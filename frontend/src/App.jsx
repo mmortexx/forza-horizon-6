@@ -119,23 +119,36 @@ function App() {
               )}
 
               {/* ARBs */}
-              {activeCar.tuning?.antiroll && (
+              {activeCar.tuning?.arbs && (
                 <div className="tuning-section">
                   <h4 className="tuning-title">Barras Estabilizadoras</h4>
-                  {activeCar.tuning.antiroll.map((t, idx) => (
+                  {activeCar.tuning.arbs.map((t, idx) => (
                     <div className="tuning-row" key={idx}>
                       <span className="tuning-param">{t.param}</span>
-                      <span className="tuning-val">{t.val}</span>
+                      <span className="tuning-val">{t.val}<span className="tuning-unit">{t.unit}</span></span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Muelles y Altura */}
+              {activeCar.tuning?.springs && (
+                <div className="tuning-section">
+                  <h4 className="tuning-title">Muelles y Altura</h4>
+                  {activeCar.tuning.springs.map((t, idx) => (
+                    <div className="tuning-row" key={idx}>
+                      <span className="tuning-param">{t.param}</span>
+                      <span className="tuning-val">{t.val}<span className="tuning-unit">{t.unit}</span></span>
                     </div>
                   ))}
                 </div>
               )}
 
               {/* Diferencial */}
-              {activeCar.tuning?.differential && (
+              {activeCar.tuning?.diff && (
                 <div className="tuning-section">
                   <h4 className="tuning-title">Diferencial</h4>
-                  {activeCar.tuning.differential.map((t, idx) => (
+                  {activeCar.tuning.diff.map((t, idx) => (
                     <div className="tuning-row" key={idx}>
                       <span className="tuning-param">{t.param}</span>
                       <span className="tuning-val">{t.val}<span className="tuning-unit">{t.unit}</span></span>
