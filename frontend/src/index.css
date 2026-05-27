@@ -382,3 +382,631 @@ h1, h2, h3, h4, h5, h6 {
   border-color: transparent;
   box-shadow: 0 0 20px var(--fh-pink-glow);
 }
+
+/* ─── ESTILOS RESTAURADOS DE LA INTERFAZ ORIGINAL ─── */
+
+/* MENÚ PRINCIPAL (HOME) */
+.home-menu {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.home-menu-title {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.home-menu-title h2 {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    letter-spacing: 4px;
+}
+
+.home-menu-title p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+}
+
+.home-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem;
+}
+
+.home-card {
+    background: rgba(8, 11, 21, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px 12px 36px 12px; /* Origami de FH6 */
+    padding: 2rem 1.6rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.home-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--fh-pink), var(--fh-purple), var(--fh-cyan));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.home-card:hover::before { opacity: 1; }
+
+.home-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: var(--border-focus);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px var(--fh-cyan-glow);
+}
+
+.home-card:active {
+    transform: translateY(-2px) scale(0.99);
+}
+
+.home-card .card-icon {
+    font-size: 2.2rem;
+    margin-bottom: 0.3rem;
+}
+
+.home-card .card-title {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.home-card .card-desc {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.45;
+}
+
+.home-card .card-badge {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 4px;
+    background: rgba(0, 240, 255, 0.1);
+    color: var(--fh-cyan);
+    border: 1px solid rgba(0, 240, 255, 0.15);
+    align-self: flex-start;
+}
+
+/* BUSCADOR DE COCHES */
+.search-box-container {
+    position: relative;
+    margin: 0.8rem 0 1.2rem 0;
+    width: 100%;
+}
+
+.search-box-container input {
+    width: 100%;
+    padding: 10px 36px 10px 14px;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    color: #fff;
+    background: rgba(10, 14, 24, 0.4) !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: 8px !important;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-box-container input:focus {
+    border-color: var(--fh-cyan) !important;
+    box-shadow: 0 0 12px var(--fh-cyan-glow) !important;
+    background: rgba(10, 14, 24, 0.7) !important;
+}
+
+.search-clear-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s ease;
+}
+
+.search-clear-btn:hover {
+    color: var(--fh-pink);
+}
+
+/* PESTAÑAS DE DETALLE (SHEET TABS) */
+.sheet-tabs {
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-top: -0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.sheet-tab-btn {
+    background: transparent;
+    color: var(--text-secondary);
+    border: none;
+    border-bottom: 3px solid transparent;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 800;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.sheet-tab-btn:hover {
+    color: #fff;
+}
+
+.sheet-tab-btn.active {
+    color: var(--fh-cyan);
+    border-bottom-color: var(--fh-cyan);
+    text-shadow: 0 0 8px var(--fh-cyan-glow);
+}
+
+.sheet-content {
+    display: none;
+    animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sheet-content.active {
+    display: block;
+}
+
+/* FICHA TÉCNICA */
+.info-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.info-card {
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 1.2rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transition: all 0.25s ease;
+}
+
+.info-card:hover {
+    border-color: rgba(0, 240, 255, 0.15);
+    box-shadow: 0 8px 25px rgba(0, 240, 255, 0.05);
+}
+
+.info-card h4 {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    color: var(--fh-cyan);
+    margin-bottom: 0.8rem;
+    border-bottom: 1px solid var(--border-subtle);
+    padding-bottom: 0.4rem;
+    letter-spacing: 0.5px;
+}
+
+.info-card p {
+    font-size: 0.88rem;
+    color: var(--text-primary);
+    margin-bottom: 0.8rem;
+    line-height: 1.55;
+}
+
+.spec-list-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.spec-list-table tr {
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.spec-list-table tr:last-child {
+    border-bottom: none;
+}
+
+.spec-list-table td {
+    padding: 8px 10px;
+}
+
+.spec-list-table td.label {
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.spec-list-table td.val {
+    color: #fff;
+    font-weight: 700;
+    text-align: right;
+    font-family: var(--font-mono);
+}
+
+/* TALLER DE MEJORAS (UPGRADES) */
+.upgrades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 1.2rem;
+}
+
+.upgrade-cat-card {
+    background: rgba(18, 22, 36, 0.4);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 1.2rem;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    transition: all 0.25s ease;
+}
+
+.upgrade-cat-card:hover {
+    border-color: rgba(255, 0, 85, 0.15);
+    box-shadow: 0 8px 25px rgba(255, 0, 85, 0.05);
+}
+
+.upgrade-cat-card h4 {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    color: var(--fh-cyan);
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.12);
+    letter-spacing: 0.5px;
+}
+
+.upgrade-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.82rem;
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.upgrade-item:last-child {
+    border-bottom: none;
+}
+
+.upgrade-item .part-lbl {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.upgrade-item .part-name {
+    color: #fff;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.upgrade-item .part-name.race-mod {
+    color: #fff;
+    background: rgba(255, 0, 85, 0.14);
+    border: 1px solid rgba(255, 0, 85, 0.25);
+    text-shadow: 0 0 4px rgba(255, 0, 85, 0.3);
+}
+
+.upgrade-item .part-name.special-mod {
+    color: #000;
+    background: var(--fh-cyan);
+    font-weight: 700;
+    border: 1px solid var(--fh-cyan);
+    box-shadow: 0 0 10px var(--fh-cyan-glow);
+}
+
+.upgrade-item .part-name.sport-mod {
+    color: #fff;
+    background: rgba(146, 0, 255, 0.14);
+    border: 1px solid rgba(146, 0, 255, 0.25);
+    text-shadow: 0 0 4px rgba(146, 0, 255, 0.3);
+}
+
+/* HOJA DE REGLAJES COMPLETO */
+.tuning-section-card {
+    background: rgba(10, 14, 24, 0.65);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 1.2rem;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    transition: all 0.25s ease;
+}
+
+.tuning-section-card:hover {
+    border-color: var(--border-focus);
+    box-shadow: 0 8px 25px rgba(0, 240, 255, 0.05);
+}
+
+.tuning-section-card h4 {
+    font-family: var(--font-display);
+    font-size: 0.98rem;
+    text-transform: uppercase;
+    color: var(--fh-pink);
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid rgba(255, 0, 85, 0.12);
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 4px rgba(255, 0, 85, 0.2);
+}
+
+.tuning-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+}
+
+.tuning-table tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.tuning-table tr:last-child {
+    border-bottom: none;
+}
+
+.tuning-table td {
+    padding: 7px 8px;
+}
+
+.tuning-table td.param {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.tuning-table td.val {
+    color: #fff;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    text-align: right;
+}
+
+.tuning-table td.val span.unit {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    margin-left: 3px;
+    font-weight: 400;
+}
+
+/* PANELES ESPECIALES DE MULTIMEDIA / VOLANTE */
+.videos-panel, .wheel-panel {
+    background: var(--bg-panel);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 1.8rem;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.media-tabs {
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.media-tab-btn {
+    background: transparent;
+    color: var(--text-secondary);
+    border: none;
+    border-bottom: 3px solid transparent;
+    padding: 12px 24px;
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 800;
+    transition: all 0.25s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.media-tab-btn:hover {
+    color: #fff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+.media-tab-btn.active {
+    color: var(--fh-cyan);
+    border-bottom-color: var(--fh-cyan);
+    text-shadow: 0 0 10px var(--fh-cyan-glow);
+}
+
+.media-content {
+    display: none;
+    animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.media-content.active {
+    display: block;
+}
+
+.media-header {
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-subtle);
+    padding-bottom: 1rem;
+}
+
+.media-header h2 {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    color: #fff;
+}
+
+.media-header p {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+}
+
+.media-header p span.highlight {
+    color: var(--fh-pink);
+    font-weight: 700;
+}
+
+.media-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin-top: 1rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+}
+
+.media-table th {
+    background: rgba(18, 22, 36, 0.8);
+    color: var(--fh-cyan);
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 12px 14px;
+    border-bottom: 1.5px solid var(--border-focus);
+    letter-spacing: 0.5px;
+}
+
+.media-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.media-table tr:hover {
+    background: rgba(255, 255, 255, 0.01);
+}
+
+.class-cell {
+    font-family: var(--font-mono);
+    font-weight: 800;
+    color: var(--fh-pink);
+}
+
+.car-cell {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: #fff;
+}
+
+.swap-cell {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.code-cell {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--fh-cyan);
+    text-shadow: 0 0 5px var(--fh-cyan-glow);
+}
+
+.media-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.media-card {
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 1.4rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transition: all 0.25s ease;
+}
+
+.media-card:hover {
+    border-color: var(--border-focus);
+    box-shadow: 0 8px 25px rgba(0, 240, 255, 0.05);
+}
+
+.media-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: var(--fh-cyan);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-focus);
+    padding-bottom: 0.4rem;
+    letter-spacing: 0.5px;
+}
+
+.media-card h4 {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    color: var(--fh-pink);
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.media-card ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.media-card li {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 1.2rem;
+    color: var(--text-primary);
+}
+
+.media-card li::before {
+    content: '▪';
+    position: absolute;
+    left: 0;
+    color: var(--fh-pink);
+}
+
+/* Botón de retroceso en pestañas de categoría */
+.tab-btn.back-to-menu-btn {
+    background: rgba(255, 0, 85, 0.12) !important;
+    border-color: rgba(255, 0, 85, 0.25) !important;
+    color: #fff !important;
+}
+
+.tab-btn.back-to-menu-btn:hover {
+    background: rgba(255, 0, 85, 0.25) !important;
+    border-color: var(--fh-pink) !important;
+    box-shadow: 0 0 15px var(--fh-pink-glow) !important;
+}
