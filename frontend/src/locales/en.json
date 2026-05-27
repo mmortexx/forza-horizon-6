@@ -1,0 +1,137 @@
+{
+  "header": {
+    "title": "Forza Horizon",
+    "subtitle": "Official Competition Manual",
+    "search_placeholder": "🔍 Search for any car in the entire manual...",
+    "fe_badge": "FORZA EDITION"
+  },
+  "alert": {
+    "title": "Forza Horizon 6 Physics (Japan Festival):",
+    "text": "AWD center differential traction balances at 70%-85% are key to chassis rotation on mountain passes. All terminology in the manual strictly corresponds to the Spanish festival workshop upgrade tree."
+  },
+  "tabs": {
+    "home": "🏠 Main Menu",
+    "elite": "🏆 Elite",
+    "warriors": "⚔️ Warriors",
+    "fe": "💎 Forza Editions",
+    "street": "🚗 Street & Road",
+    "jdm": "💎 Cult Jewels",
+    "fast": "🔥 Fast & Furious",
+    "videos": "📹 Videos",
+    "wheel": "🎮 G29 Wheel"
+  },
+  "home": {
+    "title": "Select a Section",
+    "subtitle": "Choose the category you want to check",
+    "cards": {
+      "elite": {
+        "title": "Elite",
+        "desc": "The fastest cars in the game. Class X, R, S2, and S1 with competition setups.",
+        "badge": "CLASS X • R • S2 • S1"
+      },
+      "warriors": {
+        "title": "Warriors",
+        "desc": "Middle and lower classes. Technique matters more than brute power.",
+        "badge": "CLASS A • B • C • D"
+      },
+      "fe": {
+        "title": "Forza Editions",
+        "desc": "Exclusive vehicles with unique XP, CR, and skill bonuses.",
+        "badge": "EXCLUSIVE EDITIONS"
+      },
+      "street": {
+        "title": "Street & Road",
+        "desc": "Street and road cars with setups for the Japanese asphalt.",
+        "badge": "STREET RACING"
+      },
+      "jdm": {
+        "title": "Cult Jewels",
+        "desc": "JDM classics and collector's jewels with authentic setups.",
+        "badge": "JDM CLASSICS"
+      },
+      "fast": {
+        "title": "Fast & Furious",
+        "desc": "Faithful recreations of the iconic cars from the film saga.",
+        "badge": "FILM & CULTURE"
+      },
+      "videos": {
+        "title": "Community Tunes",
+        "desc": "Analysis of 100+ videos: meta, drift, barn finds, and glitches.",
+        "badge": "100+ VIDEOS ANALYZED"
+      },
+      "wheel": {
+        "title": "G29 Wheel",
+        "desc": "Full Logitech G29 setup: FFB, profiles, and troubleshooting.",
+        "badge": "3 PROFILES READY"
+      }
+    }
+  },
+  "sidebar": {
+    "search_placeholder": "Search car...",
+    "no_cars": "No cars found"
+  },
+  "detail": {
+    "tuned_by": "TUNED BY",
+    "tabs": {
+      "info": "Tech Specs",
+      "upgrades": "Upgrades Workshop",
+      "tuning": "Tuning Sheet"
+    },
+    "info": {
+      "physics_title": "Dynamic Behavior & Physics",
+      "tips_title": "Competition Tips:",
+      "specs_title": "Physical Specifications",
+      "specs": {
+        "engine": "Base Engine",
+        "aspiration": "Aspiration",
+        "drivetrain": "Original Drivetrain",
+        "center": "Center Differential",
+        "weight": "Total Weight"
+      }
+    },
+    "upgrades": {
+      "empty": "No upgrades registered.",
+      "cats": {
+        "conversions": "Conversions",
+        "engine": "Engine",
+        "platform": "Platform and Handling",
+        "transmission": "Transmission",
+        "tires": "Tires and Rims"
+      }
+    },
+    "tuning": {
+      "empty": "No tuning registered.",
+      "cats": {
+        "tires": "Tire Pressure",
+        "alignment": "Alignment",
+        "arbs": "Anti-roll Bars",
+        "springs": "Springs and Ride Height",
+        "diff": "Differential"
+      }
+    },
+    "select_prompt": "Select a vehicle from the list."
+  },
+  "videos": {
+    "header": {
+      "title": "Community Tunes • Consolidated Report (100+ Videos/Shorts)",
+      "subtitle": "Quantitative audit of Forza Horizon 6 physics, tuning, and secrets obtained from <1>35 meta guides</1>, <2>35 drift shorts</2> and <3>30 secrets guides</3>."
+    },
+    "tabs": {
+      "meta": "🏆 Meta Cars & PI",
+      "drift": "🏎️ Drift, Touge & Initial D",
+      "secrets": "🗺️ Barn Finds & Glitches"
+    }
+  },
+  "wheel": {
+    "header": {
+      "title": "🎮 Optimal Logitech G29 Setup — Forza Horizon 6",
+      "subtitle": "Full guide with <1>3 profiles</1> according to your driving style: Racing, Drift, and Off-Road. Always adjust one parameter at a time."
+    },
+    "tabs": {
+      "ghub": "⚙️ Logitech G HUB",
+      "ffb": "🔧 Force Feedback",
+      "profiles": "🏁 Profiles",
+      "troubleshoot": "🔄 Troubleshooting"
+    }
+  }
+}

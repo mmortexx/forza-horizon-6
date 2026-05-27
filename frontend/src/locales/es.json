@@ -1,0 +1,137 @@
+{
+  "header": {
+    "title": "Forza Horizon",
+    "subtitle": "Manual de Competición Oficial",
+    "search_placeholder": "🔍 Buscar cualquier coche en todo el manual...",
+    "fe_badge": "FORZA EDITION"
+  },
+  "alert": {
+    "title": "Físicas de Forza Horizon 6 (Festival Japan):",
+    "text": "Los balances de tracción del diferencial central AWD al 70%-85% son clave para la rotación del chasis en los pasos de montaña. Toda la nomenclatura en el manual corresponde estrictamente al árbol de mejoras del taller del festival en español."
+  },
+  "tabs": {
+    "home": "🏠 Menú Principal",
+    "elite": "🏆 Elite",
+    "warriors": "⚔️ Guerreros",
+    "fe": "💎 Forza Editions",
+    "street": "🚗 Rutas & Calle",
+    "jdm": "💎 Joyas de Culto",
+    "fast": "🔥 Fast & Furious",
+    "videos": "📹 Videos",
+    "wheel": "🎮 Volante G29"
+  },
+  "home": {
+    "title": "Selecciona una sección",
+    "subtitle": "Elige la categoría que deseas consultar",
+    "cards": {
+      "elite": {
+        "title": "Elite",
+        "desc": "Los coches más rápidos del juego. Clase X, R, S2 y S1 con setups de competición.",
+        "badge": "CLASE X • R • S2 • S1"
+      },
+      "warriors": {
+        "title": "Guerreros",
+        "desc": "Clases medias y bajas. La técnica importa más que la potencia bruta.",
+        "badge": "CLASE A • B • C • D"
+      },
+      "fe": {
+        "title": "Forza Editions",
+        "desc": "Vehículos exclusivos con bonificaciones únicas de XP, CR y habilidades.",
+        "badge": "EDICIONES EXCLUSIVAS"
+      },
+      "street": {
+        "title": "Rutas & Calle",
+        "desc": "Coches de ruta y calle con setups para el asfalto japonés.",
+        "badge": "STREET RACING"
+      },
+      "jdm": {
+        "title": "Joyas de Culto",
+        "desc": "Clásicos JDM y joyas de colección con configuraciones auténticas.",
+        "badge": "CLÁSICOS JDM"
+      },
+      "fast": {
+        "title": "Fast & Furious",
+        "desc": "Recreaciones fieles de los coches icónicos de la saga cinematográfica.",
+        "badge": "CINE & CULTURA"
+      },
+      "videos": {
+        "title": "Tuneos de la Comunidad",
+        "desc": "Análisis de +100 vídeos: meta, drift, barn finds y glitches.",
+        "badge": "100+ VÍDEOS ANALIZADOS"
+      },
+      "wheel": {
+        "title": "Volante G29",
+        "desc": "Configuración completa del Logitech G29: FFB, perfiles y troubleshooting.",
+        "badge": "3 PERFILES LISTOS"
+      }
+    }
+  },
+  "sidebar": {
+    "search_placeholder": "Buscar coche...",
+    "no_cars": "No se encontraron coches"
+  },
+  "detail": {
+    "tuned_by": "TUNEADO POR",
+    "tabs": {
+      "info": "Ficha Técnica",
+      "upgrades": "Taller de Mejoras (Upgrades)",
+      "tuning": "Hoja de Reglajes (Tuning)"
+    },
+    "info": {
+      "physics_title": "Comportamiento Dinámico & Físicas",
+      "tips_title": "Consejos de Competición:",
+      "specs_title": "Especificaciones Físicas",
+      "specs": {
+        "engine": "Motor Base",
+        "aspiration": "Aspiración",
+        "drivetrain": "Tracción original",
+        "center": "Reparto Central",
+        "weight": "Peso Total"
+      }
+    },
+    "upgrades": {
+      "empty": "No hay mejoras registradas.",
+      "cats": {
+        "conversions": "Conversiones",
+        "engine": "Motor",
+        "platform": "Plataforma y Manejo",
+        "transmission": "Transmisión",
+        "tires": "Neumáticos y Llantas"
+      }
+    },
+    "tuning": {
+      "empty": "No hay reglajes registrados.",
+      "cats": {
+        "tires": "Presión de Neumáticos",
+        "alignment": "Alineación",
+        "arbs": "Barras Estabilizadoras",
+        "springs": "Muelles y Altura",
+        "diff": "Diferencial"
+      }
+    },
+    "select_prompt": "Selecciona un vehículo de la lista."
+  },
+  "videos": {
+    "header": {
+      "title": "Tuneos de la Comunidad • Reporte Consolidado (100+ Videos/Shorts)",
+      "subtitle": "Auditoría cuantitativa de las físicas, reglajes y secretos de Forza Horizon 6 obtenidos de <1>35 guías de meta</1>, <2>35 shorts de drift</2> y <3>30 guías de secretos</3>."
+    },
+    "tabs": {
+      "meta": "🏆 Coches Meta & PI",
+      "drift": "🏎️ Drift, Touge e Initial D",
+      "secrets": "🗺️ Barn Finds & Glitches"
+    }
+  },
+  "wheel": {
+    "header": {
+      "title": "🎮 Configuración Óptima del Logitech G29 — Forza Horizon 6",
+      "subtitle": "Guía completa con <1>3 perfiles</1> según tu estilo de conducción: Carreras, Drift y Off-Road. Ajusta siempre un parámetro a la vez."
+    },
+    "tabs": {
+      "ghub": "⚙️ Logitech G HUB",
+      "ffb": "🔧 Force Feedback",
+      "profiles": "🏁 Perfiles",
+      "troubleshoot": "🔄 Troubleshooting"
+    }
+  }
+}

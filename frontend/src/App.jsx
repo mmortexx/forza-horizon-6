@@ -1,9 +1,13 @@
-import { useState } from 'react'
-import carsDataRaw from './data/cars.json'
+import { useState, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
+import carsEsRaw from './data/cars_es.json'
+import carsEnRaw from './data/cars_en.json'
 import './index.css'
 
 function App() {
-  const [carsData] = useState(carsDataRaw)
+  const { t, i18n } = useTranslation()
+  const carsDataRaw = i18n.language === 'en' ? carsEnRaw : carsEsRaw;
+  const [carsData, setCarsData] = useState(carsDataRaw)
   const [view, setView] = useState('home') // 'home', 'altas', 'bajas', 'fe', 'rutas', 'joyas', 'fast', 'videos', 'wheel'
   
   // Guardar el coche activo por categoría para no perder la selección
@@ -68,6 +72,12 @@ function App() {
     setActiveWheelTab('ghub')
   }
 
+  const toggleLanguage = () => {
+    const nextLang = i18n.language === 'es' ? 'en' : 'es';
+    i18n.changeLanguage(nextLang);
+    setCarsData(nextLang === 'en' ? carsEnRaw : carsEsRaw);
+  };
+
   return (
     <div className="app-container">
       {/* Overlay transparente para cerrar sugerencias al hacer clic fuera */}
@@ -76,15 +86,20 @@ function App() {
       )}
 
       <header className="header">
-        <h1 className="header-title">Forza Horizon <span>6</span></h1>
-        <p className="header-subtitle">Manual de Competición Oficial</p>
+        <div className="header-top-bar">
+          <button className="lang-toggle-btn" onClick={toggleLanguage}>
+            {i18n.language === 'es' ? '🇪🇸 Español' : '🇬🇧 English'}
+          </button>
+        </div>
+        <h1 className="header-title">{t('header.title')} <span>6</span></h1>
+        <p className="header-subtitle">{t('header.subtitle')}</p>
 
         {/* Buscador Global de Coches */}
         <div className="global-search-container">
           <div className="global-search-wrapper">
             <input 
               type="text" 
-              placeholder="🔍 Buscar cualquier coche en todo el manual..." 
+              placeholder={t('header.search_placeholder')} 
               value={globalSearchQuery}
               onChange={(e) => {
                 setGlobalSearchQuery(e.target.value);
@@ -119,7 +134,7 @@ function App() {
                   <div className="suggestion-meta">
                     <span className="suggestion-pi">{car.pi}</span>
                     <span className="suggestion-category">
-                      {car.category === 'fe' ? 'FORZA EDITION' : car.category.toUpperCase()}
+                      {car.category === 'fe' ? t('header.fe_badge') : car.category.toUpperCase()}
                     </span>
                   </div>
                 </div>
@@ -131,39 +146,39 @@ function App() {
 
       {/* AVISO DE TELEMETRÍA (Marquee) */}
       <div className="telemetry-alert">
-        <strong>Físicas de Forza Horizon 6 (Festival Japan):</strong>
-        <span>Los balances de tracción del diferencial central AWD al 70%-85% son clave para la rotación del chasis en los pasos de montaña. Toda la nomenclatura en el manual corresponde estrictamente al árbol de mejoras del taller del festival en español.</span>
+        <strong>{t('alert.title')}</strong>
+        <span>{t('alert.text')}</span>
       </div>
 
       {/* CATEGORY TABS (Solo si no estamos en home) */}
       {view !== 'home' && (
         <div className="tabs-container">
           <button className="tab-btn back-to-menu-btn" onClick={() => handleViewChange('home')}>
-            <span>🏠 Menú Principal</span>
+            <span>{t('tabs.home')}</span>
           </button>
           <button className={`tab-btn ${view === 'altas' ? 'active' : ''}`} onClick={() => handleViewChange('altas')}>
-            <span>🏆 Elite</span>
+            <span>{t('tabs.elite')}</span>
           </button>
           <button className={`tab-btn ${view === 'bajas' ? 'active' : ''}`} onClick={() => handleViewChange('bajas')}>
-            <span>⚔️ Guerreros</span>
+            <span>{t('tabs.warriors')}</span>
           </button>
           <button className={`tab-btn ${view === 'fe' ? 'active' : ''}`} onClick={() => handleViewChange('fe')}>
-            <span>💎 Forza Editions</span>
+            <span>{t('tabs.fe')}</span>
           </button>
           <button className={`tab-btn ${view === 'rutas' ? 'active' : ''}`} onClick={() => handleViewChange('rutas')}>
-            <span>🚗 Rutas & Calle</span>
+            <span>{t('tabs.street')}</span>
           </button>
           <button className={`tab-btn ${view === 'joyas' ? 'active' : ''}`} onClick={() => handleViewChange('joyas')}>
-            <span>💎 Joyas de Culto</span>
+            <span>{t('tabs.jdm')}</span>
           </button>
           <button className={`tab-btn ${view === 'fast' ? 'active' : ''}`} onClick={() => handleViewChange('fast')}>
-            <span>🔥 Fast & Furious</span>
+            <span>{t('tabs.fast')}</span>
           </button>
           <button className={`tab-btn ${view === 'videos' ? 'active' : ''}`} onClick={() => handleViewChange('videos')}>
-            <span>📹 Videos</span>
+            <span>{t('tabs.videos')}</span>
           </button>
           <button className={`tab-btn ${view === 'wheel' ? 'active' : ''}`} onClick={() => handleViewChange('wheel')}>
-            <span>🎮 Volante G29</span>
+            <span>{t('tabs.wheel')}</span>
           </button>
         </div>
       )}
@@ -174,57 +189,57 @@ function App() {
         {view === 'home' && (
           <div className="home-menu">
             <div className="home-menu-title">
-              <h2>Selecciona una sección</h2>
-              <p>Elige la categoría que deseas consultar</p>
+              <h2>{t('home.title')}</h2>
+              <p>{t('home.subtitle')}</p>
             </div>
             <div className="home-grid">
               <div className="home-card" onClick={() => handleViewChange('altas')}>
                 <span className="card-icon">🏆</span>
-                <span className="card-title">Elite</span>
-                <span className="card-desc">Los coches más rápidos del juego. Clase X, R, S2 y S1 con setups de competición.</span>
-                <span className="card-badge">CLASE X • R • S2 • S1</span>
+                <span className="card-title">{t('home.cards.elite.title')}</span>
+                <span className="card-desc">{t('home.cards.elite.desc')}</span>
+                <span className="card-badge">{t('home.cards.elite.badge')}</span>
               </div>
               <div className="home-card" onClick={() => handleViewChange('bajas')}>
                 <span className="card-icon">⚔️</span>
-                <span className="card-title">Guerreros</span>
-                <span className="card-desc">Clases medias y bajas. La técnica importa más que la potencia bruta.</span>
-                <span className="card-badge">CLASE A • B • C • D</span>
+                <span className="card-title">{t('home.cards.warriors.title')}</span>
+                <span className="card-desc">{t('home.cards.warriors.desc')}</span>
+                <span className="card-badge">{t('home.cards.warriors.badge')}</span>
               </div>
               <div className="home-card" onClick={() => handleViewChange('fe')}>
                 <span className="card-icon">💎</span>
-                <span className="card-title">Forza Editions</span>
-                <span className="card-desc">Vehículos exclusivos con bonificaciones únicas de XP, CR y habilidades.</span>
-                <span className="card-badge">EDICIONES EXCLUSIVAS</span>
+                <span className="card-title">{t('home.cards.fe.title')}</span>
+                <span className="card-desc">{t('home.cards.fe.desc')}</span>
+                <span className="card-badge">{t('home.cards.fe.badge')}</span>
               </div>
               <div className="home-card" onClick={() => handleViewChange('rutas')}>
                 <span className="card-icon">🚗</span>
-                <span className="card-title">Rutas & Calle</span>
-                <span className="card-desc">Coches de ruta y calle con setups para el asfalto japonés.</span>
-                <span className="card-badge">STREET RACING</span>
+                <span className="card-title">{t('home.cards.street.title')}</span>
+                <span className="card-desc">{t('home.cards.street.desc')}</span>
+                <span className="card-badge">{t('home.cards.street.badge')}</span>
               </div>
               <div className="home-card" onClick={() => handleViewChange('joyas')}>
                 <span className="card-icon">💎</span>
-                <span className="card-title">Joyas de Culto</span>
-                <span className="card-desc">Clásicos JDM y joyas de colección con configuraciones auténticas.</span>
-                <span className="card-badge">CLÁSICOS JDM</span>
+                <span className="card-title">{t('home.cards.jdm.title')}</span>
+                <span className="card-desc">{t('home.cards.jdm.desc')}</span>
+                <span className="card-badge">{t('home.cards.jdm.badge')}</span>
               </div>
               <div className="home-card" onClick={() => handleViewChange('fast')}>
                 <span className="card-icon">🔥</span>
-                <span className="card-title">Fast & Furious</span>
-                <span className="card-desc">Recreaciones fieles de los coches icónicos de la saga cinematográfica.</span>
-                <span className="card-badge">CINE & CULTURA</span>
+                <span className="card-title">{t('home.cards.fast.title')}</span>
+                <span className="card-desc">{t('home.cards.fast.desc')}</span>
+                <span className="card-badge">{t('home.cards.fast.badge')}</span>
               </div>
               <div className="home-card" onClick={() => handleViewChange('videos')}>
                 <span className="card-icon">📹</span>
-                <span className="card-title">Tuneos de la Comunidad</span>
-                <span className="card-desc">Análisis de +100 vídeos: meta, drift, barn finds y glitches.</span>
-                <span className="card-badge">100+ VÍDEOS ANALIZADOS</span>
+                <span className="card-title">{t('home.cards.videos.title')}</span>
+                <span className="card-desc">{t('home.cards.videos.desc')}</span>
+                <span className="card-badge">{t('home.cards.videos.badge')}</span>
               </div>
               <div className="home-card" onClick={() => handleViewChange('wheel')}>
                 <span className="card-icon">🎮</span>
-                <span className="card-title">Volante G29</span>
-                <span className="card-desc">Configuración completa del Logitech G29: FFB, perfiles y troubleshooting.</span>
-                <span className="card-badge">3 PERFILES LISTOS</span>
+                <span className="card-title">{t('home.cards.wheel.title')}</span>
+                <span className="card-desc">{t('home.cards.wheel.desc')}</span>
+                <span className="card-badge">{t('home.cards.wheel.badge')}</span>
               </div>
             </div>
           </div>
@@ -238,7 +253,7 @@ function App() {
               <div className="search-box-container">
                 <input 
                   type="text" 
-                  placeholder="Buscar coche..." 
+                  placeholder={t('sidebar.search_placeholder')} 
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
@@ -265,7 +280,7 @@ function App() {
                 ))
               ) : (
                 <div style={{padding: '1.5rem 1rem', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.88rem'}}>
-                  No se encontraron coches
+                  {t('sidebar.no_cars')}
                 </div>
               )}
             </aside>
@@ -276,20 +291,20 @@ function App() {
                 <div className="detail-header">
                   <h2 className="detail-title">{activeCar.name}</h2>
                   <div className="detail-pilot">
-                    TUNEADO POR: <span className="pilot-name">{activeCar.pilot}</span>
+                    {t('detail.tuned_by')}: <span className="pilot-name">{activeCar.pilot}</span>
                   </div>
                 </div>
 
                 {/* Pestañas del Detalle del coche */}
                 <div className="sheet-tabs">
                   <button className={`sheet-tab-btn ${activeSheetTab === 'info' ? 'active' : ''}`} onClick={() => setActiveSheetTab('info')}>
-                    Ficha Técnica
+                    {t('detail.tabs.info')}
                   </button>
                   <button className={`sheet-tab-btn ${activeSheetTab === 'upgrades' ? 'active' : ''}`} onClick={() => setActiveSheetTab('upgrades')}>
-                    Taller de Mejoras (Upgrades)
+                    {t('detail.tabs.upgrades')}
                   </button>
                   <button className={`sheet-tab-btn ${activeSheetTab === 'tuning' ? 'active' : ''}`} onClick={() => setActiveSheetTab('tuning')}>
-                    Hoja de Reglajes (Tuning)
+                    {t('detail.tabs.tuning')}
                   </button>
                 </div>
 
@@ -297,33 +312,33 @@ function App() {
                 <div className={`sheet-content ${activeSheetTab === 'info' ? 'active' : ''}`}>
                   <div className="info-grid">
                     <div className="info-card">
-                      <h4>Comportamiento Dinámico & Físicas</h4>
+                      <h4>{t('detail.info.physics_title')}</h4>
                       <p>{activeCar.description}</p>
-                      <h5 style={{marginTop: '1rem', marginBottom: '0.3rem', color: 'var(--fh-pink)', fontFamily: 'var(--font-display)', fontSize: '0.85rem', textTransform: 'uppercase'}}>Consejos de Competición:</h5>
+                      <h5 style={{marginTop: '1rem', marginBottom: '0.3rem', color: 'var(--fh-pink)', fontFamily: 'var(--font-display)', fontSize: '0.85rem', textTransform: 'uppercase'}}>{t('detail.info.tips_title')}</h5>
                       <p style={{color: 'var(--text-secondary)', fontSize: '0.88rem'}}>{activeCar.tips}</p>
                     </div>
                     <div className="info-card">
-                      <h4>Especificaciones Físicas</h4>
+                      <h4>{t('detail.info.specs_title')}</h4>
                       <table className="spec-list-table">
                         <tbody>
                           <tr>
-                            <td className="label">Motor Base</td>
+                            <td className="label">{t('detail.info.specs.engine')}</td>
                             <td className="val">{activeCar.specs?.engine || 'Stock'}</td>
                           </tr>
                           <tr>
-                            <td className="label">Aspiración</td>
+                            <td className="label">{t('detail.info.specs.aspiration')}</td>
                             <td className="val">{activeCar.specs?.aspiration || 'Natural'}</td>
                           </tr>
                           <tr>
-                            <td className="label">Tracción original</td>
+                            <td className="label">{t('detail.info.specs.drivetrain')}</td>
                             <td className="val">{activeCar.specs?.drivetrain || 'Stock'}</td>
                           </tr>
                           <tr>
-                            <td className="label">Reparto Central</td>
+                            <td className="label">{t('detail.info.specs.center')}</td>
                             <td className="val">{activeCar.specs?.center || 'N/D'}</td>
                           </tr>
                           <tr>
-                            <td className="label">Peso Total</td>
+                            <td className="label">{t('detail.info.specs.weight')}</td>
                             <td className="val">{activeCar.specs?.weight || 'N/A'}</td>
                           </tr>
                         </tbody>
@@ -340,11 +355,11 @@ function App() {
                         if (!list || list.length === 0) return null;
                         
                         const labels = {
-                          conversions: 'Conversiones',
-                          engine: 'Motor',
-                          platform: 'Plataforma y Manejo',
-                          transmission: 'Transmisión',
-                          tires: 'Neumáticos y Llantas'
+                          conversions: t('detail.upgrades.cats.conversions'),
+                          engine: t('detail.upgrades.cats.engine'),
+                          platform: t('detail.upgrades.cats.platform'),
+                          transmission: t('detail.upgrades.cats.transmission'),
+                          tires: t('detail.upgrades.cats.tires')
                         };
                         const label = labels[catKey] || catKey.toUpperCase();
 
@@ -368,7 +383,7 @@ function App() {
                       })}
                     </div>
                   ) : (
-                    <div style={{color: 'var(--text-secondary)', textAlign: 'center'}}>No hay mejoras registradas.</div>
+                    <div style={{color: 'var(--text-secondary)', textAlign: 'center'}}>{t('detail.upgrades.empty')}</div>
                   )}
                 </div>
 
@@ -380,11 +395,11 @@ function App() {
                         if (!list || list.length === 0) return null;
 
                         const labels = {
-                          tires: 'Presión de Neumáticos',
-                          alignment: 'Alineación',
-                          arbs: 'Barras Estabilizadoras',
-                          springs: 'Muelles y Altura',
-                          diff: 'Diferencial'
+                          tires: t('detail.tuning.cats.tires'),
+                          alignment: t('detail.tuning.cats.alignment'),
+                          arbs: t('detail.tuning.cats.arbs'),
+                          springs: t('detail.tuning.cats.springs'),
+                          diff: t('detail.tuning.cats.diff')
                         };
                         const label = labels[secKey] || secKey.toUpperCase();
 
@@ -409,14 +424,14 @@ function App() {
                       })}
                     </div>
                   ) : (
-                    <div style={{color: 'var(--text-secondary)', textAlign: 'center'}}>No hay reglajes registrados.</div>
+                    <div style={{color: 'var(--text-secondary)', textAlign: 'center'}}>{t('detail.tuning.empty')}</div>
                   )}
                 </div>
 
               </section>
             ) : (
               <div style={{color: 'var(--text-secondary)', textAlign: 'center', padding: '3rem'}}>
-                Selecciona un vehículo de la lista.
+                {t('detail.select_prompt')}
               </div>
             )}
           </div>
@@ -426,19 +441,19 @@ function App() {
         {view === 'videos' && (
           <div className="videos-panel">
             <div className="media-header">
-              <h2>Tuneos de la Comunidad • Reporte Consolidado (100+ Videos/Shorts)</h2>
-              <p>Auditoría cuantitativa de las físicas, reglajes y secretos de Forza Horizon 6 obtenidos de <span className="highlight">35 guías de meta</span>, <span class="highlight">35 shorts de drift</span> y <span class="highlight">30 guías de secretos</span>.</p>
+              <h2>{t('videos.header.title')}</h2>
+              <p>{t('videos.header.subtitle')}</p>
             </div>
 
             <div className="media-tabs">
               <button className={`media-tab-btn ${activeMediaTab === 'meta' ? 'active' : ''}`} onClick={() => setActiveMediaTab('meta')}>
-                🏆 Coches Meta & PI
+                {t('videos.tabs.meta')}
               </button>
               <button className={`media-tab-btn ${activeMediaTab === 'drift' ? 'active' : ''}`} onClick={() => setActiveMediaTab('drift')}>
-                🏎️ Drift, Touge e Initial D
+                {t('videos.tabs.drift')}
               </button>
               <button className={`media-tab-btn ${activeMediaTab === 'secretos' ? 'active' : ''}`} onClick={() => setActiveMediaTab('secretos')}>
-                🗺️ Barn Finds & Glitches
+                {t('videos.tabs.secrets')}
               </button>
             </div>
 
@@ -711,22 +726,22 @@ function App() {
         {view === 'wheel' && (
           <div className="wheel-panel">
             <div className="media-header">
-              <h2>🎮 Configuración Óptima del Logitech G29 — Forza Horizon 6</h2>
-              <p>Guía completa con <span className="highlight">3 perfiles</span> según tu estilo de conducción: Carreras, Drift y Off-Road. Ajusta siempre un parámetro a la vez.</p>
+              <h2>{t('wheel.header.title')}</h2>
+              <p>{t('wheel.header.subtitle')}</p>
             </div>
 
             <div className="media-tabs">
               <button className={`media-tab-btn ${activeWheelTab === 'ghub' ? 'active' : ''}`} onClick={() => setActiveWheelTab('ghub')}>
-                ⚙️ Logitech G HUB
+                {t('wheel.tabs.ghub')}
               </button>
               <button className={`media-tab-btn ${activeWheelTab === 'ffb' ? 'active' : ''}`} onClick={() => setActiveWheelTab('ffb')}>
-                🔧 Force Feedback
+                {t('wheel.tabs.ffb')}
               </button>
               <button className={`media-tab-btn ${activeWheelTab === 'profiles' ? 'active' : ''}`} onClick={() => setActiveWheelTab('profiles')}>
-                🏁 Perfiles
+                {t('wheel.tabs.profiles')}
               </button>
               <button className={`media-tab-btn ${activeWheelTab === 'troubleshoot' ? 'active' : ''}`} onClick={() => setActiveWheelTab('troubleshoot')}>
-                🔄 Troubleshooting
+                {t('wheel.tabs.troubleshoot')}
               </button>
             </div>
 
