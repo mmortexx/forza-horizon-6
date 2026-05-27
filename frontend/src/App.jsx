@@ -21,12 +21,33 @@ function App() {
   const [activeMediaTab, setActiveMediaTab] = useState('meta') // 'meta', 'drift', 'secretos'
   const [activeWheelTab, setActiveWheelTab] = useState('ghub') // 'ghub', 'ffb', 'profiles', 'troubleshoot'
 
+  // Estados del Buscador Global
+  const [globalSearchQuery, setGlobalSearchQuery] = useState('')
+  const [showGlobalSuggestions, setShowGlobalSuggestions] = useState(false)
+
   if (!carsData) return <div style={{color:'red', padding:'2rem', textAlign:'center'}}>Error cargando datos estáticos.</div>
+
+  // Aplanar todos los coches de categorías en una lista única para el buscador global
+  const allCars = Object.keys(carsDataRaw).reduce((acc, category) => {
+    if (['altas', 'bajas', 'fe', 'rutas', 'joyas', 'fast'].includes(category)) {
+      const carsWithCategory = carsDataRaw[category].map(car => ({
+        ...car,
+        category
+      }));
+      return [...acc, ...carsWithCategory];
+    }
+    return acc;
+  }, []);
+
+  // Filtrar sugerencias globales (máximo 8 resultados)
+  const globalSuggestions = globalSearchQuery.trim() !== ''
+    ? allCars.filter(car => car.name.toLowerCase().includes(globalSearchQuery.toLowerCase())).slice(0, 8)
+    : [];
 
   const isCarCategory = ['altas', 'bajas', 'fe', 'rutas', 'joyas', 'fast'].includes(view)
   const currentCarsRaw = carsData[view] || []
   
-  // Filtrar coches por buscador
+  // Filtrar coches por buscador local de la barra lateral
   const currentCars = currentCarsRaw.filter(car => 
     car.name.toLowerCase().includes(searchQuery.toLowerCase())
   )
@@ -34,8 +55,9 @@ function App() {
   const activeCarId = activeCarIds[view] || currentCars[0]?.id || null
   const activeCar = currentCars.find(c => c.id === activeCarId) || currentCars[0]
 
-  const handleCarSelect = (carId) => {
-    setActiveCarIds(prev => ({ ...prev, [view]: carId }))
+  const handleCarSelect = (carId, carCat) => {
+    const targetCat = carCat || view;
+    setActiveCarIds(prev => ({ ...prev, [targetCat]: carId }))
   }
 
   const handleViewChange = (newView) => {
@@ -48,9 +70,63 @@ function App() {
 
   return (
     <div className="app-container">
+      {/* Overlay transparente para cerrar sugerencias al hacer clic fuera */}
+      {showGlobalSuggestions && globalSearchQuery && (
+        <div className="global-search-overlay" onClick={() => setShowGlobalSuggestions(false)} />
+      )}
+
       <header className="header">
         <h1 className="header-title">Forza Horizon <span>6</span></h1>
         <p className="header-subtitle">Manual de Competición Oficial</p>
+
+        {/* Buscador Global de Coches */}
+        <div className="global-search-container">
+          <div className="global-search-wrapper">
+            <input 
+              type="text" 
+              placeholder="🔍 Buscar cualquier coche en todo el manual..." 
+              value={globalSearchQuery}
+              onChange={(e) => {
+                setGlobalSearchQuery(e.target.value);
+                setShowGlobalSuggestions(true);
+              }}
+              onFocus={() => setShowGlobalSuggestions(true)}
+              className="global-search-input"
+            />
+            {globalSearchQuery && (
+              <span className="global-search-clear" onClick={() => {
+                setGlobalSearchQuery('');
+                setShowGlobalSuggestions(false);
+              }}>&times;</span>
+            )}
+          </div>
+
+          {/* Menú desplegable de sugerencias globales */}
+          {showGlobalSuggestions && globalSuggestions.length > 0 && (
+            <div className="global-search-dropdown glass-panel">
+              {globalSuggestions.map(car => (
+                <div 
+                  key={car.id} 
+                  className="global-search-item"
+                  onClick={() => {
+                    handleCarSelect(car.id, car.category);
+                    handleViewChange(car.category);
+                    setGlobalSearchQuery('');
+                    setShowGlobalSuggestions(false);
+                  }}
+                >
+                  <span className="suggestion-name">{car.name}</span>
+                  <div className="suggestion-meta">
+                    <span className="suggestion-pi">{car.pi}</span>
+                    <span className="suggestion-category">
+                      {car.category === 'fe' ? 'FORZA EDITION' : car.category.toUpperCase()}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </header>
 
       {/* AVISO DE TELEMETRÍA (Marquee) */}
