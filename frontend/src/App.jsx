@@ -264,10 +264,18 @@ function App() {
               
               {currentCars.length > 0 ? (
                 currentCars.map(car => (
-                  <button 
+                  <div 
                     key={car.id} 
                     className={`car-item-btn ${activeCarId === car.id ? 'active' : ''}`}
                     onClick={() => handleCarSelect(car.id)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleCarSelect(car.id);
+                      }
+                    }}
                   >
                     <div className="car-name-row">
                       <span className="car-name">{car.name}</span>
@@ -276,7 +284,7 @@ function App() {
                       <span className="car-class">{car.pi}</span>
                       <span className="car-discipline">{car.discipline}</span>
                     </div>
-                  </button>
+                  </div>
                 ))
               ) : (
                 <div style={{padding: '1.5rem 1rem', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.88rem'}}>
