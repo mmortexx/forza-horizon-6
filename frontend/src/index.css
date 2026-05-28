@@ -610,6 +610,477 @@ body {
   box-shadow: 0 12px 25px rgba(0, 212, 255, 0.3);
 }
 
+/* ─── SECCIÓN: MENÚ PRINCIPAL DEL MANUAL (HOME MENU JDM) ─── */
+.home-menu {
+  position: relative;
+  z-index: 5;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 6rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4.5rem;
+}
+
+.home-menu-title {
+  text-align: center;
+}
+
+.home-menu-title h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  color: #ffffff;
+  transform: skewX(-8deg);
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.9);
+  margin-bottom: 0.8rem;
+}
+
+.home-menu-title h2::after {
+  content: ' JDM';
+  color: var(--neon-blue);
+  text-shadow: 0 0 15px var(--neon-blue-glow);
+}
+
+.home-menu-title p {
+  font-family: var(--font-hud);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Barra de Estadísticas */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.stat-card-mini {
+  background: rgba(255, 255, 255, 0.015);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid var(--border-subtle);
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  transition: var(--transition-premium);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.stat-card-mini::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.stat-card-mini:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0, 212, 255, 0.25);
+  box-shadow: 0 15px 35px rgba(0, 212, 255, 0.1);
+}
+
+.stat-card-mini:hover::after {
+  opacity: 1;
+}
+
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.stat-desc {
+  font-family: var(--font-hud);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+/* Banner Coche Destacado */
+.featured-car-banner {
+  background: linear-gradient(135deg, rgba(255, 107, 0, 0.08) 0%, rgba(10, 10, 18, 0.85) 100%) !important;
+  border: 1px solid var(--border-glow-orange) !important;
+  border-radius: 18px;
+  padding: 3rem;
+  box-shadow: 
+    0 25px 55px rgba(0,0,0,0.7),
+    0 0 25px rgba(255, 107, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.featured-car-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -20%; width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(255, 107, 0, 0.12) 0%, transparent 70%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.featured-car-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  text-align: left;
+}
+
+.featured-tag {
+  font-family: var(--font-hud);
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--forza-orange);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  display: inline-block;
+  align-self: flex-start;
+}
+
+.featured-car-banner h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 900;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  transform: skewX(-4deg);
+}
+
+.featured-desc {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 800px;
+  line-height: 1.7;
+}
+
+.featured-meta {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 0.8rem;
+}
+
+.featured-pi {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: #ffffff;
+  background: var(--forza-orange);
+  padding: 4px 14px;
+  border-radius: 4px;
+  transform: skewX(-8deg);
+  box-shadow: 0 0 12px var(--forza-orange-glow);
+}
+
+.featured-class {
+  font-family: var(--font-hud);
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-secondary);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 4px 14px;
+  border-radius: 4px;
+  transform: skewX(-8deg);
+}
+
+.featured-btn {
+  background: transparent;
+  border: 1px solid var(--forza-orange);
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 0.7rem 1.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transform: skewX(-8deg);
+  transition: var(--transition-premium);
+  margin-left: auto;
+}
+
+.featured-btn:hover {
+  background: var(--forza-orange);
+  box-shadow: 0 0 20px var(--forza-orange-glow);
+  transform: skewX(-8deg) scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .featured-btn {
+    margin-left: 0;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Grid de las 8 Categorías */
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  width: 100%;
+}
+
+.home-card {
+  background: linear-gradient(135deg, rgba(15, 15, 28, 0.55), rgba(8, 8, 14, 0.95));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition-premium);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+}
+
+.home-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 4px;
+  background: var(--neon-blue);
+  opacity: 0.3;
+  transition: var(--transition-premium);
+}
+
+.home-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+}
+
+.home-card:hover::before {
+  opacity: 1;
+}
+
+/* Variaciones de tarjetas por color neón */
+.card-elite:hover { border-color: var(--neon-blue); box-shadow: 0 0 20px rgba(0, 212, 255, 0.15); }
+.card-elite::before { background: var(--neon-blue); }
+.card-warriors:hover { border-color: var(--forza-orange); box-shadow: 0 0 20px rgba(255, 107, 0, 0.15); }
+.card-warriors::before { background: var(--forza-orange); }
+.card-fe:hover { border-color: var(--neon-pink); box-shadow: 0 0 20px rgba(255, 0, 85, 0.15); }
+.card-fe::before { background: var(--neon-pink); }
+.card-street:hover { border-color: var(--neon-green); box-shadow: 0 0 20px rgba(0, 255, 102, 0.15); }
+.card-street::before { background: var(--neon-green); }
+.card-jdm:hover { border-color: var(--neon-blue); box-shadow: 0 0 20px rgba(0, 212, 255, 0.15); }
+.card-jdm::before { background: var(--neon-blue); }
+.card-fast:hover { border-color: var(--forza-orange); box-shadow: 0 0 20px rgba(255, 107, 0, 0.15); }
+.card-fast::before { background: var(--forza-orange); }
+.card-videos:hover { border-color: var(--neon-pink); box-shadow: 0 0 20px rgba(255, 0, 85, 0.15); }
+.card-videos::before { background: var(--neon-pink); }
+.card-wheel:hover { border-color: var(--neon-green); box-shadow: 0 0 20px rgba(0, 255, 102, 0.15); }
+.card-wheel::before { background: var(--neon-green); }
+
+.card-icon {
+  font-size: 2.2rem;
+  display: inline-block;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.home-card:hover .card-icon {
+  transform: scale(1.2) rotate(8deg);
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.card-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.card-badge {
+  font-family: var(--font-hud);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3px 10px;
+  border-radius: 4px;
+  align-self: flex-start;
+  color: var(--text-muted);
+  transition: var(--transition-fast);
+}
+
+.home-card:hover .card-badge {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Playlist de la Temporada */
+.festival-playlist {
+  background: linear-gradient(180deg, rgba(12, 12, 22, 0.6) 0%, rgba(6, 6, 12, 0.95) 100%) !important;
+  border: 1px solid rgba(0, 212, 255, 0.15) !important;
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: 
+    0 30px 65px rgba(0,0,0,0.8),
+    0 0 30px rgba(0, 212, 255, 0.05);
+  text-align: left;
+}
+
+.playlist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.playlist-season {
+  font-family: var(--font-hud);
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--neon-pink);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+.playlist-header h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+  font-weight: 900;
+  color: #ffffff;
+  text-transform: uppercase;
+  transform: skewX(-4deg);
+}
+
+.playlist-points {
+  font-family: var(--font-hud);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--neon-blue);
+  border: 1px solid var(--border-glow-blue);
+  background: rgba(0, 212, 255, 0.05);
+  padding: 6px 16px;
+  border-radius: 6px;
+  transform: skewX(-8deg);
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.15);
+}
+
+.playlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.playlist-item {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  padding: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  transition: var(--transition-premium);
+  position: relative;
+}
+
+.playlist-item::before {
+  content: '';
+  position: absolute;
+  top: 15px; left: 15px; width: 6px; height: 6px;
+  border-left: 2px solid var(--neon-blue);
+  border-top: 2px solid var(--neon-blue);
+}
+
+.playlist-item:hover {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(0, 212, 255, 0.2);
+  transform: translateX(3px);
+}
+
+.item-title-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.item-badge-active {
+  font-family: var(--font-hud);
+  font-size: 0.7rem;
+  font-weight: 900;
+  color: #ffffff;
+  background: var(--neon-pink);
+  padding: 2px 8px;
+  border-radius: 4px;
+  transform: skewX(-8deg);
+  box-shadow: 0 0 8px var(--neon-pink-glow);
+}
+
+.item-badge-done {
+  font-family: var(--font-hud);
+  font-size: 0.7rem;
+  font-weight: 900;
+  color: #ffffff;
+  background: var(--neon-green);
+  padding: 2px 8px;
+  border-radius: 4px;
+  transform: skewX(-8deg);
+  box-shadow: 0 0 8px var(--neon-green-glow);
+}
+
+.playlist-item h4 {
+  font-family: var(--font-hud);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.playlist-item p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.playlist-item.completed {
+  opacity: 0.65;
+  border-color: rgba(0, 255, 102, 0.08);
+}
+
+.playlist-item.completed:hover {
+  opacity: 0.9;
+}
 
 /* ─── SECCIÓN: MANUAL DE COCHES (SIDEBAR + DETALLE) ─── */
 .manual-section-wrapper {
