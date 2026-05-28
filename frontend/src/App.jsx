@@ -1143,17 +1143,6 @@ function App() {
       <footer className="footer">
         <div className="footer-container">
           
-          <div className="footer-newsletter-wrapper reveal active">
-            <h3 className="newsletter-title">{text.newsletter.title}</h3>
-            <p className="newsletter-desc">{text.newsletter.desc}</p>
-            <form className="newsletter-form" onSubmit={(e) => { e.preventDefault(); alert(text.newsletter.alert); }}>
-              <input type="email" className="newsletter-input" placeholder={text.newsletter.placeholder} required aria-label="Boletín de Forza Horizon" />
-              <button type="submit" className="newsletter-btn">
-                <span>{text.newsletter.btn} <i data-lucide="chevron-right" size="18" style={{verticalAlign: 'middle'}}></i></span>
-              </button>
-            </form>
-          </div>
-
           <div className="footer-brand">
             <div className="footer-logo">
               FORZA <span>HORIZON 6</span>
