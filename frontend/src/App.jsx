@@ -1010,8 +1010,8 @@ function App() {
       </main>
     </div>
 
-    {/* Canvas de partículas - se monta después del render */}
-    <SpeedParticles />
+    {/* Efecto de humo de drift */}
+    <DriftSmoke />
     </>
   )
 }
@@ -1019,9 +1019,9 @@ function App() {
 export default App
 
 /* ═══════════════════════════════════════════════════════════
-   SPEED PARTICLES COMPONENT
+   DRIFT SMOKE / TIRE SMOKE EFFECT
    ═══════════════════════════════════════════════════════════ */
-function SpeedParticles() {
+function DriftSmoke() {
   const canvasRef = useRef(null)
 
   useEffect(() => {
@@ -1037,58 +1037,145 @@ function SpeedParticles() {
     resize()
     window.addEventListener('resize', resize, { passive: true })
 
-    // Partículas tipo "speed lines" estilo HUD Forza
-    const particles = []
-    const particleCount = window.innerWidth < 768 ? 30 : 60
+    // Sistema de partículas de humo
+    const smokeParticles = []
+    const maxParticles = window.innerWidth < 768 ? 25 : 50
 
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        length: Math.random() * 80 + 20,
-        speed: Math.random() * 8 + 2,
-        opacity: Math.random() * 0.3 + 0.1,
-        angle: Math.random() * 0.3 - 0.15, // casi horizontal
-        color: Math.random() > 0.5 ? '#00f0ff' : '#ff0055',
-      })
+    class SmokeParticle {
+      constructor() {
+        this.reset()
+      }
+
+      reset() {
+        // Nacer en la parte inferior derecha (como drift desde atrás)
+        this.x = canvas.width * 0.6 + Math.random() * canvas.width * 0.3
+        this.y = canvas.height * 0.5 + Math.random() * canvas.height * 0.4
+        this.radius = Math.random() * 60 + 30
+        this.maxRadius = Math.random() * 150 + 80
+        this.growthRate = Math.random() * 0.5 + 0.2
+        this.opacity = Math.random() * 0.15 + 0.05
+        this.fadeRate = Math.random() * 0.003 + 0.001
+        this.driftX = (Math.random() - 0.5) * 0.5
+        this.driftY = -Math.random() * 0.8 - 0.2
+        this.color = Math.random() > 0.6 ? '#555555' : Math.random() > 0.5 ? '#888888' : '#aaaaaa'
+      }
+
+      update() {
+        this.radius += this.growthRate
+        this.x += this.driftX
+        this.y += this.driftY
+        this.opacity -= this.fadeRate
+
+        if (this.opacity <= 0 || this.radius >= this.maxRadius) {
+          this.reset()
+        }
+      }
+
+      draw(ctx) {
+        const gradient = ctx.createRadialGradient(
+          this.x, this.y, 0,
+          this.x, this.y, this.radius
+        )
+        gradient.addColorStop(0, `rgba(${this.color === '#555555' ? '85,85,85' : this.color === '#888888' ? '136,136,136' : '170,170,170'}, ${this.opacity})`)
+        gradient.addColorStop(0.5, `rgba(${this.color === '#555555' ? '85,85,85' : this.color === '#888888' ? '136,136,136' : '170,170,170'}, ${this.opacity * 0.5})`)
+        gradient.addColorStop(1, 'transparent')
+
+        ctx.beginPath()
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2)
+        ctx.fillStyle = gradient
+        ctx.fill()
+      }
     }
+
+    // Inicializar partículas
+    for (let i = 0; i < maxParticles; i++) {
+      smokeParticles.push(new SmokeParticle())
+    }
+
+    // Tire track lines (marcas de neumáticos en el asfalto)
+    const tireTracks = []
+    const maxTracks = 8
+
+    class TireTrack {
+      constructor() {
+        this.reset()
+      }
+
+      reset() {
+        this.points = []
+        this.opacity = Math.random() * 0.15 + 0.05
+        this.fadeRate = Math.random() * 0.002 + 0.001
+        this.lineWidth = Math.random() * 3 + 1
+        this.x = canvas.width * 0.5 + Math.random() * canvas.width * 0.4
+        this.y = canvas.height * 0.55 + Math.random() * canvas.height * 0.35
+        this.angle = Math.random() * 0.4 - 0.2
+        this.speed = Math.random() * 1 + 0.5
+        this.length = 0
+        this.maxLength = Math.random() * 200 + 100
+      }
+
+      update() {
+        this.length += this.speed
+        this.x += Math.cos(this.angle) * this.speed
+        this.y += Math.sin(this.angle) * this.speed
+        this.opacity -= this.fadeRate
+
+        if (this.opacity <= 0 || this.length >= this.maxLength) {
+          this.reset()
+        }
+      }
+
+      draw(ctx) {
+        if (this.points.length < 2) return
+
+        ctx.save()
+        ctx.globalAlpha = this.opacity
+        ctx.strokeStyle = '#333333'
+        ctx.lineWidth = this.lineWidth
+        ctx.lineCap = 'round'
+        ctx.shadowBlur = 5
+        ctx.shadowColor = 'rgba(0,0,0,0.5)'
+
+        ctx.beginPath()
+        ctx.moveTo(this.points[0].x, this.points[0].y)
+        for (let i = 1; i < this.points.length; i++) {
+          ctx.lineTo(this.points[i].x, this.points[i].y)
+        }
+        ctx.stroke()
+        ctx.restore()
+      }
+
+      addPoint(x, y) {
+        this.points.push({ x, y })
+        if (this.points.length > 50) {
+          this.points.shift()
+        }
+      }
+    }
+
+    for (let i = 0; i < maxTracks; i++) {
+      tireTracks.push(new TireTrack())
+    }
+
+    let frame = 0
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      particles.forEach(p => {
-        ctx.save()
-        ctx.translate(p.x, p.y)
-        ctx.rotate(p.angle)
-
-        const gradient = ctx.createLinearGradient(0, 0, p.length, 0)
-        gradient.addColorStop(0, 'transparent')
-        gradient.addColorStop(0.5, p.color)
-        gradient.addColorStop(1, 'transparent')
-
-        ctx.strokeStyle = gradient
-        ctx.lineWidth = 1.5
-        ctx.globalAlpha = p.opacity
-        ctx.shadowBlur = 8
-        ctx.shadowColor = p.color
-
-        ctx.beginPath()
-        ctx.moveTo(0, 0)
-        ctx.lineTo(p.length, 0)
-        ctx.stroke()
-        ctx.restore()
-
-        // Mover partícula
-        p.x += p.speed
-        p.y += Math.sin(p.angle) * p.speed
-
-        // Reset si sale de pantalla
-        if (p.x > canvas.width + p.length) {
-          p.x = -p.length
-          p.y = Math.random() * canvas.height
-        }
+      // Dibujar tracks de neumáticos
+      tireTracks.forEach(track => {
+        track.addPoint(track.x, track.y)
+        track.update()
+        track.draw(ctx)
       })
 
+      // Dibujar humo
+      smokeParticles.forEach(p => {
+        p.update()
+        p.draw(ctx)
+      })
+
+      frame++
       animationId = requestAnimationFrame(animate)
     }
 
@@ -1103,15 +1190,7 @@ function SpeedParticles() {
   return (
     <canvas
       ref={canvasRef}
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        pointerEvents: 'none',
-        zIndex: 3,
-      }}
+      id="drift-smoke-canvas"
     />
   )
 }
