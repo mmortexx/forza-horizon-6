@@ -1106,10 +1106,10 @@ body {
 .car-list {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.5rem;
   max-height: calc(100vh - 170px);
   overflow-y: auto;
-  padding-right: 0.5rem;
+  padding: 1.2rem 0.8rem 1.2rem 1.2rem; /* Padding cómodo para alejar elementos de los bordes */
   background: rgba(10, 10, 18, 0.85);
   border: 1px solid var(--border-subtle);
   border-radius: 16px;
@@ -1151,7 +1151,7 @@ body {
 .car-item-btn {
   background: rgba(255, 255, 255, 0.015);
   border: 1px solid rgba(255, 255, 255, 0.04);
-  padding: 0.7rem 1rem;
+  padding: 0.8rem 1.1rem;
   border-radius: 10px;
   text-align: left;
   cursor: pointer;
@@ -1161,6 +1161,7 @@ body {
   gap: 0.4rem;
   position: relative;
   overflow: hidden;
+  flex-shrink: 0; /* Evita que los botones colapsen verticalmente en pantallas de menor tamaño */
 }
 
 .car-item-btn::before {
@@ -1223,7 +1224,7 @@ body {
   background: rgba(10, 10, 18, 0.85);
   border: 1px solid var(--border-subtle);
   border-radius: 16px;
-  padding: 1.5rem;
+  padding: 2rem; /* Espaciado cómodo para que respire la ficha */
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
@@ -1335,7 +1336,7 @@ body {
 }
 
 .spec-list-table td {
-  padding: 0.4rem 0;
+  padding: 0.5rem 0; /* Espaciado cómodo de lectura */
   border-bottom: 1px solid rgba(255,255,255,0.04);
   font-family: var(--font-hud);
   font-size: 1.05rem;
@@ -1384,7 +1385,9 @@ body {
 .upgrade-item {
   display: flex;
   justify-content: space-between;
-  padding: 0.3rem 0;
+  align-items: flex-start;
+  gap: 0.4rem;
+  padding: 0.5rem 0; /* Espaciado cómodo */
   border-bottom: 1px solid rgba(255,255,255,0.03);
 }
 
@@ -1395,12 +1398,21 @@ body {
 .part-lbl {
   color: var(--text-secondary);
   font-size: 0.85rem;
+  width: 48%; /* Ancho fijo para evitar solapamientos horizontales */
+  flex-shrink: 0;
+  word-break: break-word;
+  line-height: 1.3;
 }
 
 .part-name {
   color: #ffffff;
   font-weight: 700;
   font-size: 0.85rem;
+  width: 48%; /* Ancho fijo para evitar solapamientos horizontales */
+  flex-shrink: 0;
+  text-align: right;
+  word-break: break-word;
+  line-height: 1.3;
 }
 
 .part-name.race-mod { color: var(--neon-pink); }
@@ -1437,7 +1449,7 @@ body {
 }
 
 .tuning-table td {
-  padding: 0.3rem 0;
+  padding: 0.45rem 0; /* Espaciado cómodo de lectura */
   border-bottom: 1px solid rgba(255,255,255,0.03);
   font-size: 0.9rem;
 }

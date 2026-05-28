@@ -9,7 +9,7 @@ const landingText = {
   es: {
     hero: {
       tag: "FESTIVAL JAPAN • 2026",
-      desc: "Siente la velocidad pura en las calles neón de Tokio, domina las curvas Touge del Monte Fuji y explora la costa tropical de Okinawa en un mundo abierto masivo y espectacular.",
+      desc: "El manual definitivo de reglajes, mejoras y telemetría de competición JDM para Forza Horizon 6. Domina el asfalto de Japón con los mejores tuneos de la comunidad.",
       btn_tuning: "Ver Reglajes",
       btn_wheel: "Ajustar Volante"
     },
@@ -24,7 +24,7 @@ const landingText = {
   en: {
     hero: {
       tag: "FESTIVAL JAPAN • 2026",
-      desc: "Feel pure speed in the neon streets of Tokyo, master the Touge turns of Mount Fuji, and explore the tropical coast of Okinawa in a massive and spectacular open world.",
+      desc: "The ultimate manual for JDM competition setups, upgrades, and telemetry for Forza Horizon 6. Dominate the Japanese asphalt with the best community tunes.",
       btn_tuning: "View Setups",
       btn_wheel: "Calibrate Wheel"
     },
