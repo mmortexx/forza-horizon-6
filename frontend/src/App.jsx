@@ -345,9 +345,56 @@ function App() {
       {/* BARRA DE NAVEGACIÓN UNIFICADA */}
       <nav className="navbar scrolled">
         <div className="nav-container">
-          <a href="#" className="logo" onClick={(e) => { e.preventDefault(); handleViewChange('home'); }}>
-            FORZA <span>HORIZON 6</span>
-          </a>
+          <div className="nav-left">
+            <a href="#" className="logo" onClick={(e) => { e.preventDefault(); handleViewChange('home'); }}>
+              FORZA <span>HORIZON 6</span>
+            </a>
+            
+            {/* Buscador Rápido en Navbar en el lado izquierdo */}
+            <div className="nav-search-wrapper">
+              <input 
+                type="text" 
+                placeholder={t('header.search_placeholder')}
+                value={globalSearchQuery}
+                onChange={(e) => {
+                  setGlobalSearchQuery(e.target.value)
+                  setShowGlobalSuggestions(true)
+                }}
+                onFocus={() => setShowGlobalSuggestions(true)}
+                className="nav-search-input"
+              />
+              {globalSearchQuery && (
+                <span className="nav-search-clear" onClick={() => {
+                  setGlobalSearchQuery('')
+                  setShowGlobalSuggestions(false)
+                }}>&times;</span>
+              )}
+              {showGlobalSuggestions && globalSuggestions.length > 0 && (
+                <div className="nav-search-dropdown glass-panel">
+                  {globalSuggestions.map(car => (
+                    <div 
+                      key={car.id} 
+                      className="nav-search-item"
+                      onClick={() => {
+                        handleCarSelect(car.id, car.category)
+                        handleViewChange(car.category)
+                        setGlobalSearchQuery('')
+                        setShowGlobalSuggestions(false)
+                      }}
+                    >
+                      <span className="suggestion-name">{car.name}</span>
+                      <div className="suggestion-meta">
+                        <span className="suggestion-pi">{car.pi}</span>
+                        <span className="suggestion-category">
+                          {car.category === 'fe' ? t('header.fe_badge') : car.category.toUpperCase()}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
           
           <button className="nav-toggle" onClick={() => setMobileMenuOpen(prev => !prev)} aria-label="Toggle navigation">
             <i data-lucide={mobileMenuOpen ? "x" : "menu"} size="30"></i>
@@ -375,53 +422,6 @@ function App() {
               </a>
             </li>
             
-            {/* Buscador Rápido en Navbar */}
-            <li className="nav-search-li">
-              <div className="nav-search-wrapper">
-                <input 
-                  type="text" 
-                  placeholder={t('header.search_placeholder')}
-                  value={globalSearchQuery}
-                  onChange={(e) => {
-                    setGlobalSearchQuery(e.target.value)
-                    setShowGlobalSuggestions(true)
-                  }}
-                  onFocus={() => setShowGlobalSuggestions(true)}
-                  className="nav-search-input"
-                />
-                {globalSearchQuery && (
-                  <span className="nav-search-clear" onClick={() => {
-                    setGlobalSearchQuery('')
-                    setShowGlobalSuggestions(false)
-                  }}>&times;</span>
-                )}
-                {showGlobalSuggestions && globalSuggestions.length > 0 && (
-                  <div className="nav-search-dropdown glass-panel">
-                    {globalSuggestions.map(car => (
-                      <div 
-                        key={car.id} 
-                        className="nav-search-item"
-                        onClick={() => {
-                          handleCarSelect(car.id, car.category)
-                          handleViewChange(car.category)
-                          setGlobalSearchQuery('')
-                          setShowGlobalSuggestions(false)
-                        }}
-                      >
-                        <span className="suggestion-name">{car.name}</span>
-                        <div className="suggestion-meta">
-                          <span className="suggestion-pi">{car.pi}</span>
-                          <span className="suggestion-category">
-                            {car.category === 'fe' ? t('header.fe_badge') : car.category.toUpperCase()}
-                          </span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </li>
-
             {/* Toggle de Idioma */}
             <li>
               <button className="lang-toggle-btn" onClick={toggleLanguage}>
