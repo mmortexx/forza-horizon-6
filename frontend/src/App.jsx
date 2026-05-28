@@ -1049,17 +1049,23 @@ function DriftSmoke() {
       reset() {
         // Nacer en la parte inferior, como polvo de neumáticos
         this.x = Math.random() * canvas.width
-        this.y = canvas.height + Math.random() * 100
-        this.width = Math.random() * 200 + 100
-        this.height = Math.random() * 40 + 15
-        this.growthRateW = Math.random() * 1.5 + 0.5
-        this.growthRateH = Math.random() * 0.5 + 0.2
-        this.opacity = Math.random() * 0.12 + 0.03
-        this.fadeRate = Math.random() * 0.002 + 0.001
-        this.driftX = (Math.random() - 0.5) * 2
-        this.driftY = -Math.random() * 1.5 - 0.5
-        // Color café/tierra de neumáticos
-        this.color = Math.random() > 0.5 ? '160,140,120' : Math.random() > 0.5 ? '140,130,110' : '120,110,100'
+        this.y = canvas.height + Math.random() * 120
+        this.width = Math.random() * 250 + 150
+        this.height = Math.random() * 50 + 20
+        this.growthRateW = Math.random() * 2.0 + 1.0
+        this.growthRateH = Math.random() * 0.8 + 0.3
+        this.opacity = Math.random() * 0.08 + 0.02
+        this.fadeRate = Math.random() * 0.0012 + 0.0004
+        this.driftX = (Math.random() - 0.5) * 4
+        this.driftY = -Math.random() * 1.0 - 0.3
+        // Colores tierra/grisáceos de neumáticos elegantes
+        const colors = [
+          '115, 108, 102', // Tierra grisácea
+          '95, 90, 85',    // Gris asfalto sucio
+          '135, 128, 122', // Polvo claro
+          '80, 76, 72'     // Humo oscuro de goma
+        ]
+        this.color = colors[Math.floor(Math.random() * colors.length)]
       }
 
       update() {
@@ -1075,31 +1081,23 @@ function DriftSmoke() {
       }
 
       draw(ctx) {
+        if (this.opacity <= 0) return
         ctx.save()
-        ctx.globalAlpha = this.opacity
-
-        // Crear gradiente horizontal para efecto de humo
-        const gradient = ctx.createLinearGradient(
-          this.x - this.width/2, this.y,
-          this.x + this.width/2, this.y
-        )
-        gradient.addColorStop(0, `rgba(${this.color}, 0)`)
-        gradient.addColorStop(0.3, `rgba(${this.color}, 0.8)`)
-        gradient.addColorStop(0.7, `rgba(${this.color}, 0.5)`)
+        
+        // Translación y escala para dibujar elipse con gradiente radial de alto rendimiento
+        ctx.translate(this.x, this.y)
+        ctx.scale(1, this.height / this.width)
+        
+        const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, this.width / 2)
+        gradient.addColorStop(0, `rgba(${this.color}, ${this.opacity})`)
+        gradient.addColorStop(0.6, `rgba(${this.color}, ${this.opacity * 0.4})`)
         gradient.addColorStop(1, `rgba(${this.color}, 0)`)
-
+        
         ctx.fillStyle = gradient
-
-        // Dibujar elipse aplastada (más horizontal que vertical)
         ctx.beginPath()
-        ctx.ellipse(this.x, this.y, this.width/2, this.height/2, 0, 0, Math.PI * 2)
+        ctx.arc(0, 0, this.width / 2, 0, Math.PI * 2)
         ctx.fill()
-
-        // Añadir blur para efecto de humo
-        ctx.filter = 'blur(8px)'
-        ctx.fill()
-        ctx.filter = 'none'
-
+        
         ctx.restore()
       }
     }
