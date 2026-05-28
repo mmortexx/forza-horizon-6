@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import carsEsRaw from './data/cars_es.json'
 import carsEnRaw from './data/cars_en.json'
@@ -28,6 +28,35 @@ function App() {
   // Estados del Buscador Global
   const [globalSearchQuery, setGlobalSearchQuery] = useState('')
   const [showGlobalSuggestions, setShowGlobalSuggestions] = useState(false)
+
+  // Scroll progress
+  const [scrollProgress, setScrollProgress] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight
+      setScrollProgress(docHeight > 0 ? (scrollTop / docHeight) * 100 : 0)
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Intersection Observer para animaciones
+  const observerRef = useRef()
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible')
+          }
+        })
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    )
+    return () => observerRef.current?.disconnect()
+  }, [])
 
   if (!carsData) return <div style={{color:'red', padding:'2rem', textAlign:'center'}}>Error cargando datos estáticos.</div>
 
@@ -79,7 +108,14 @@ function App() {
   };
 
   return (
-    <div className="app-container">
+    <>
+      {/* Scroll Progress Bar */}
+      <div
+        className="scroll-progress"
+        style={{ width: `${scrollProgress}%` }}
+      />
+
+      <div className="app-container">
       {/* Overlay transparente para cerrar sugerencias al hacer clic fuera */}
       {showGlobalSuggestions && globalSearchQuery && (
         <div className="global-search-overlay" onClick={() => setShowGlobalSuggestions(false)} />
@@ -973,7 +1009,109 @@ function App() {
 
       </main>
     </div>
+
+    {/* Canvas de partículas - se monta después del render */}
+    <SpeedParticles />
+    </>
   )
 }
 
 export default App
+
+/* ═══════════════════════════════════════════════════════════
+   SPEED PARTICLES COMPONENT
+   ═══════════════════════════════════════════════════════════ */
+function SpeedParticles() {
+  const canvasRef = useRef(null)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    let animationId
+
+    const resize = () => {
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+    }
+    resize()
+    window.addEventListener('resize', resize, { passive: true })
+
+    // Partículas tipo "speed lines" estilo HUD Forza
+    const particles = []
+    const particleCount = window.innerWidth < 768 ? 30 : 60
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        length: Math.random() * 80 + 20,
+        speed: Math.random() * 8 + 2,
+        opacity: Math.random() * 0.3 + 0.1,
+        angle: Math.random() * 0.3 - 0.15, // casi horizontal
+        color: Math.random() > 0.5 ? '#00f0ff' : '#ff0055',
+      })
+    }
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+      particles.forEach(p => {
+        ctx.save()
+        ctx.translate(p.x, p.y)
+        ctx.rotate(p.angle)
+
+        const gradient = ctx.createLinearGradient(0, 0, p.length, 0)
+        gradient.addColorStop(0, 'transparent')
+        gradient.addColorStop(0.5, p.color)
+        gradient.addColorStop(1, 'transparent')
+
+        ctx.strokeStyle = gradient
+        ctx.lineWidth = 1.5
+        ctx.globalAlpha = p.opacity
+        ctx.shadowBlur = 8
+        ctx.shadowColor = p.color
+
+        ctx.beginPath()
+        ctx.moveTo(0, 0)
+        ctx.lineTo(p.length, 0)
+        ctx.stroke()
+        ctx.restore()
+
+        // Mover partícula
+        p.x += p.speed
+        p.y += Math.sin(p.angle) * p.speed
+
+        // Reset si sale de pantalla
+        if (p.x > canvas.width + p.length) {
+          p.x = -p.length
+          p.y = Math.random() * canvas.height
+        }
+      })
+
+      animationId = requestAnimationFrame(animate)
+    }
+
+    animate()
+
+    return () => {
+      cancelAnimationFrame(animationId)
+      window.removeEventListener('resize', resize)
+    }
+  }, [])
+
+  return (
+    <canvas
+      ref={canvasRef}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        pointerEvents: 'none',
+        zIndex: 3,
+      }}
+    />
+  )
+}
