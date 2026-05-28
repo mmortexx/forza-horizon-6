@@ -1019,7 +1019,7 @@ function App() {
 export default App
 
 /* ═══════════════════════════════════════════════════════════
-   DRIFT SMOKE / TIRE SMOKE EFFECT
+   DRIFT SMOKE / TIRE DUST EFFECT
    ═══════════════════════════════════════════════════════════ */
 function DriftSmoke() {
   const canvasRef = useRef(null)
@@ -1037,145 +1037,87 @@ function DriftSmoke() {
     resize()
     window.addEventListener('resize', resize, { passive: true })
 
-    // Sistema de partículas de humo
-    const smokeParticles = []
-    const maxParticles = window.innerWidth < 768 ? 25 : 50
+    // Sistema de partículas de polvo/humo de neumáticos
+    const dustParticles = []
+    const maxParticles = window.innerWidth < 768 ? 40 : 80
 
-    class SmokeParticle {
+    class DustParticle {
       constructor() {
         this.reset()
       }
 
       reset() {
-        // Nacer en la parte inferior derecha (como drift desde atrás)
-        this.x = canvas.width * 0.6 + Math.random() * canvas.width * 0.3
-        this.y = canvas.height * 0.5 + Math.random() * canvas.height * 0.4
-        this.radius = Math.random() * 60 + 30
-        this.maxRadius = Math.random() * 150 + 80
-        this.growthRate = Math.random() * 0.5 + 0.2
-        this.opacity = Math.random() * 0.15 + 0.05
-        this.fadeRate = Math.random() * 0.003 + 0.001
-        this.driftX = (Math.random() - 0.5) * 0.5
-        this.driftY = -Math.random() * 0.8 - 0.2
-        this.color = Math.random() > 0.6 ? '#555555' : Math.random() > 0.5 ? '#888888' : '#aaaaaa'
+        // Nacer en la parte inferior, como polvo de neumáticos
+        this.x = Math.random() * canvas.width
+        this.y = canvas.height + Math.random() * 100
+        this.width = Math.random() * 200 + 100
+        this.height = Math.random() * 40 + 15
+        this.growthRateW = Math.random() * 1.5 + 0.5
+        this.growthRateH = Math.random() * 0.5 + 0.2
+        this.opacity = Math.random() * 0.12 + 0.03
+        this.fadeRate = Math.random() * 0.002 + 0.001
+        this.driftX = (Math.random() - 0.5) * 2
+        this.driftY = -Math.random() * 1.5 - 0.5
+        // Color café/tierra de neumáticos
+        this.color = Math.random() > 0.5 ? '160,140,120' : Math.random() > 0.5 ? '140,130,110' : '120,110,100'
       }
 
       update() {
-        this.radius += this.growthRate
+        this.width += this.growthRateW
+        this.height += this.growthRateH
         this.x += this.driftX
         this.y += this.driftY
         this.opacity -= this.fadeRate
 
-        if (this.opacity <= 0 || this.radius >= this.maxRadius) {
+        if (this.opacity <= 0 || this.y < -this.height) {
           this.reset()
         }
       }
 
       draw(ctx) {
-        const gradient = ctx.createRadialGradient(
-          this.x, this.y, 0,
-          this.x, this.y, this.radius
-        )
-        gradient.addColorStop(0, `rgba(${this.color === '#555555' ? '85,85,85' : this.color === '#888888' ? '136,136,136' : '170,170,170'}, ${this.opacity})`)
-        gradient.addColorStop(0.5, `rgba(${this.color === '#555555' ? '85,85,85' : this.color === '#888888' ? '136,136,136' : '170,170,170'}, ${this.opacity * 0.5})`)
-        gradient.addColorStop(1, 'transparent')
+        ctx.save()
+        ctx.globalAlpha = this.opacity
 
-        ctx.beginPath()
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2)
+        // Crear gradiente horizontal para efecto de humo
+        const gradient = ctx.createLinearGradient(
+          this.x - this.width/2, this.y,
+          this.x + this.width/2, this.y
+        )
+        gradient.addColorStop(0, `rgba(${this.color}, 0)`)
+        gradient.addColorStop(0.3, `rgba(${this.color}, 0.8)`)
+        gradient.addColorStop(0.7, `rgba(${this.color}, 0.5)`)
+        gradient.addColorStop(1, `rgba(${this.color}, 0)`)
+
         ctx.fillStyle = gradient
+
+        // Dibujar elipse aplastada (más horizontal que vertical)
+        ctx.beginPath()
+        ctx.ellipse(this.x, this.y, this.width/2, this.height/2, 0, 0, Math.PI * 2)
         ctx.fill()
+
+        // Añadir blur para efecto de humo
+        ctx.filter = 'blur(8px)'
+        ctx.fill()
+        ctx.filter = 'none'
+
+        ctx.restore()
       }
     }
 
     // Inicializar partículas
     for (let i = 0; i < maxParticles; i++) {
-      smokeParticles.push(new SmokeParticle())
+      dustParticles.push(new DustParticle())
     }
-
-    // Tire track lines (marcas de neumáticos en el asfalto)
-    const tireTracks = []
-    const maxTracks = 8
-
-    class TireTrack {
-      constructor() {
-        this.reset()
-      }
-
-      reset() {
-        this.points = []
-        this.opacity = Math.random() * 0.15 + 0.05
-        this.fadeRate = Math.random() * 0.002 + 0.001
-        this.lineWidth = Math.random() * 3 + 1
-        this.x = canvas.width * 0.5 + Math.random() * canvas.width * 0.4
-        this.y = canvas.height * 0.55 + Math.random() * canvas.height * 0.35
-        this.angle = Math.random() * 0.4 - 0.2
-        this.speed = Math.random() * 1 + 0.5
-        this.length = 0
-        this.maxLength = Math.random() * 200 + 100
-      }
-
-      update() {
-        this.length += this.speed
-        this.x += Math.cos(this.angle) * this.speed
-        this.y += Math.sin(this.angle) * this.speed
-        this.opacity -= this.fadeRate
-
-        if (this.opacity <= 0 || this.length >= this.maxLength) {
-          this.reset()
-        }
-      }
-
-      draw(ctx) {
-        if (this.points.length < 2) return
-
-        ctx.save()
-        ctx.globalAlpha = this.opacity
-        ctx.strokeStyle = '#333333'
-        ctx.lineWidth = this.lineWidth
-        ctx.lineCap = 'round'
-        ctx.shadowBlur = 5
-        ctx.shadowColor = 'rgba(0,0,0,0.5)'
-
-        ctx.beginPath()
-        ctx.moveTo(this.points[0].x, this.points[0].y)
-        for (let i = 1; i < this.points.length; i++) {
-          ctx.lineTo(this.points[i].x, this.points[i].y)
-        }
-        ctx.stroke()
-        ctx.restore()
-      }
-
-      addPoint(x, y) {
-        this.points.push({ x, y })
-        if (this.points.length > 50) {
-          this.points.shift()
-        }
-      }
-    }
-
-    for (let i = 0; i < maxTracks; i++) {
-      tireTracks.push(new TireTrack())
-    }
-
-    let frame = 0
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      // Dibujar tracks de neumáticos
-      tireTracks.forEach(track => {
-        track.addPoint(track.x, track.y)
-        track.update()
-        track.draw(ctx)
-      })
-
-      // Dibujar humo
-      smokeParticles.forEach(p => {
+      // Dibujar polvo
+      dustParticles.forEach(p => {
         p.update()
         p.draw(ctx)
       })
 
-      frame++
       animationId = requestAnimationFrame(animate)
     }
 
