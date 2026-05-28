@@ -1,14 +1,1658 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/forza-horizon-6/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
-    <script type="module" crossorigin src="/forza-horizon-6/assets/index-CciIZRCT.js"></script>
-    <link rel="stylesheet" crossorigin href="/forza-horizon-6/assets/index-BpzBOAzZ.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forza Horizon 6 | Sitio Oficial - Japan Festival</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/forza-horizon-6/favicon.svg" />
+
+  <!-- Google Fonts: Orbitron (Títulos Racing) e Inter (Cuerpo de texto) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* ═══════════════════════════════════════════════════════════
+       DISEÑO VISUAL DE ALTO IMPACTO - FORZA HORIZON 6 JAPAN
+       ═══════════════════════════════════════════════════════════ */
+    
+    :root {
+      --bg-darkest: #050508;
+      --bg-dark: #0b0b14;
+      --bg-panel: rgba(11, 11, 20, 0.75);
+      
+      --forza-orange: #FF6B00;
+      --forza-orange-glow: rgba(255, 107, 0, 0.4);
+      --neon-blue: #00D4FF;
+      --neon-blue-glow: rgba(0, 212, 255, 0.4);
+      --neon-pink: #ff0055;
+      --neon-pink-glow: rgba(255, 0, 85, 0.4);
+      
+      --text-primary: #ffffff;
+      --text-secondary: #cbd5e1;
+      --text-muted: #64748b;
+      
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --font-display: 'Orbitron', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'Rajdhani', sans-serif;
+      
+      --transition-premium: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-darkest);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Scrollbar personalizada */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-darkest);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      border: 2px solid var(--bg-darkest);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--forza-orange);
+    }
+
+    /* ─── NAVEGACIÓN (NAVBAR) ─── */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(5, 5, 8, 0.4);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: var(--transition-premium);
+    }
+
+    .navbar.scrolled {
+      background: rgba(5, 5, 8, 0.85);
+      border-bottom-color: rgba(255, 107, 0, 0.2);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      color: #ffffff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transform: skewX(-8deg);
+      text-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
+    }
+
+    .logo span {
+      color: var(--forza-orange);
+      text-shadow: 0 0 12px var(--forza-orange-glow);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: var(--transition-premium);
+      position: relative;
+      padding: 0.3rem 0;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--forza-orange);
+      transition: var(--transition-premium);
+      box-shadow: 0 0 8px var(--forza-orange-glow);
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-btn-cta {
+      background: linear-gradient(135deg, var(--forza-orange), var(--neon-pink));
+      color: #ffffff !important;
+      padding: 0.6rem 1.4rem;
+      border-radius: 4px;
+      box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+      transform: skewX(-8deg);
+    }
+    
+    .nav-btn-cta span {
+      display: inline-block;
+      transform: skewX(8deg);
+    }
+
+    .nav-btn-cta:hover {
+      filter: brightness(1.1);
+      box-shadow: 0 4px 20px rgba(255, 107, 0, 0.6);
+      transform: skewX(-8deg) translateY(-1px);
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    /* Hamburger menu en móviles */
+    @media (max-width: 900px) {
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        width: 280px;
+        height: calc(100vh - 70px);
+        background: rgba(11, 11, 20, 0.95);
+        backdrop-filter: blur(25px);
+        flex-direction: column;
+        padding: 3rem 2rem;
+        gap: 2rem;
+        align-items: flex-start;
+        border-left: 1px solid var(--border-subtle);
+        transition: var(--transition-premium);
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+    }
+
+    /* ─── HERO SECTION (CON PARALLAX E INTERACTIVIDAD) ─── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* Contenedor del fondo para efecto Parallax por JS */
+    .hero-parallax-bg {
+      position: absolute;
+      top: -10%; left: -10%; right: -10%; bottom: -10%;
+      background: 
+        linear-gradient(rgba(5, 5, 8, 0.5), rgba(5, 5, 8, 0.9)),
+        url('forza_bg.png') no-repeat center center;
+      background-size: cover;
+      z-index: 1;
+      transform: scale(1.05);
+      transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+      will-change: transform;
+      animation: hero-zoom 25s ease-in-out infinite alternate;
+    }
+
+    @keyframes hero-zoom {
+      0% { background-size: 105% auto; }
+      100% { background-size: 112% auto; }
+    }
+
+    /* Capas decorativas de velocidad */
+    .hero-speed-lines {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle, transparent 40%, rgba(5, 5, 8, 0.9) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      max-width: 1000px;
+      padding: 0 2rem;
+      margin-top: 4rem;
+    }
+
+    .hero-tag {
+      font-family: var(--font-mono);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--neon-blue);
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 10px var(--neon-blue-glow);
+      animation: fade-in-up 1s ease-out;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3.2rem, 8vw, 6.5rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -2px;
+      color: #ffffff;
+      transform: skewX(-8deg);
+      line-height: 0.95;
+      margin-bottom: 2rem;
+      text-shadow: 
+        0 2px 10px rgba(0, 0, 0, 0.8),
+        3px 3px 0px rgba(255, 107, 0, 0.9);
+      animation: fade-in-up 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero-title span {
+      color: var(--forza-orange);
+      text-shadow: 
+        0 0 15px var(--forza-orange-glow),
+        3px 3px 0px rgba(0, 0, 0, 0.9);
+    }
+
+    .hero-desc {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: var(--text-secondary);
+      max-width: 750px;
+      margin: 0 auto 3rem auto;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+      animation: fade-in-up 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fade-in-up 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 1.1rem 2.6rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transform: skewX(-8deg);
+      transition: var(--transition-premium);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .btn span {
+      display: inline-block;
+      transform: skewX(8deg);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--forza-orange), var(--neon-pink));
+      color: #ffffff;
+      box-shadow: 
+        0 10px 30px rgba(255, 107, 0, 0.4),
+        0 0 15px rgba(255, 0, 85, 0.15);
+    }
+
+    .btn-primary:hover {
+      transform: skewX(-8deg) translateY(-3px) scale(1.02);
+      box-shadow: 
+        0 15px 35px rgba(255, 107, 0, 0.6),
+        0 0 25px rgba(255, 0, 85, 0.35);
+      filter: brightness(1.1);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--neon-blue);
+      transform: skewX(-8deg) translateY(-3px) scale(1.02);
+      box-shadow: 0 10px 25px rgba(0, 212, 255, 0.25);
+    }
+
+    /* Animación de entrada */
+    @keyframes fade-in-up {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ─── SECCIÓN DE CONTENEDOR COMÚN ─── */
+    .section-padding {
+      padding: 7rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-title-wrapper {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+
+    .section-subtitle {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--forza-orange);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      color: #ffffff;
+      transform: skewX(-8deg);
+      text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.8);
+    }
+
+    .section-title span {
+      color: var(--neon-blue);
+      text-shadow: 0 0 15px var(--neon-blue-glow);
+    }
+
+    /* ─── SECCIÓN: CARACTERÍSTICAS DEL JUEGO (FEATURES) ─── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: linear-gradient(145deg, rgba(15, 15, 26, 0.7), rgba(8, 8, 14, 0.95));
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 3rem 2.2rem;
+      text-align: left;
+      transition: var(--transition-premium);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--forza-orange), var(--neon-blue));
+      opacity: 0;
+      transition: var(--transition-premium);
+      z-index: 2;
+    }
+
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(0, 212, 255, 0.2);
+      box-shadow: 
+        0 25px 50px rgba(0,0,0,0.6),
+        0 0 30px rgba(0, 212, 255, 0.08);
+    }
+
+    .feature-icon-wrapper {
+      width: 70px;
+      height: 70px;
+      border-radius: 12px;
+      background: rgba(255, 107, 0, 0.1);
+      border: 1px solid rgba(255, 107, 0, 0.25);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--forza-orange);
+      margin-bottom: 2rem;
+      transition: var(--transition-premium);
+      box-shadow: 0 0 15px rgba(255, 107, 0, 0.05);
+    }
+
+    .feature-card:hover .feature-icon-wrapper {
+      color: var(--neon-blue);
+      background: rgba(0, 212, 255, 0.1);
+      border-color: rgba(0, 212, 255, 0.3);
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+      transform: scale(1.05) rotate(5deg);
+    }
+
+    .feature-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 1rem;
+      letter-spacing: 0.5px;
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    /* ─── SECCIÓN: GALERÍA SHOWCASE (CARUSEL INTERACTIVO) ─── */
+    .showcase-slider-container {
+      position: relative;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      border-radius: 18px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+      overflow: hidden;
+      background: var(--bg-dark);
+    }
+
+    .showcase-track {
+      display: flex;
+      width: 100%;
+      height: 520px;
+      position: relative;
+    }
+
+    .showcase-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+      z-index: 1;
+    }
+
+    .showcase-slide.active {
+      opacity: 1;
+      z-index: 2;
+    }
+
+    .showcase-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.02);
+      transition: transform 6s ease-out;
+    }
+
+    .showcase-slide.active img {
+      transform: scale(1.08);
+    }
+
+    /* Sombras oscuras para textos legibles sobre la galería */
+    .showcase-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(0deg, rgba(5, 5, 8, 0.95) 0%, rgba(5, 5, 8, 0.2) 50%, transparent 100%);
+      z-index: 2;
+    }
+
+    .showcase-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 3rem;
+      z-index: 3;
+      text-align: left;
+    }
+
+    .showcase-caption h3 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: #ffffff;
+      transform: skewX(-8deg);
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+      margin-bottom: 0.6rem;
+    }
+
+    .showcase-caption p {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+    }
+
+    /* Botones de navegación del carrusel */
+    .showcase-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background: rgba(11, 11, 20, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: var(--transition-premium);
+    }
+
+    .showcase-btn:hover {
+      background: var(--forza-orange);
+      border-color: var(--forza-orange);
+      box-shadow: 0 0 15px var(--forza-orange-glow);
+    }
+
+    .showcase-btn-prev { left: 20px; }
+    .showcase-btn-next { right: 20px; }
+
+    /* Indicadores de puntos */
+    .showcase-dots {
+      position: absolute;
+      bottom: 25px;
+      right: 40px;
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .showcase-dot {
+      width: 25px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: var(--transition-premium);
+    }
+
+    .showcase-dot.active {
+      background: var(--forza-orange);
+      width: 45px;
+      box-shadow: 0 0 10px var(--forza-orange-glow);
+    }
+
+    /* ─── SECCIÓN: COCHES DESTACADOS (CARS) ─── */
+    .cars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .car-card {
+      background: linear-gradient(185deg, rgba(15, 15, 26, 0.6) 0%, rgba(8, 8, 14, 0.95) 100%);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+      transition: var(--transition-premium);
+    }
+
+    .car-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+    }
+
+    .car-img-wrapper {
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .car-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition-premium);
+    }
+
+    .car-card:hover .car-img-wrapper img {
+      transform: scale(1.08) rotate(1deg);
+    }
+
+    .car-card-body {
+      padding: 2.2rem;
+      text-align: left;
+    }
+
+    .car-class-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #ffffff;
+      background: var(--forza-orange);
+      padding: 3px 12px;
+      border-radius: 4px;
+      margin-bottom: 0.8rem;
+      transform: skewX(-8deg);
+      box-shadow: 0 0 8px rgba(255, 107, 0, 0.3);
+    }
+
+    .car-card.neon-blue-theme .car-class-badge {
+      background: var(--neon-blue);
+      box-shadow: 0 0 8px rgba(0, 212, 255, 0.3);
+    }
+
+    .car-card.neon-pink-theme .car-class-badge {
+      background: var(--neon-pink);
+      box-shadow: 0 0 8px rgba(255, 0, 85, 0.3);
+    }
+
+    .car-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Barras de estadísticas de rendimiento */
+    .car-stats-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .car-stat-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .car-stat-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .car-stat-value {
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    .car-bar-bg {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .car-bar-fill {
+      height: 100%;
+      width: 0; /* Animado en JS */
+      background: linear-gradient(90deg, var(--forza-orange), #ff9500);
+      border-radius: 3px;
+      transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .car-card.neon-blue-theme .car-bar-fill {
+      background: linear-gradient(90deg, var(--neon-blue), #007aff);
+    }
+
+    .car-card.neon-pink-theme .car-bar-fill {
+      background: linear-gradient(90deg, var(--neon-pink), #9200ff);
+    }
+
+    /* ─── SECCIÓN: MAPA E INFOGRAFÍA (MAP) ─── */
+    .map-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .map-card {
+      height: 380px;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+      cursor: pointer;
+      transition: var(--transition-premium);
+    }
+
+    .map-card-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-size: cover;
+      background-position: center;
+      transition: var(--transition-premium);
+      filter: grayscale(40%) brightness(50%);
+    }
+
+    .map-card:hover .map-card-bg {
+      transform: scale(1.08);
+      filter: grayscale(0%) brightness(75%);
+    }
+
+    .map-card-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(to top, rgba(5, 5, 8, 0.95) 0%, rgba(5, 5, 8, 0.1) 60%, transparent 100%);
+      z-index: 2;
+    }
+
+    .map-card-content {
+      position: absolute;
+      bottom: 0; left: 0; width: 100%;
+      padding: 2.2rem;
+      z-index: 3;
+      text-align: left;
+    }
+
+    .map-card-content h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: #ffffff;
+      transform: skewX(-8deg);
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    }
+
+    .map-card-content p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+    }
+
+    /* ─── SECCIÓN: REQUISITOS DEL SISTEMA (SPECS) ─── */
+    .specs-table-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      background: linear-gradient(145deg, rgba(12, 12, 22, 0.6), rgba(6, 6, 11, 0.95));
+      overflow: hidden;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+    }
+
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .specs-table th {
+      background: rgba(255, 107, 0, 0.1);
+      border-bottom: 2px solid var(--forza-orange);
+      color: var(--forza-orange);
+      font-family: var(--font-display);
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      padding: 1.2rem 1.8rem;
+    }
+
+    .specs-table th.neon-blue-th {
+      background: rgba(0, 212, 255, 0.08);
+      border-bottom-color: var(--neon-blue);
+      color: var(--neon-blue);
+    }
+
+    .specs-table td {
+      padding: 1.2rem 1.8rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      font-size: 0.92rem;
+    }
+
+    .specs-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .specs-table tr:hover {
+      background: rgba(255, 255, 255, 0.015);
+    }
+
+    .specs-table td.spec-name {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: #ffffff;
+      text-transform: uppercase;
+      width: 25%;
+    }
+
+    .specs-table td.spec-val {
+      color: var(--text-secondary);
+      width: 37.5%;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      background: #020204;
+      border-top: 1px solid var(--border-subtle);
+      padding: 5rem 2rem 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 2rem;
+      text-transform: uppercase;
+      letter-spacing: -1.5px;
+      color: #ffffff;
+      transform: skewX(-8deg);
+      text-shadow: 0 0 15px rgba(255, 107, 0, 0.3);
+    }
+
+    .footer-logo span {
+      color: var(--forza-orange);
+    }
+
+    .footer-tagline {
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .social-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text-secondary);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: var(--transition-premium);
+      text-decoration: none;
+    }
+
+    .social-btn:hover {
+      background: rgba(255, 107, 0, 0.1);
+      border-color: var(--forza-orange);
+      color: var(--forza-orange);
+      box-shadow: 0 0 15px var(--forza-orange-glow);
+      transform: translateY(-3px);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: var(--transition-premium);
+    }
+
+    .footer-links a:hover {
+      color: #ffffff;
+    }
+
+    .footer-copyright {
+      font-size: 0.8rem;
+      color: rgba(100, 116, 139, 0.6);
+      margin-top: 1.5rem;
+    }
+
+    /* ─── MODAL DE TRÁILER INTERACTIVO ─── */
+    .trailer-modal {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(2, 2, 4, 0.95);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      padding: 2rem;
+    }
+
+    .trailer-modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .trailer-modal-content {
+      position: relative;
+      width: 100%;
+      max-width: 960px;
+      aspect-ratio: 16/9;
+      background: #000000;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 25px 65px rgba(0,0,0,0.8);
+      transform: scale(0.95);
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .trailer-modal.active .trailer-modal-content {
+      transform: scale(1);
+    }
+
+    .trailer-close-btn {
+      position: absolute;
+      top: -50px;
+      right: 0;
+      background: none;
+      border: none;
+      color: #ffffff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .trailer-close-btn:hover {
+      color: var(--forza-orange);
+    }
+
+    .trailer-modal iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ─── ANIMACIÓN EN SCROLL (SCROLL REVEAL) ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN (NAVBAR STICKY) -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo">
+        FORZA <span>HORIZON 6</span>
+      </a>
+      
+      <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú de navegación">
+        <i data-lucide="menu" size="28"></i>
+      </button>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#hero">Inicio</a></li>
+        <li><a href="#features">Características</a></li>
+        <li><a href="#showcase">Galería</a></li>
+        <li><a href="#cars">Coches</a></li>
+        <li><a href="#map">Mapa</a></li>
+        <li><a href="#specs">Requisitos</a></li>
+        <li>
+          <a href="/forza-horizon-6/" class="nav-btn-cta">
+            <span>Manual JDM</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- SECCIÓN HERO DE ALTO IMPACTO -->
+  <header class="hero" id="hero">
+    <!-- Fondo Parallax por Javascript -->
+    <div class="hero-parallax-bg" id="hero-bg"></div>
+    <div class="hero-speed-lines"></div>
+
+    <div class="hero-content">
+      <span class="hero-tag">FESTIVAL JAPAN • 2026</span>
+      <h1 class="hero-title">FORZA HORIZON <span>6</span></h1>
+      <p class="hero-desc">
+        Siente la velocidad pura en las calles neón de Tokio y domina las curvas Touge del Monte Fuji. El festival automovilístico definitivo aterriza en Japón.
+      </p>
+      <div class="hero-ctas">
+        <button class="btn btn-primary" onclick="openTrailer()">
+          <span><i data-lucide="play" size="18" style="vertical-align: middle; margin-right: 4px;"></i> Ver Tráiler</span>
+        </button>
+        <a href="#features" class="btn btn-secondary">
+          <span>Explorar Festival</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECCIÓN DE CARACTERÍSTICAS (FEATURES) -->
+  <section class="section-padding reveal" id="features">
+    <div class="section-title-wrapper">
+      <span class="section-subtitle">Horizon Experience</span>
+      <h2 class="section-title">El Festival <span>Definitivo</span></h2>
+    </div>
+
+    <div class="features-grid">
+      <!-- Tarjeta 1: Mundo Abierto -->
+      <div class="feature-card">
+        <div class="feature-icon-wrapper">
+          <i data-lucide="map" size="32"></i>
+        </div>
+        <h3>Mundo Abierto de Japón</h3>
+        <p>Explora desde autopistas metropolitanas elevadas de Tokio de noche hasta senderos de montaña rurales bajo pétalos de cerezo en flor.</p>
+      </div>
+
+      <!-- Tarjeta 2: Coches Legendarios -->
+      <div class="feature-card">
+        <div class="feature-icon-wrapper">
+          <i data-lucide="gauge" size="32"></i>
+        </div>
+        <h3>+500 Coches Auténticos</h3>
+        <p>Colecciona, modifica y pilota el catálogo más completo de vehículos deportivos, hiperdeportivos modernos y leyendas clásicas de importación JDM.</p>
+      </div>
+
+      <!-- Tarjeta 3: Horizon Multijugador -->
+      <div class="feature-card">
+        <div class="feature-icon-wrapper">
+          <i data-lucide="users" size="32"></i>
+        </div>
+        <h3>Multijugador Horizon</h3>
+        <p>Compite en carreras, únete a convoyes de derrape en puertos de montaña o disfruta de eventos espontáneos Arcade con la comunidad.</p>
+      </div>
+
+      <!-- Tarjeta 4: Gráficos 4K HDR -->
+      <div class="feature-card">
+        <div class="feature-icon-wrapper">
+          <i data-lucide="monitor" size="32"></i>
+        </div>
+        <h3>Gráficos 4K HDR</h3>
+        <p>Vive una inmersión absoluta gracias a la iluminación global de última generación por Ray Tracing y condiciones climáticas extremas dinámicas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN: SHOWCASE DE LA GALERÍA (CARUSEL INTERACTIVO) -->
+  <section class="section-padding reveal" id="showcase">
+    <div class="section-title-wrapper">
+      <span class="section-subtitle">Showcase</span>
+      <h2 class="section-title">Capturas <span>Del Juego</span></h2>
+    </div>
+
+    <div class="showcase-slider-container">
+      <div class="showcase-track">
+        <!-- Slide 1: Tokyo Neon -->
+        <div class="showcase-slide active">
+          <img src="gallery_tokyo.png" alt="Coche deportivo de carreras en las calles neón de Tokio">
+          <div class="showcase-overlay"></div>
+          <div class="showcase-caption">
+            <h3>Shinjuku Drift Run</h3>
+            <p>Siente la deriva en el corazón de Tokio de noche, rodeado por rascacielos iluminados con luces neón y asfalto húmedo.</p>
+          </div>
+        </div>
+
+        <!-- Slide 2: Monte Fuji -->
+        <div class="showcase-slide">
+          <img src="gallery_fuji.png" alt="Deportivos derrapando en el Monte Fuji con sakura">
+          <div class="showcase-overlay"></div>
+          <div class="showcase-caption">
+            <h3>Paso Touge del Monte Fuji</h3>
+            <p>Domina las bajadas técnicas de montaña durante la hora dorada, esquivando curvas cerradas bordeadas por cerezos en flor.</p>
+          </div>
+        </div>
+
+        <!-- Slide 3: Okinawa -->
+        <div class="showcase-slide">
+          <img src="gallery_okinawa.png" alt="Deportivo conduciendo por la costa tropical de Okinawa">
+          <div class="showcase-overlay"></div>
+          <div class="showcase-caption">
+            <h3>Autopistas Costeras de Okinawa</h3>
+            <p>Velocidad punta libre en puentes y autopistas junto al mar turquesa del trópico japonés al amanecer.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controles -->
+      <button class="showcase-btn showcase-btn-prev" onclick="changeSlide(-1)" aria-label="Imagen anterior">
+        <i data-lucide="chevron-left" size="24"></i>
+      </button>
+      <button class="showcase-btn showcase-btn-next" onclick="changeSlide(1)" aria-label="Siguiente imagen">
+        <i data-lucide="chevron-right" size="24"></i>
+      </button>
+
+      <!-- Dots -->
+      <div class="showcase-dots">
+        <div class="showcase-dot active" onclick="setSlide(0)"></div>
+        <div class="showcase-dot" onclick="setSlide(1)"></div>
+        <div class="showcase-dot" onclick="setSlide(2)"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN: COCHES DESTACADOS (CARS) -->
+  <section class="section-padding reveal" id="cars">
+    <div class="section-title-wrapper">
+      <span class="section-subtitle">Garaje Especializado</span>
+      <h2 class="section-title">Coches <span>Destacados</span></h2>
+    </div>
+
+    <div class="cars-grid">
+      <!-- Coche 1: Supra GR -->
+      <div class="car-card">
+        <div class="car-img-wrapper">
+          <img src="gallery_fuji.png" alt="Toyota Supra GR">
+        </div>
+        <div class="car-card-body">
+          <span class="car-class-badge">A CLASS</span>
+          <h3>Toyota Supra GR Horizon Edition</h3>
+          <div class="car-stats-container">
+            <div class="car-stat-row">
+              <div class="car-stat-info">
+                <span>Velocidad</span>
+                <span class="car-stat-value">9.2</span>
+              </div>
+              <div class="car-bar-bg">
+                <div class="car-bar-fill animate-bar" data-width="92%"></div>
+              </div>
+            </div>
+            <div class="car-stat-row">
+              <div class="car-stat-info">
+                <span>Aceleración</span>
+                <span class="car-stat-value">9.8</span>
+              </div>
+              <div class="car-bar-bg">
+                <div class="car-bar-fill animate-bar" data-width="98%"></div>
+              </div>
+            </div>
+            <div class="car-stat-row">
+              <div class="car-stat-info">
+                <span>Manejo</span>
+                <span class="car-stat-value">9.0</span>
+              </div>
+              <div class="car-bar-bg">
+                <div class="car-bar-fill animate-bar" data-width="90%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coche 2: Skyline R34 -->
+      <div class="car-card neon-blue-theme">
+        <div class="car-img-wrapper">
+          <img src="gallery_tokyo.png" alt="Nissan Skyline GT-R R34">
+        </div>
+        <div class="car-card-body">
+          <span class="car-class-badge">S1 CLASS</span>
+          <h3>Nissan Skyline GT-R R34 Mines</h3>
+          <div class="car-stats-container">
+            <div class="car-stat-row">
+              <div class="car-stat-info">
+                <span>Velocidad</span>
+                <span class="car-stat-value">8.8</span>
+              </div>
+              <div class="car-bar-bg">
+                <div class="car-bar-fill animate-bar" data-width="88%"></div>
+              </div>
+            </div>
+            <div class="car-stat-row">
+              <div class="car-stat-info">
+                <span>Aceleración</span>
+                <span class="car-stat-value">9.2</span>
+              </div>
+              <div class="car-bar-bg">
+                <div class="car-bar-fill animate-bar" data-width="92%"></div>
+              </div>
+            </div>
+            <div class="car-stat-row">
+              <div class="car-stat-info">
+                <span>Manejo</span>
+                <span class="car-stat-value">9.5</span>
+              </div>
+              <div class="car-bar-bg">
+                <div class="car-bar-fill animate-bar" data-width="95%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coche 3: Lotus Exige -->
+      <div class="car-card neon-pink-theme">
+        <div class="car-img-wrapper">
+          <img src="forza_bg.png" alt="Lotus Exige WTAC">
+        </div>
+        <div class="car-card-body">
+          <span class="car-class-badge">R CLASS</span>
+          <h3>Lotus Exige WTAC Time Attack</h3>
+          <div class="car-stats-container">
+            <div class="car-stat-row">
+              <div class="car-stat-info">
+                <span>Velocidad</span>
+                <span class="car-stat-value">9.0</span>
+              </div>
+              <div class="car-bar-bg">
+                <div class="car-bar-fill animate-bar" data-width="90%"></div>
+              </div>
+            </div>
+            <div class="car-stat-row">
+              <div class="car-stat-info">
+                <span>Aceleración</span>
+                <span class="car-stat-value">9.4</span>
+              </div>
+              <div class="car-bar-bg">
+                <div class="car-bar-fill animate-bar" data-width="94%"></div>
+              </div>
+            </div>
+            <div class="car-stat-row">
+              <div class="car-stat-info">
+                <span>Manejo</span>
+                <span class="car-stat-value">10.0</span>
+              </div>
+              <div class="car-bar-bg">
+                <div class="car-bar-fill animate-bar" data-width="100%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN: MAPA E INFOGRAFÍA (MAP) -->
+  <section class="section-padding reveal" id="map">
+    <div class="section-title-wrapper">
+      <span class="section-subtitle">Territorios Horizon</span>
+      <h2 class="section-title">Mapa de <span>Japón</span></h2>
+    </div>
+
+    <div class="map-grid">
+      <!-- Región 1: Tokyo -->
+      <div class="map-card">
+        <div class="map-card-bg" style="background-image: url('gallery_tokyo.png');"></div>
+        <div class="map-card-overlay"></div>
+        <div class="map-card-content">
+          <h3>Tokyo Metropolis</h3>
+          <p>Autopistas elevadas urbanas (C1 Loop), cañones urbanos repletos de neón tridimensional en Shibuya y zonas técnicas en muelles industriales.</p>
+        </div>
+      </div>
+
+      <!-- Región 2: Monte Fuji -->
+      <div class="map-card">
+        <div class="map-card-bg" style="background-image: url('gallery_fuji.png');"></div>
+        <div class="map-card-overlay"></div>
+        <div class="map-card-content">
+          <h3>Monte Fuji Touge</h3>
+          <p>La meca del drift. Curvas cerradas encadenadas, bajadas y subidas de asfalto rodeadas de templos sintoístas tradicionales y bosques frondosos.</p>
+        </div>
+      </div>
+
+      <!-- Región 3: Okinawa -->
+      <div class="map-card">
+        <div class="map-card-bg" style="background-image: url('gallery_okinawa.png');"></div>
+        <div class="map-card-overlay"></div>
+        <div class="map-card-content">
+          <h3>Costa de Okinawa</h3>
+          <p>Puentes de autopista largos sobre aguas turquesas, pueblos costeros de arena blanca y clima subtropical húmedo.</p>
+        </div>
+      </div>
+
+      <!-- Región 4: Alpes Japoneses -->
+      <div class="map-card">
+        <div class="map-card-bg" style="background-image: url('forza_bg.png');"></div>
+        <div class="map-card-overlay"></div>
+        <div class="map-card-content">
+          <h3>Alpes Japoneses</h3>
+          <p>Subidas exigentes con vistas al horizonte, pasos de montaña nevados durante el invierno y pistas de tierra de rally de alta altitud.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN: REQUISITOS DEL SISTEMA (SPECS) -->
+  <section class="section-padding reveal" id="specs">
+    <div class="section-title-wrapper">
+      <span class="section-subtitle">Especificaciones PC</span>
+      <h2 class="section-title">Requisitos del <span>Sistema</span></h2>
+    </div>
+
+    <div class="specs-table-container">
+      <table class="specs-table">
+        <thead>
+          <tr>
+            <th>Componente</th>
+            <th>Mínimos (1080p @ 30 FPS)</th>
+            <th class="neon-blue-th">Recomendados (1440p @ 60 FPS)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="spec-name">Sistema Operativo</td>
+            <td class="spec-val">Windows 10 (versión 1909 o superior)</td>
+            <td class="spec-val">Windows 11 (64-bit)</td>
+          </tr>
+          <tr>
+            <td class="spec-name">Procesador (CPU)</td>
+            <td class="spec-val">Intel Core i5-4460 / AMD Ryzen 3 1200</td>
+            <td class="spec-val">Intel Core i7-10700K / AMD Ryzen 7 3800X</td>
+          </tr>
+          <tr>
+            <td class="spec-name">Memoria RAM</td>
+            <td class="spec-val">8 GB RAM</td>
+            <td class="spec-val">16 GB RAM</td>
+          </tr>
+          <tr>
+            <td class="spec-name">Tarjeta Gráfica (GPU)</td>
+            <td class="spec-val">NVIDIA GTX 970 / AMD RX 470 (4 GB VRAM)</td>
+            <td class="spec-val">NVIDIA RTX 3070 / AMD RX 6800 (8 GB VRAM)</td>
+          </tr>
+          <tr>
+            <td class="spec-name">Almacenamiento</td>
+            <td class="spec-val">110 GB HDD (SSD recomendado)</td>
+            <td class="spec-val">110 GB SSD NVMe M.2 (Obligatorio)</td>
+          </tr>
+          <tr>
+            <td class="spec-name">DirectX</td>
+            <td class="spec-val">DirectX 12 (API level 12_0)</td>
+            <td class="spec-val">DirectX 12 (API level 12_2 / Ultimate)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- PIE DE PÁGINA (FOOTER) -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a href="#" class="footer-logo">
+          FORZA <span>HORIZON 6</span>
+        </a>
+        <span class="footer-tagline">El Festival Horizon Aterriza en Japón</span>
+      </div>
+
+      <!-- Iconos Redes Sociales -->
+      <div class="footer-socials">
+        <a href="https://twitter.com/ForzaHorizon" class="social-btn" target="_blank" aria-label="Twitter">
+          <i data-lucide="twitter"></i>
+        </a>
+        <a href="https://www.youtube.com/user/ForzaMotorsport" class="social-btn" target="_blank" aria-label="YouTube">
+          <i data-lucide="youtube"></i>
+        </a>
+        <a href="https://www.instagram.com/forzahorizon/" class="social-btn" target="_blank" aria-label="Instagram">
+          <i data-lucide="instagram"></i>
+        </a>
+        <a href="https://github.com/mmortexx/forza-horizon-6" class="social-btn" target="_blank" aria-label="GitHub">
+          <i data-lucide="github"></i>
+        </a>
+      </div>
+
+      <!-- Enlaces del Footer -->
+      <ul class="footer-links">
+        <li><a href="#">Privacidad</a></li>
+        <li><a href="#">Términos de Servicio</a></li>
+        <li><a href="/forza-horizon-6/">Manual de Competición</a></li>
+        <li><a href="https://forza.net" target="_blank">Página Oficial de Forza</a></li>
+      </ul>
+
+      <p class="footer-copyright">
+        &copy; 2026 Playground Games & Xbox Game Studios. Forza Horizon 6 es una marca registrada de Microsoft Corporation. Desarrollado de forma ficticia como tributo.
+      </p>
+    </div>
+  </footer>
+
+  <!-- MODAL DE TRÁILER INTERACTIVO -->
+  <div class="trailer-modal" id="trailer-modal">
+    <div class="trailer-modal-content">
+      <button class="trailer-close-btn" onclick="closeTrailer()">
+        <i data-lucide="x" size="20"></i> Cerrar
+      </button>
+      <!-- Usamos el tráiler oficial conceptual viral de FH6 en Japón -->
+      <iframe id="trailer-video" src="" title="Forza Horizon 6 Official Concept Trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <script>
+    /* ═══════════════════════════════════════════════════════════
+       INTERACTIVIDAD JAVASCRIPT - PANTALLA COMPLETA E IMPACTO
+       ═══════════════════════════════════════════════════════════ */
+
+    // Inicializar Lucide Icons
+    lucide.createIcons();
+
+    // 1. SCROLL REVEAL (Intersection Observer para animación de secciones)
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // 2. NAVBAR SCROLL EFFECT
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Menu hamburguesa móvil
+    const navToggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      const icon = navToggle.querySelector('i');
+      if (navLinks.classList.contains('active')) {
+        navToggle.innerHTML = '<i data-lucide="x" size="28"></i>';
+      } else {
+        navToggle.innerHTML = '<i data-lucide="menu" size="28"></i>';
+      }
+      lucide.createIcons();
+    });
+
+    // Cerrar menú móvil al hacer click en un enlace
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        navToggle.innerHTML = '<i data-lucide="menu" size="28"></i>';
+        lucide.createIcons();
+      });
+    });
+
+    // 3. PARALLAX EFFECT EN HERO BACKGROUND (Solo escritorio)
+    const heroBg = document.getElementById('hero-bg');
+    if (window.innerWidth > 900) {
+      window.addEventListener('mousemove', (e) => {
+        const moveX = (e.clientX - window.innerWidth / 2) * -0.015;
+        const moveY = (e.clientY - window.innerHeight / 2) * -0.015;
+        heroBg.style.transform = `scale(1.05) translate(${moveX}px, ${moveY}px)`;
+      });
+    }
+
+    // 4. CARUSEL INTERACTIVO DE LA GALERÍA (SHOWCASE)
+    let currentSlideIndex = 0;
+    const slides = document.querySelectorAll('.showcase-slide');
+    const dots = document.querySelectorAll('.showcase-dot');
+
+    function changeSlide(direction) {
+      slides[currentSlideIndex].classList.remove('active');
+      dots[currentSlideIndex].classList.remove('active');
+      
+      currentSlideIndex = (currentSlideIndex + direction + slides.length) % slides.length;
+      
+      slides[currentSlideIndex].classList.add('active');
+      dots[currentSlideIndex].classList.add('active');
+    }
+
+    function setSlide(index) {
+      slides[currentSlideIndex].classList.remove('active');
+      dots[currentSlideIndex].classList.remove('active');
+      
+      currentSlideIndex = index;
+      
+      slides[currentSlideIndex].classList.add('active');
+      dots[currentSlideIndex].classList.add('active');
+    }
+
+    // Rotación automática del carrusel cada 6 segundos
+    let autoSlideInterval = setInterval(() => changeSlide(1), 6000);
+
+    // Resetear el intervalo cuando el usuario interactúe
+    document.querySelectorAll('.showcase-btn, .showcase-dot').forEach(el => {
+      el.addEventListener('click', () => {
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = setInterval(() => changeSlide(1), 8000); // Dar más margen
+      });
+    });
+
+    // 5. ANIMACIÓN DE BARRAS DE PROGRESO DE LOS COCHES
+    const barFillElements = document.querySelectorAll('.animate-bar');
+    const barObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const fillWidth = entry.target.getAttribute('data-width');
+          entry.target.style.width = fillWidth;
+          barObserver.unobserve(entry.target); // Animación una única vez
+        }
+      });
+    }, { threshold: 0.1 });
+
+    barFillElements.forEach(bar => barObserver.observe(bar));
+
+    // 6. CONTROL DEL MODAL DE VIDEO DEL TRÁILER
+    const trailerModal = document.getElementById('trailer-modal');
+    const trailerVideo = document.getElementById('trailer-video');
+    // Tráiler conceptual de FH6 Japan muy popular
+    const youtubeTrailerUrl = "https://www.youtube.com/embed/PcrXF6yT-cE?autoplay=1";
+
+    function openTrailer() {
+      trailerModal.classList.add('active');
+      trailerVideo.src = youtubeTrailerUrl;
+      document.body.style.overflow = 'hidden'; // Detener scroll en body
+    }
+
+    function closeTrailer() {
+      trailerModal.classList.remove('active');
+      trailerVideo.src = "";
+      document.body.style.overflow = 'auto'; // Habilitar scroll de nuevo
+    }
+
+    // Cerrar al pulsar escape
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && trailerModal.classList.contains('active')) {
+        closeTrailer();
+      }
+    });
+  </script>
+</body>
 </html>
