@@ -228,54 +228,133 @@ function App() {
               <h2>{t('home.title')}</h2>
               <p>{t('home.subtitle')}</p>
             </div>
+
+            {/* BARRA DE ESTADÍSTICAS DEL MANUAL */}
+            <div className="stats-bar">
+              <div className="stat-card-mini">
+                <span className="stat-num">🏆 18</span>
+                <span className="stat-desc">{i18n.language === 'en' ? 'Meta Cars Verified' : 'Coches Meta Verificados'}</span>
+              </div>
+              <div className="stat-card-mini">
+                <span className="stat-num">⚙️ 80+</span>
+                <span className="stat-desc">{i18n.language === 'en' ? 'Share Codes' : 'Códigos de Tuneo'}</span>
+              </div>
+              <div className="stat-card-mini">
+                <span className="stat-num">📹 100+</span>
+                <span className="stat-desc">{i18n.language === 'en' ? 'Videos Audited' : 'Guías Auditadas'}</span>
+              </div>
+              <div className="stat-card-mini">
+                <span className="stat-num">⚡ 650°</span>
+                <span className="stat-desc">{i18n.language === 'en' ? 'Wheel Telemetry' : 'Ángulos G29 Listos'}</span>
+              </div>
+            </div>
+
+            {/* COCHE DESTACADO DEL FESTIVAL (HERO BANNER) */}
+            <div className="featured-car-banner glass-panel">
+              <div className="featured-car-content">
+                <span className="featured-tag">🔥 {i18n.language === 'en' ? 'FEATURED SETUP' : 'REGLAJE DESTACADO'}</span>
+                <h3>Subaru BRZ Forza Edition JDM</h3>
+                <p className="featured-desc">
+                  {i18n.language === 'en' 
+                    ? 'The absolute king of dirt tracks. Built with a lifted rally suspension, optimized AWD differentials (75% central split), and low center of gravity. Click below to inspect its blueprints.'
+                    : 'El monarca absoluto de las pistas de tierra. Altura de suspensión rally, reparto central de tracción al 75% y balance neutral de peso. Haz clic abajo para ver su ficha técnica.'}
+                </p>
+                <div className="featured-meta">
+                  <span className="featured-pi">PI 800</span>
+                  <span className="featured-class">A CLASS</span>
+                  <button className="featured-btn" onClick={() => {
+                    handleCarSelect("brz-fe-dirt", "fe");
+                    handleViewChange("fe");
+                  }}>
+                    {i18n.language === 'en' ? 'INSPECT SETUP ➔' : 'VER REGLAJE ➔'}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* GRID DE CATEGORÍAS */}
             <div className="home-grid">
-              <div className="home-card" onClick={() => handleViewChange('altas')}>
+              <div className="home-card card-elite" onClick={() => handleViewChange('altas')}>
                 <span className="card-icon">🏆</span>
                 <span className="card-title">{t('home.cards.elite.title')}</span>
                 <span className="card-desc">{t('home.cards.elite.desc')}</span>
                 <span className="card-badge">{t('home.cards.elite.badge')}</span>
               </div>
-              <div className="home-card" onClick={() => handleViewChange('bajas')}>
+              <div className="home-card card-warriors" onClick={() => handleViewChange('bajas')}>
                 <span className="card-icon">⚔️</span>
                 <span className="card-title">{t('home.cards.warriors.title')}</span>
                 <span className="card-desc">{t('home.cards.warriors.desc')}</span>
                 <span className="card-badge">{t('home.cards.warriors.badge')}</span>
               </div>
-              <div className="home-card" onClick={() => handleViewChange('fe')}>
+              <div className="home-card card-fe" onClick={() => handleViewChange('fe')}>
                 <span className="card-icon">💎</span>
                 <span className="card-title">{t('home.cards.fe.title')}</span>
                 <span className="card-desc">{t('home.cards.fe.desc')}</span>
                 <span className="card-badge">{t('home.cards.fe.badge')}</span>
               </div>
-              <div className="home-card" onClick={() => handleViewChange('rutas')}>
+              <div className="home-card card-street" onClick={() => handleViewChange('rutas')}>
                 <span className="card-icon">🚗</span>
                 <span className="card-title">{t('home.cards.street.title')}</span>
                 <span className="card-desc">{t('home.cards.street.desc')}</span>
                 <span className="card-badge">{t('home.cards.street.badge')}</span>
               </div>
-              <div className="home-card" onClick={() => handleViewChange('joyas')}>
-                <span className="card-icon">💎</span>
+              <div className="home-card card-jdm" onClick={() => handleViewChange('joyas')}>
+                <span className="card-icon">🇯🇵</span>
                 <span className="card-title">{t('home.cards.jdm.title')}</span>
                 <span className="card-desc">{t('home.cards.jdm.desc')}</span>
                 <span className="card-badge">{t('home.cards.jdm.badge')}</span>
               </div>
-              <div className="home-card" onClick={() => handleViewChange('fast')}>
+              <div className="home-card card-fast" onClick={() => handleViewChange('fast')}>
                 <span className="card-icon">🔥</span>
                 <span className="card-title">{t('home.cards.fast.title')}</span>
                 <span className="card-desc">{t('home.cards.fast.desc')}</span>
                 <span className="card-badge">{t('home.cards.fast.badge')}</span>
               </div>
-              <div className="home-card" onClick={() => handleViewChange('videos')}>
+              <div className="home-card card-videos" onClick={() => handleViewChange('videos')}>
                 <span className="card-icon">📹</span>
                 <span className="card-title">{t('home.cards.videos.title')}</span>
                 <span className="card-desc">{t('home.cards.videos.desc')}</span>
                 <span className="card-badge">{t('home.cards.videos.badge')}</span>
               </div>
-              <div className="home-card" onClick={() => handleViewChange('wheel')}>
+              <div className="home-card card-wheel" onClick={() => handleViewChange('wheel')}>
                 <span className="card-icon">🎮</span>
                 <span className="card-title">{t('home.cards.wheel.title')}</span>
                 <span className="card-desc">{t('home.cards.wheel.desc')}</span>
                 <span className="card-badge">{t('home.cards.wheel.badge')}</span>
+              </div>
+            </div>
+
+            {/* HORIZON PLAYLIST DE LA TEMPORADA */}
+            <div className="festival-playlist glass-panel">
+              <div className="playlist-header">
+                <div>
+                  <span className="playlist-season">☀ {i18n.language === 'en' ? 'HORIZON RETRO SEASON' : 'TEMPORADA RETRO HORIZON'}</span>
+                  <h3>{i18n.language === 'en' ? 'Weekly Championship Challenges' : 'Desafíos del Campeonato Semanal'}</h3>
+                </div>
+                <span className="playlist-points">20 / 40 PTS</span>
+              </div>
+              <div className="playlist-grid">
+                <div className="playlist-item">
+                  <div className="item-title-row">
+                    <span className="item-badge-active">ACTIVE</span>
+                    <h4>{i18n.language === 'en' ? 'Lotus WTAC Time Attack' : 'Time Attack Lotus WTAC'}</h4>
+                  </div>
+                  <p>{i18n.language === 'en' ? 'Achieve a clean lap under 2:10 on Mt. Akina sprint. Setup: R-Class Lotus Exige.' : 'Logra una vuelta limpia en menos de 2:10 en el sprint de Mt. Akina. Configuración: Lotus Exige Clase R.'}</p>
+                </div>
+                <div className="playlist-item">
+                  <div className="item-title-row">
+                    <span className="item-badge-active">ACTIVE</span>
+                    <h4>{i18n.language === 'en' ? 'Touge Drift King' : 'Rey del Drift Touge'}</h4>
+                  </div>
+                  <p>{i18n.language === 'en' ? 'Accumulate 350,000 drift points in Irohazaka downhill. Setup: Nissan Silvia S15 Spec-R.' : 'Acumula 350,000 puntos de drift en el descenso de Irohazaka. Configuración: Nissan Silvia S15 Spec-R.'}</p>
+                </div>
+                <div className="playlist-item completed">
+                  <div className="item-title-row">
+                    <span className="item-badge-done">COMPLETED</span>
+                    <h4>{i18n.language === 'en' ? 'Kei Car Revival' : 'Resurgimiento Kei Car'}</h4>
+                  </div>
+                  <p>{i18n.language === 'en' ? 'Win a road racing championship using the Honda Beat (CBR Swap). Setup: C-Class.' : 'Gana un campeonato de carretera usando el Honda Beat (CBR Swap). Configuración: Clase C.'}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -1037,9 +1116,9 @@ function DriftSmoke() {
     resize()
     window.addEventListener('resize', resize, { passive: true })
 
-    // Sistema de partículas de polvo/humo de neumáticos
+    // Sistema de partículas de polvo/humo de neumáticos ampliado
     const dustParticles = []
-    const maxParticles = window.innerWidth < 768 ? 40 : 80
+    const maxParticles = window.innerWidth < 768 ? 60 : 120
 
     class DustParticle {
       constructor() {
@@ -1050,20 +1129,20 @@ function DriftSmoke() {
         // Nacer en la parte inferior, como polvo de neumáticos
         this.x = Math.random() * canvas.width
         this.y = canvas.height + Math.random() * 120
-        this.width = Math.random() * 250 + 150
-        this.height = Math.random() * 50 + 20
-        this.growthRateW = Math.random() * 2.0 + 1.0
-        this.growthRateH = Math.random() * 0.8 + 0.3
-        this.opacity = Math.random() * 0.08 + 0.02
-        this.fadeRate = Math.random() * 0.0012 + 0.0004
-        this.driftX = (Math.random() - 0.5) * 4
-        this.driftY = -Math.random() * 1.0 - 0.3
+        this.width = Math.random() * 280 + 180
+        this.height = Math.random() * 60 + 25
+        this.growthRateW = Math.random() * 2.5 + 1.2
+        this.growthRateH = Math.random() * 0.9 + 0.4
+        this.opacity = Math.random() * 0.18 + 0.08  /* Humo mucho más visible */
+        this.fadeRate = Math.random() * 0.0010 + 0.0003
+        this.driftX = (Math.random() - 0.5) * 5
+        this.driftY = -Math.random() * 1.2 - 0.4
         // Colores tierra/grisáceos de neumáticos elegantes
         const colors = [
-          '115, 108, 102', // Tierra grisácea
-          '95, 90, 85',    // Gris asfalto sucio
-          '135, 128, 122', // Polvo claro
-          '80, 76, 72'     // Humo oscuro de goma
+          '125, 118, 112', // Tierra grisácea
+          '105, 100, 95',  // Gris asfalto sucio
+          '145, 138, 132', // Polvo claro
+          '90, 86, 82'     // Humo oscuro de goma
         ]
         this.color = colors[Math.floor(Math.random() * colors.length)]
       }
