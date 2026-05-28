@@ -5,13 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Forza Horizon 6 | Sitio Oficial - Japan Festival</title>
   
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="/forza-horizon-6/favicon.svg" />
+  <!-- Meta Tags SEO -->
+  <meta name="description" content="Siente la velocidad pura en las calles neón de Tokio y domina las curvas Touge del Monte Fuji. Vive el festival automovilístico definitivo en Forza Horizon 6: Japan.">
+  <meta name="keywords" content="Forza Horizon 6, Japón, Carreras, Mundo Abierto, JDM, Tokio, Monte Fuji, Xbox, PC, Jugar Forza">
+  <meta name="author" content="Playground Games Tribute">
+  <meta property="og:title" content="Forza Horizon 6 | Sitio Oficial - Japan Festival">
+  <meta property="og:description" content="El festival automovilístico definitivo aterriza en Japón. Explora un mundo abierto espectacular y lleno de neón.">
+  <meta property="og:image" content="forza_bg.png">
+  <meta property="og:type" content="website">
 
-  <!-- Google Fonts: Orbitron (Títulos Racing) e Inter (Cuerpo de texto) -->
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <!-- Google Fonts: Orbitron (Títulos Racing), Rajdhani (HUD Tecnológico) e Inter (Textos legibles) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;600;700;800&display=swap" rel="stylesheet">
   
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -22,27 +31,34 @@
        ═══════════════════════════════════════════════════════════ */
     
     :root {
-      --bg-darkest: #050508;
-      --bg-dark: #0b0b14;
-      --bg-panel: rgba(11, 11, 20, 0.75);
+      --bg-darkest: #05050a;
+      --bg-dark: #0a0a12;
+      --bg-panel: rgba(10, 10, 18, 0.75);
+      --bg-hud: rgba(15, 15, 28, 0.85);
       
       --forza-orange: #FF6B00;
-      --forza-orange-glow: rgba(255, 107, 0, 0.4);
+      --forza-orange-glow: rgba(255, 107, 0, 0.5);
       --neon-blue: #00D4FF;
-      --neon-blue-glow: rgba(0, 212, 255, 0.4);
+      --neon-blue-glow: rgba(0, 212, 255, 0.5);
       --neon-pink: #ff0055;
-      --neon-pink-glow: rgba(255, 0, 85, 0.4);
+      --neon-pink-glow: rgba(255, 0, 85, 0.5);
+      --neon-green: #00FF66;
+      --neon-green-glow: rgba(0, 255, 102, 0.4);
       
       --text-primary: #ffffff;
       --text-secondary: #cbd5e1;
       --text-muted: #64748b;
       
       --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-glow-blue: rgba(0, 212, 255, 0.25);
+      --border-glow-orange: rgba(255, 107, 0, 0.25);
+      
       --font-display: 'Orbitron', sans-serif;
       --font-body: 'Inter', sans-serif;
-      --font-mono: 'Rajdhani', sans-serif;
+      --font-hud: 'Rajdhani', sans-serif;
       
       --transition-premium: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      --transition-fast: all 0.2s ease-out;
     }
 
     * {
@@ -62,38 +78,50 @@
 
     /* Scrollbar personalizada */
     ::-webkit-scrollbar {
-      width: 8px;
+      width: 10px;
     }
     ::-webkit-scrollbar-track {
       background: var(--bg-darkest);
     }
     ::-webkit-scrollbar-thumb {
       background: rgba(255, 255, 255, 0.1);
-      border-radius: 4px;
-      border: 2px solid var(--bg-darkest);
+      border-radius: 5px;
+      border: 3px solid var(--bg-darkest);
     }
     ::-webkit-scrollbar-thumb:hover {
       background: var(--forza-orange);
+      box-shadow: 0 0 10px var(--forza-orange-glow);
     }
 
-    /* ─── NAVEGACIÓN (NAVBAR) ─── */
+    /* Canvas global de fondo */
+    #canvas-decorations {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── NAVEGACIÓN (NAVBAR STICKY GLASSMORPHISM) ─── */
     .navbar {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       z-index: 1000;
-      background: rgba(5, 5, 8, 0.4);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: rgba(5, 5, 10, 0.35);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
       border-bottom: 1px solid var(--border-subtle);
       transition: var(--transition-premium);
     }
 
     .navbar.scrolled {
-      background: rgba(5, 5, 8, 0.85);
-      border-bottom-color: rgba(255, 107, 0, 0.2);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      background: rgba(5, 5, 10, 0.85);
+      border-bottom-color: rgba(0, 212, 255, 0.3);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
     }
 
     .nav-container {
@@ -108,16 +136,16 @@
     .logo {
       font-family: var(--font-display);
       font-weight: 900;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       text-transform: uppercase;
-      letter-spacing: -1px;
+      letter-spacing: -1.5px;
       color: #ffffff;
       text-decoration: none;
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      transform: skewX(-8deg);
-      text-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
+      transform: skewX(-10deg);
+      text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
     }
 
     .logo span {
@@ -127,7 +155,7 @@
 
     .nav-links {
       display: flex;
-      gap: 2.5rem;
+      gap: 2.2rem;
       list-style: none;
       align-items: center;
     }
@@ -135,8 +163,8 @@
     .nav-links a {
       color: var(--text-secondary);
       text-decoration: none;
-      font-family: var(--font-mono);
-      font-size: 1.1rem;
+      font-family: var(--font-hud);
+      font-size: 1.15rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -152,17 +180,29 @@
       left: 0;
       width: 0;
       height: 2px;
-      background: var(--forza-orange);
+      background: var(--neon-blue);
       transition: var(--transition-premium);
-      box-shadow: 0 0 8px var(--forza-orange-glow);
+      box-shadow: 0 0 8px var(--neon-blue-glow);
     }
 
     .nav-links a:hover {
       color: #ffffff;
+      text-shadow: 0 0 8px var(--neon-blue-glow);
     }
 
     .nav-links a:hover::after {
       width: 100%;
+    }
+
+    .nav-links li.active a {
+      color: var(--forza-orange);
+      text-shadow: 0 0 10px var(--forza-orange-glow);
+    }
+
+    .nav-links li.active a::after {
+      width: 100%;
+      background: var(--forza-orange);
+      box-shadow: 0 0 8px var(--forza-orange-glow);
     }
 
     .nav-btn-cta {
@@ -170,8 +210,9 @@
       color: #ffffff !important;
       padding: 0.6rem 1.4rem;
       border-radius: 4px;
-      box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+      box-shadow: 0 4px 15px rgba(255, 107, 0, 0.4);
       transform: skewX(-8deg);
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
     
     .nav-btn-cta span {
@@ -180,9 +221,9 @@
     }
 
     .nav-btn-cta:hover {
-      filter: brightness(1.1);
-      box-shadow: 0 4px 20px rgba(255, 107, 0, 0.6);
-      transform: skewX(-8deg) translateY(-1px);
+      filter: brightness(1.2);
+      box-shadow: 0 4px 22px rgba(255, 0, 85, 0.7);
+      transform: skewX(-8deg) translateY(-2px);
     }
 
     .nav-toggle {
@@ -193,16 +234,16 @@
       cursor: pointer;
     }
 
-    /* Hamburger menu en móviles */
-    @media (max-width: 900px) {
+    /* Menú móvil */
+    @media (max-width: 990px) {
       .nav-links {
         position: fixed;
         top: 70px;
         right: -100%;
-        width: 280px;
+        width: 300px;
         height: calc(100vh - 70px);
-        background: rgba(11, 11, 20, 0.95);
-        backdrop-filter: blur(25px);
+        background: rgba(8, 8, 15, 0.96);
+        backdrop-filter: blur(30px);
         flex-direction: column;
         padding: 3rem 2rem;
         gap: 2rem;
@@ -220,7 +261,7 @@
       }
     }
 
-    /* ─── HERO SECTION (CON PARALLAX E INTERACTIVIDAD) ─── */
+    /* ─── HERO SECTION (VIDEO + PARTÍCULAS 3D VELOCIDAD) ─── */
     .hero {
       position: relative;
       height: 100vh;
@@ -230,60 +271,102 @@
       align-items: center;
       text-align: center;
       overflow: hidden;
+      z-index: 1;
     }
 
-    /* Contenedor del fondo para efecto Parallax por JS */
+    /* Fondo Parallax */
     .hero-parallax-bg {
       position: absolute;
       top: -10%; left: -10%; right: -10%; bottom: -10%;
-      background: 
-        linear-gradient(rgba(5, 5, 8, 0.5), rgba(5, 5, 8, 0.9)),
-        url('forza_bg.png') no-repeat center center;
+      background: url('forza_bg.png') no-repeat center center;
       background-size: cover;
       z-index: 1;
       transform: scale(1.05);
       transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
       will-change: transform;
-      animation: hero-zoom 25s ease-in-out infinite alternate;
     }
 
-    @keyframes hero-zoom {
-      0% { background-size: 105% auto; }
-      100% { background-size: 112% auto; }
+    /* Video de fondo de YouTube */
+    .hero-video-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100vw;
+      height: 56.25vw; /* 16:9 aspect ratio */
+      min-height: 100vh;
+      min-width: 177.77vh; /* 16:9 aspect ratio */
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
     }
 
-    /* Capas decorativas de velocidad */
+    .hero-video-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .hero-video-wrapper.loaded {
+      opacity: 0.65; /* Atenuación del vídeo */
+    }
+
+    /* Overlays y capas de diseño */
+    .hero-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(180deg, 
+        rgba(5, 5, 10, 0.4) 0%, 
+        rgba(5, 5, 10, 0.7) 60%, 
+        var(--bg-darkest) 100%
+      );
+      z-index: 3;
+      pointer-events: none;
+    }
+
     .hero-speed-lines {
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: radial-gradient(circle, transparent 40%, rgba(5, 5, 8, 0.9) 100%);
-      z-index: 2;
+      background: radial-gradient(circle, transparent 35%, rgba(5, 5, 10, 0.8) 100%);
+      z-index: 4;
       pointer-events: none;
     }
 
     .hero-content {
       position: relative;
-      z-index: 3;
-      max-width: 1000px;
+      z-index: 5;
+      max-width: 1100px;
       padding: 0 2rem;
-      margin-top: 4rem;
+      margin-top: 2rem;
     }
 
     .hero-tag {
-      font-family: var(--font-mono);
-      font-size: 1.2rem;
-      font-weight: 700;
+      font-family: var(--font-hud);
+      font-size: 1.3rem;
+      font-weight: 800;
       color: var(--neon-blue);
       text-transform: uppercase;
-      letter-spacing: 6px;
+      letter-spacing: 8px;
       margin-bottom: 1.5rem;
-      text-shadow: 0 0 10px var(--neon-blue-glow);
-      animation: fade-in-up 1s ease-out;
+      text-shadow: 0 0 15px var(--neon-blue-glow);
+      display: inline-block;
+      border: 1px solid var(--border-glow-blue);
+      padding: 0.4rem 1.2rem;
+      background: rgba(0, 212, 255, 0.05);
+      backdrop-filter: blur(5px);
+      transform: skewX(-10deg);
+    }
+    
+    .hero-tag span {
+      display: inline-block;
+      transform: skewX(10deg);
     }
 
+    /* Título con efecto glitch de carreras */
     .hero-title {
       font-family: var(--font-display);
-      font-size: clamp(3.2rem, 8vw, 6.5rem);
+      font-size: clamp(3rem, 9vw, 6.8rem);
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: -2px;
@@ -291,42 +374,41 @@
       transform: skewX(-8deg);
       line-height: 0.95;
       margin-bottom: 2rem;
+      position: relative;
       text-shadow: 
-        0 2px 10px rgba(0, 0, 0, 0.8),
-        3px 3px 0px rgba(255, 107, 0, 0.9);
-      animation: fade-in-up 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        0 2px 10px rgba(0, 0, 0, 0.9),
+        3px 3px 0px var(--neon-pink);
     }
 
     .hero-title span {
       color: var(--forza-orange);
       text-shadow: 
-        0 0 15px var(--forza-orange-glow),
-        3px 3px 0px rgba(0, 0, 0, 0.9);
+        0 0 20px var(--forza-orange-glow),
+        3px 3px 0px #000000;
     }
 
     .hero-desc {
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
       color: var(--text-secondary);
-      max-width: 750px;
-      margin: 0 auto 3rem auto;
-      text-shadow: 0 2px 5px rgba(0,0,0,0.8);
-      animation: fade-in-up 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+      max-width: 800px;
+      margin: 0 auto 3.5rem auto;
+      text-shadow: 0 3px 6px rgba(0,0,0,0.9);
+      font-weight: 400;
     }
 
     .hero-ctas {
       display: flex;
-      gap: 1.5rem;
+      gap: 1.8rem;
       justify-content: center;
       flex-wrap: wrap;
-      animation: fade-in-up 1.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .btn {
       font-family: var(--font-display);
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 800;
       text-transform: uppercase;
-      padding: 1.1rem 2.6rem;
+      padding: 1.2rem 2.8rem;
       border: none;
       border-radius: 4px;
       cursor: pointer;
@@ -335,185 +417,222 @@
       display: flex;
       align-items: center;
       gap: 0.8rem;
+      position: relative;
+      overflow: hidden;
     }
 
     .btn span {
-      display: inline-block;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
       transform: skewX(8deg);
+      z-index: 2;
     }
 
     .btn-primary {
       background: linear-gradient(135deg, var(--forza-orange), var(--neon-pink));
       color: #ffffff;
       box-shadow: 
-        0 10px 30px rgba(255, 107, 0, 0.4),
-        0 0 15px rgba(255, 0, 85, 0.15);
+        0 8px 25px rgba(255, 107, 0, 0.4),
+        0 0 15px rgba(255, 0, 85, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%; width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: 0.5s;
+    }
+
+    .btn-primary:hover::before {
+      left: 100%;
     }
 
     .btn-primary:hover {
-      transform: skewX(-8deg) translateY(-3px) scale(1.02);
+      transform: skewX(-8deg) translateY(-4px) scale(1.03);
       box-shadow: 
         0 15px 35px rgba(255, 107, 0, 0.6),
-        0 0 25px rgba(255, 0, 85, 0.35);
-      filter: brightness(1.1);
+        0 0 30px rgba(255, 0, 85, 0.4);
+      filter: brightness(1.15);
     }
 
     .btn-secondary {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(10, 10, 18, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       color: #ffffff;
       backdrop-filter: blur(10px);
     }
 
     .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.1);
       border-color: var(--neon-blue);
-      transform: skewX(-8deg) translateY(-3px) scale(1.02);
-      box-shadow: 0 10px 25px rgba(0, 212, 255, 0.25);
+      transform: skewX(-8deg) translateY(-4px) scale(1.03);
+      box-shadow: 
+        0 12px 25px rgba(0, 212, 255, 0.3),
+        0 0 15px rgba(0, 212, 255, 0.15);
     }
 
-    /* Animación de entrada */
-    @keyframes fade-in-up {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* ─── SECCIÓN DE CONTENEDOR COMÚN ─── */
+    /* ─── SECCIONES: COMÚN ─── */
     .section-padding {
-      padding: 7rem 2rem;
+      padding: 8rem 2rem;
       max-width: 1400px;
       margin: 0 auto;
+      position: relative;
+      z-index: 2;
     }
 
     .section-title-wrapper {
       text-align: center;
-      margin-bottom: 5rem;
+      margin-bottom: 6rem;
     }
 
     .section-subtitle {
-      font-family: var(--font-mono);
-      font-size: 0.95rem;
-      font-weight: 700;
+      font-family: var(--font-hud);
+      font-size: 1.05rem;
+      font-weight: 800;
       color: var(--forza-orange);
       text-transform: uppercase;
-      letter-spacing: 4px;
-      margin-bottom: 0.5rem;
+      letter-spacing: 6px;
+      margin-bottom: 0.8rem;
+      display: block;
+      text-shadow: 0 0 8px var(--forza-orange-glow);
     }
 
     .section-title {
       font-family: var(--font-display);
-      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: -1px;
       color: #ffffff;
       transform: skewX(-8deg);
-      text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.8);
+      text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.9);
     }
 
     .section-title span {
       color: var(--neon-blue);
-      text-shadow: 0 0 15px var(--neon-blue-glow);
+      text-shadow: 
+        0 0 20px var(--neon-blue-glow),
+        2px 2px 0 #000000;
     }
 
-    /* ─── SECCIÓN: CARACTERÍSTICAS DEL JUEGO (FEATURES) ─── */
+    /* ─── CARACTERÍSTICAS CON TILT 3D ─── */
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 2.5rem;
     }
 
     .feature-card {
-      background: linear-gradient(145deg, rgba(15, 15, 26, 0.7), rgba(8, 8, 14, 0.95));
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
+      background: linear-gradient(135deg, rgba(15, 15, 28, 0.65), rgba(8, 8, 14, 0.95));
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 16px;
-      padding: 3rem 2.2rem;
+      border-radius: 20px;
+      padding: 3.5rem 2.5rem;
       text-align: left;
-      transition: var(--transition-premium);
+      transition: border-color 0.3s, box-shadow 0.3s;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.6);
+      transform-style: preserve-3d;
+      transform: perspective(1000px);
     }
 
+    /* Efecto Glow que sigue al cursor */
     .feature-card::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--forza-orange), var(--neon-blue));
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle 180px at var(--mouse-x, 0) var(--mouse-y, 0), 
+        rgba(0, 212, 255, 0.12) 0%, 
+        transparent 80%
+      );
+      pointer-events: none;
+      z-index: 1;
       opacity: 0;
-      transition: var(--transition-premium);
-      z-index: 2;
+      transition: opacity 0.3s ease;
     }
 
     .feature-card:hover::before {
       opacity: 1;
     }
 
+    .feature-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--forza-orange), var(--neon-pink));
+      opacity: 0;
+      transition: var(--transition-premium);
+      z-index: 3;
+    }
+
+    .feature-card:hover::after {
+      opacity: 1;
+    }
+
     .feature-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(0, 212, 255, 0.2);
+      border-color: rgba(0, 212, 255, 0.35);
       box-shadow: 
-        0 25px 50px rgba(0,0,0,0.6),
-        0 0 30px rgba(0, 212, 255, 0.08);
+        0 30px 60px rgba(0,0,0,0.7),
+        0 0 35px rgba(0, 212, 255, 0.12);
     }
 
     .feature-icon-wrapper {
-      width: 70px;
-      height: 70px;
-      border-radius: 12px;
-      background: rgba(255, 107, 0, 0.1);
+      width: 75px;
+      height: 75px;
+      border-radius: 16px;
+      background: rgba(255, 107, 0, 0.08);
       border: 1px solid rgba(255, 107, 0, 0.25);
       display: flex;
       justify-content: center;
       align-items: center;
       color: var(--forza-orange);
-      margin-bottom: 2rem;
+      margin-bottom: 2.2rem;
       transition: var(--transition-premium);
-      box-shadow: 0 0 15px rgba(255, 107, 0, 0.05);
+      box-shadow: 0 0 20px rgba(255, 107, 0, 0.1);
+      transform: translateZ(30px);
     }
 
     .feature-card:hover .feature-icon-wrapper {
       color: var(--neon-blue);
-      background: rgba(0, 212, 255, 0.1);
-      border-color: rgba(0, 212, 255, 0.3);
-      box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
-      transform: scale(1.05) rotate(5deg);
+      background: rgba(0, 212, 255, 0.08);
+      border-color: rgba(0, 212, 255, 0.35);
+      box-shadow: 0 0 25px rgba(0, 212, 255, 0.25);
+      transform: translateZ(45px) rotate(8deg);
     }
 
     .feature-card h3 {
       font-family: var(--font-display);
-      font-size: 1.35rem;
+      font-size: 1.45rem;
       font-weight: 800;
       text-transform: uppercase;
       color: #ffffff;
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
       letter-spacing: 0.5px;
+      transform: translateZ(20px);
     }
 
     .feature-card p {
       color: var(--text-secondary);
-      font-size: 0.92rem;
-      line-height: 1.6;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      transform: translateZ(10px);
     }
 
-    /* ─── SECCIÓN: GALERÍA SHOWCASE (CARUSEL INTERACTIVO) ─── */
+    /* ─── SHOWCASE GALERÍA CON PROGRESS BAR + LIGHTBOX ─── */
     .showcase-slider-container {
       position: relative;
       width: 100%;
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
-      border-radius: 18px;
+      border-radius: 20px;
       border: 1px solid var(--border-subtle);
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
       overflow: hidden;
       background: var(--bg-dark);
     }
@@ -521,7 +640,7 @@
     .showcase-track {
       display: flex;
       width: 100%;
-      height: 520px;
+      height: 580px;
       position: relative;
     }
 
@@ -532,8 +651,9 @@
       width: 100%;
       height: 100%;
       opacity: 0;
-      transition: opacity 0.8s ease-in-out;
+      transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 1;
+      cursor: zoom-in;
     }
 
     .showcase-slide.active {
@@ -546,19 +666,22 @@
       height: 100%;
       object-fit: cover;
       transform: scale(1.02);
-      transition: transform 6s ease-out;
+      transition: transform 7s ease-out;
     }
 
     .showcase-slide.active img {
       transform: scale(1.08);
     }
 
-    /* Sombras oscuras para textos legibles sobre la galería */
     .showcase-overlay {
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: linear-gradient(0deg, rgba(5, 5, 8, 0.95) 0%, rgba(5, 5, 8, 0.2) 50%, transparent 100%);
-      z-index: 2;
+      background: linear-gradient(0deg, 
+        rgba(5, 5, 10, 0.95) 0%, 
+        rgba(5, 5, 10, 0.3) 50%, 
+        transparent 100%
+      );
+      z-index: 3;
     }
 
     .showcase-caption {
@@ -566,38 +689,38 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      padding: 3rem;
-      z-index: 3;
+      padding: 3.5rem;
+      z-index: 4;
       text-align: left;
     }
 
     .showcase-caption h3 {
       font-family: var(--font-display);
-      font-size: 1.8rem;
+      font-size: 2.2rem;
       font-weight: 900;
       text-transform: uppercase;
       color: #ffffff;
       transform: skewX(-8deg);
-      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-      margin-bottom: 0.6rem;
+      text-shadow: 0 3px 12px rgba(0,0,0,0.9);
+      margin-bottom: 0.8rem;
     }
 
     .showcase-caption p {
-      font-size: 1rem;
+      font-size: 1.05rem;
       color: var(--text-secondary);
-      max-width: 600px;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+      max-width: 650px;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.9);
     }
 
-    /* Botones de navegación del carrusel */
+    /* Botones de navegación */
     .showcase-btn {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 55px;
-      height: 55px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
-      background: rgba(11, 11, 20, 0.7);
+      background: rgba(10, 10, 18, 0.75);
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.15);
       color: #ffffff;
@@ -612,299 +735,779 @@
     .showcase-btn:hover {
       background: var(--forza-orange);
       border-color: var(--forza-orange);
-      box-shadow: 0 0 15px var(--forza-orange-glow);
+      box-shadow: 0 0 20px var(--forza-orange-glow);
+      transform: translateY(-50%) scale(1.05);
     }
 
-    .showcase-btn-prev { left: 20px; }
-    .showcase-btn-next { right: 20px; }
+    .showcase-btn-prev { left: 25px; }
+    .showcase-btn-next { right: 25px; }
 
-    /* Indicadores de puntos */
-    .showcase-dots {
+    /* Indicadores y Barra de Progreso */
+    .showcase-progress-bar {
       position: absolute;
-      bottom: 25px;
-      right: 40px;
+      bottom: 0;
+      left: 0;
+      height: 4px;
+      width: 0;
+      background: linear-gradient(90deg, var(--forza-orange), var(--neon-pink));
+      z-index: 15;
+      box-shadow: 0 0 10px var(--forza-orange-glow);
+    }
+
+    .showcase-controls-wrapper {
+      position: absolute;
+      bottom: 30px;
+      right: 45px;
       display: flex;
-      gap: 10px;
+      align-items: center;
+      gap: 20px;
       z-index: 10;
     }
 
+    .showcase-dots {
+      display: flex;
+      gap: 12px;
+    }
+
     .showcase-dot {
-      width: 25px;
-      height: 4px;
+      width: 28px;
+      height: 5px;
       background: rgba(255, 255, 255, 0.25);
-      border-radius: 2px;
+      border-radius: 3px;
       cursor: pointer;
       transition: var(--transition-premium);
     }
 
     .showcase-dot.active {
       background: var(--forza-orange);
-      width: 45px;
+      width: 50px;
       box-shadow: 0 0 10px var(--forza-orange-glow);
     }
 
-    /* ─── SECCIÓN: COCHES DESTACADOS (CARS) ─── */
-    .cars-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
+    /* ─── LIGHTBOX CINEMATOGRÁFICO ─── */
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(2, 2, 4, 0.98);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      user-select: none;
     }
 
-    .car-card {
-      background: linear-gradient(185deg, rgba(15, 15, 26, 0.6) 0%, rgba(8, 8, 14, 0.95) 100%);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+    .lightbox.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 80%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 80vh;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.9);
+      transition: transform 0.3s ease-out;
+      cursor: zoom-in;
+    }
+
+    .lightbox-img.zoomed {
+      transform: scale(1.5);
+      cursor: zoom-out;
+    }
+
+    .lightbox-caption {
+      margin-top: 1.5rem;
+      font-family: var(--font-hud);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -60px;
+      right: 0;
+      background: none;
+      border: none;
+      color: #ffffff;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-hud);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .lightbox-close:hover {
+      color: var(--neon-pink);
+    }
+
+    .lightbox-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
       transition: var(--transition-premium);
     }
 
-    .car-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+    .lightbox-nav-btn:hover {
+      background: rgba(255,255,255,0.15);
+      color: var(--neon-blue);
+      border-color: var(--neon-blue);
     }
 
-    .car-img-wrapper {
-      width: 100%;
-      height: 220px;
-      overflow: hidden;
+    .lightbox-prev { left: -100px; }
+    .lightbox-next { right: -100px; }
+
+    @media (max-width: 1100px) {
+      .lightbox-prev { left: 10px; }
+      .lightbox-next { right: 10px; }
+    }
+
+    /* ─── SECCIÓN: GARAJE INTERACTIVO DE COCHES ─── */
+    .garage-selector {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .garage-tab {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text-secondary);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.05rem;
+      text-transform: uppercase;
+      padding: 0.8rem 2.2rem;
+      cursor: pointer;
+      transform: skewX(-8deg);
+      transition: var(--transition-premium);
+    }
+
+    .garage-tab span {
+      display: inline-block;
+      transform: skewX(8deg);
+    }
+
+    .garage-tab.active {
+      background: var(--forza-orange);
+      border-color: var(--forza-orange);
+      color: #ffffff;
+      box-shadow: 0 0 20px var(--forza-orange-glow);
+    }
+
+    .garage-tab:hover:not(.active) {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--neon-blue);
+      color: #ffffff;
+    }
+
+    .garage-display {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      background: linear-gradient(180deg, rgba(12, 12, 22, 0.5) 0%, rgba(6, 6, 12, 0.9) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 4rem;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+      min-height: 520px;
+    }
+
+    .garage-car-visual {
       position: relative;
+      width: 100%;
+      height: 380px;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
     }
 
-    .car-img-wrapper img {
+    .garage-car-visual img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: var(--transition-premium);
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
-    .car-card:hover .car-img-wrapper img {
-      transform: scale(1.08) rotate(1deg);
+    .garage-car-visual:hover img {
+      transform: scale(1.06) rotate(1deg);
     }
 
-    .car-card-body {
-      padding: 2.2rem;
-      text-align: left;
-    }
-
-    .car-class-badge {
-      display: inline-block;
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      font-weight: 800;
-      color: #ffffff;
-      background: var(--forza-orange);
-      padding: 3px 12px;
-      border-radius: 4px;
-      margin-bottom: 0.8rem;
-      transform: skewX(-8deg);
-      box-shadow: 0 0 8px rgba(255, 107, 0, 0.3);
-    }
-
-    .car-card.neon-blue-theme .car-class-badge {
-      background: var(--neon-blue);
-      box-shadow: 0 0 8px rgba(0, 212, 255, 0.3);
-    }
-
-    .car-card.neon-pink-theme .car-class-badge {
-      background: var(--neon-pink);
-      box-shadow: 0 0 8px rgba(255, 0, 85, 0.3);
-    }
-
-    .car-card h3 {
+    .garage-car-class {
+      position: absolute;
+      top: 20px;
+      left: 20px;
       font-family: var(--font-display);
-      font-size: 1.4rem;
+      font-size: 0.9rem;
+      font-weight: 900;
+      color: #ffffff;
+      background: var(--neon-pink);
+      padding: 5px 16px;
+      border-radius: 4px;
+      transform: skewX(-8deg);
+      box-shadow: 0 0 15px var(--neon-pink-glow);
+      z-index: 2;
+    }
+
+    .garage-car-info {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+
+    .garage-car-header h3 {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
       font-weight: 900;
       text-transform: uppercase;
       color: #ffffff;
-      margin-bottom: 1.5rem;
+      transform: skewX(-4deg);
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
     }
 
-    /* Barras de estadísticas de rendimiento */
-    .car-stats-container {
+    .garage-car-sub {
+      font-family: var(--font-hud);
+      font-size: 1.1rem;
+      color: var(--neon-blue);
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .garage-stats {
       display: flex;
       flex-direction: column;
-      gap: 1.2rem;
+      gap: 1.3rem;
     }
 
-    .car-stat-row {
+    .garage-stat-row {
       display: flex;
       flex-direction: column;
       gap: 0.4rem;
     }
 
-    .car-stat-info {
+    .garage-stat-label {
       display: flex;
       justify-content: space-between;
-      font-size: 0.82rem;
-      font-family: var(--font-mono);
+      font-family: var(--font-hud);
+      font-size: 0.9rem;
       font-weight: 700;
       text-transform: uppercase;
       color: var(--text-secondary);
     }
 
-    .car-stat-value {
+    .garage-stat-val {
       color: #ffffff;
       font-weight: 800;
     }
 
-    .car-bar-bg {
+    .garage-bar-bg {
       width: 100%;
-      height: 6px;
+      height: 8px;
       background: rgba(255, 255, 255, 0.08);
-      border-radius: 3px;
+      border-radius: 4px;
       overflow: hidden;
     }
 
-    .car-bar-fill {
+    .garage-bar-fill {
       height: 100%;
-      width: 0; /* Animado en JS */
-      background: linear-gradient(90deg, var(--forza-orange), #ff9500);
-      border-radius: 3px;
-      transition: width 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+      width: 0%; /* Animado por JS */
+      background: linear-gradient(90deg, var(--forza-orange), var(--neon-pink));
+      border-radius: 4px;
+      transition: width 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+      box-shadow: 0 0 10px rgba(255, 107, 0, 0.4);
     }
 
-    .car-card.neon-blue-theme .car-bar-fill {
-      background: linear-gradient(90deg, var(--neon-blue), #007aff);
-    }
-
-    .car-card.neon-pink-theme .car-bar-fill {
-      background: linear-gradient(90deg, var(--neon-pink), #9200ff);
-    }
-
-    /* ─── SECCIÓN: MAPA E INFOGRAFÍA (MAP) ─── */
-    .map-grid {
+    .garage-spec-hud {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 1.5rem;
+      margin-top: 0.5rem;
     }
 
-    .map-card {
-      height: 380px;
+    .garage-spec-box {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 0.8rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .garage-spec-title {
+      font-family: var(--font-hud);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.3rem;
+    }
+
+    .garage-spec-value {
+      font-family: var(--font-hud);
+      font-size: 1rem;
+      font-weight: 800;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 990px) {
+      .garage-display {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+        gap: 2.5rem;
+      }
+      .garage-car-visual {
+        height: 280px;
+      }
+    }
+
+    /* ─── MAPA INTERACTIVO DE JAPÓN (HUD TACTICAL) ─── */
+    .map-section-wrapper {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      align-items: center;
+      background: linear-gradient(180deg, rgba(8, 8, 14, 0.9) 0%, rgba(5, 5, 10, 0.6) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 4rem;
+      box-shadow: 0 35px 80px rgba(0,0,0,0.7);
+    }
+
+    .map-interactive-hud {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      background: radial-gradient(circle, rgba(0, 212, 255, 0.03) 0%, transparent 80%), rgba(2, 2, 4, 0.4);
+      border: 1px solid rgba(0, 212, 255, 0.15);
       border-radius: 16px;
       overflow: hidden;
-      position: relative;
-      border: 1px solid var(--border-subtle);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+      box-shadow: inset 0 0 40px rgba(0, 212, 255, 0.05);
+    }
+
+    /* Cuadrícula de radar HUD */
+    .map-hud-grid {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+      z-index: 1;
+    }
+
+    .map-hud-circles {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 600px; height: 600px;
+      transform: translate(-50%, -50%);
+      border: 1px dashed rgba(0, 212, 255, 0.04);
+      border-radius: 50%;
+      z-index: 1;
+    }
+    
+    .map-hud-circles::before {
+      content: '';
+      position: absolute;
+      top: 50px; left: 50px; right: 50px; bottom: 50px;
+      border: 1px solid rgba(0, 212, 255, 0.02);
+      border-radius: 50%;
+    }
+
+    /* Gráfico simplificado de Japón de fondo (SVG Estilizado de coordenadas) */
+    .map-japan-vector {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 90%;
+      height: 90%;
+      transform: translate(-50%, -50%);
+      opacity: 0.15;
+      z-index: 1;
+      filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.4));
+    }
+
+    /* Pines interactivos del radar */
+    .map-pin {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
       cursor: pointer;
-      transition: var(--transition-premium);
+      z-index: 5;
+      transform: translate(-50%, -50%);
     }
 
-    .map-card-bg {
+    .map-pin-pulse {
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
-      background-size: cover;
-      background-position: center;
-      transition: var(--transition-premium);
-      filter: grayscale(40%) brightness(50%);
+      border-radius: 50%;
+      background: var(--neon-blue);
+      box-shadow: 0 0 12px var(--neon-blue);
+      animation: pinPulse 2s infinite;
     }
 
-    .map-card:hover .map-card-bg {
-      transform: scale(1.08);
-      filter: grayscale(0%) brightness(75%);
-    }
-
-    .map-card-overlay {
+    .map-pin-dot {
       position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: linear-gradient(to top, rgba(5, 5, 8, 0.95) 0%, rgba(5, 5, 8, 0.1) 60%, transparent 100%);
-      z-index: 2;
+      top: 6px; left: 6px; width: 12px; height: 12px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid var(--neon-blue);
     }
 
-    .map-card-content {
+    .map-pin.active .map-pin-pulse {
+      background: var(--forza-orange);
+      box-shadow: 0 0 18px var(--forza-orange-glow);
+    }
+    
+    .map-pin.active .map-pin-dot {
+      border-color: var(--forza-orange);
+    }
+
+    .map-pin-label {
       position: absolute;
-      bottom: 0; left: 0; width: 100%;
-      padding: 2.2rem;
-      z-index: 3;
+      left: 32px;
+      top: 50%;
+      transform: translateY(-50%) skewX(-8deg);
+      font-family: var(--font-hud);
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: #ffffff;
+      background: rgba(5,5,10,0.85);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 3px 10px;
+      border-radius: 4px;
+      white-space: nowrap;
+      transition: var(--transition-fast);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    }
+
+    .map-pin:hover .map-pin-label,
+    .map-pin.active .map-pin-label {
+      color: #ffffff;
+      border-color: var(--neon-blue);
+      background: rgba(0, 212, 255, 0.15);
+      box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+    }
+
+    .map-pin.active:hover .map-pin-label {
+      border-color: var(--forza-orange);
+      background: rgba(255, 107, 0, 0.15);
+    }
+
+    /* Coordenadas de los pines */
+    #pin-tokyo { top: 48%; left: 68%; }
+    #pin-fuji { top: 62%; left: 56%; }
+    #pin-okinawa { top: 82%; left: 24%; }
+    #pin-alpes { top: 32%; left: 48%; }
+
+    /* Panel lateral de información de regiones */
+    .map-region-panel {
       text-align: left;
+      background: rgba(12, 12, 24, 0.7);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      padding: 3rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      position: relative;
+      overflow: hidden;
+      min-height: 480px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition-premium);
     }
 
-    .map-card-content h3 {
+    .map-region-panel.animating {
+      opacity: 0;
+      transform: translateY(15px) scale(0.98);
+    }
+
+    .map-region-img {
+      width: 100%;
+      height: 180px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .map-region-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .map-region-header {
+      margin-bottom: 1.2rem;
+    }
+
+    .map-region-title {
       font-family: var(--font-display);
-      font-size: 1.4rem;
+      font-size: 1.8rem;
       font-weight: 900;
       text-transform: uppercase;
       color: #ffffff;
       transform: skewX(-8deg);
-      margin-bottom: 0.5rem;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
 
-    .map-card-content p {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      line-height: 1.4;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
-    }
-
-    /* ─── SECCIÓN: REQUISITOS DEL SISTEMA (SPECS) ─── */
-    .specs-table-container {
-      max-width: 1000px;
-      margin: 0 auto;
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      background: linear-gradient(145deg, rgba(12, 12, 22, 0.6), rgba(6, 6, 11, 0.95));
-      overflow: hidden;
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
-    }
-
-    .specs-table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-    }
-
-    .specs-table th {
-      background: rgba(255, 107, 0, 0.1);
-      border-bottom: 2px solid var(--forza-orange);
-      color: var(--forza-orange);
-      font-family: var(--font-display);
-      font-weight: 800;
-      text-transform: uppercase;
-      font-size: 1rem;
-      letter-spacing: 1px;
-      padding: 1.2rem 1.8rem;
-    }
-
-    .specs-table th.neon-blue-th {
-      background: rgba(0, 212, 255, 0.08);
-      border-bottom-color: var(--neon-blue);
-      color: var(--neon-blue);
-    }
-
-    .specs-table td {
-      padding: 1.2rem 1.8rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-      font-size: 0.92rem;
-    }
-
-    .specs-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .specs-table tr:hover {
-      background: rgba(255, 255, 255, 0.015);
-    }
-
-    .specs-table td.spec-name {
-      font-family: var(--font-mono);
+    .map-region-type {
+      font-family: var(--font-hud);
+      font-size: 0.95rem;
       font-weight: 700;
+      color: var(--neon-blue);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 0.2rem;
+    }
+
+    .map-region-desc {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .map-region-event {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .map-event-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 10px;
+      background: rgba(255, 107, 0, 0.1);
+      border: 1px solid rgba(255, 107, 0, 0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--forza-orange);
+    }
+
+    .map-event-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .map-event-title {
+      font-family: var(--font-hud);
+      font-weight: 800;
+      font-size: 0.95rem;
       color: #ffffff;
       text-transform: uppercase;
-      width: 25%;
     }
 
-    .specs-table td.spec-val {
+    .map-event-reward {
+      font-family: var(--font-hud);
+      font-size: 0.8rem;
+      color: var(--neon-green);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    @keyframes pinPulse {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+
+    @media (max-width: 990px) {
+      .map-section-wrapper {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+        gap: 3rem;
+      }
+      .map-interactive-hud {
+        height: 380px;
+      }
+    }
+
+    /* ─── REQUISITOS DEL SISTEMA: DIAGNÓSTICO HUD CYBERPUNK ─── */
+    .specs-hud-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, rgba(15, 15, 28, 0.8), rgba(6, 6, 12, 0.95));
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      border-radius: 20px;
+      padding: 3.5rem;
+      box-shadow: 
+        0 30px 65px rgba(0, 0, 0, 0.7),
+        0 0 30px rgba(0, 212, 255, 0.05);
+      position: relative;
+    }
+
+    /* Esquinas decorativas del monitor */
+    .specs-hud-corner {
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      border: 2px solid var(--neon-blue);
+      pointer-events: none;
+    }
+    
+    .corner-tl { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+    .corner-tr { top: 20px; right: 20px; border-left: none; border-bottom: none; }
+    .corner-bl { bottom: 20px; left: 20px; border-right: none; border-top: none; }
+    .corner-br { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+
+    .specs-selector {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 3.5rem;
+      flex-wrap: wrap;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 2rem;
+    }
+
+    .specs-tab {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.1);
       color: var(--text-secondary);
-      width: 37.5%;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      padding: 0.7rem 1.8rem;
+      cursor: pointer;
+      transform: skewX(-8deg);
+      transition: var(--transition-premium);
     }
 
-    /* ─── FOOTER ─── */
+    .specs-tab span {
+      display: inline-block;
+      transform: skewX(8deg);
+    }
+
+    .specs-tab.active {
+      border-color: var(--neon-blue);
+      color: #ffffff;
+      background: rgba(0, 212, 255, 0.08);
+      box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+    }
+
+    .specs-tab:hover:not(.active) {
+      border-color: rgba(255,255,255,0.3);
+      color: #ffffff;
+    }
+
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      transition: var(--transition-premium);
+    }
+
+    .specs-grid.animating {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .spec-item {
+      background: rgba(255, 255, 255, 0.015);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: left;
+      position: relative;
+    }
+
+    .spec-item-icon {
+      color: var(--neon-blue);
+      margin-bottom: 1.2rem;
+      display: inline-block;
+    }
+
+    .spec-item-name {
+      font-family: var(--font-hud);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 0.4rem;
+    }
+
+    .spec-item-val {
+      font-family: var(--font-hud);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    
+    .spec-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; width: 3px; height: 0;
+      background: var(--neon-blue);
+      transition: var(--transition-premium);
+    }
+
+    .spec-item:hover::after {
+      height: 100%;
+    }
+
+    .spec-item:hover {
+      border-color: rgba(0, 212, 255, 0.15);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    @media (max-width: 768px) {
+      .specs-hud-wrapper {
+        padding: 2rem;
+      }
+    }
+
+    /* ─── FOOTER CON FORMULARIO HUD ─── */
     .footer {
-      background: #020204;
+      background: #020205;
       border-top: 1px solid var(--border-subtle);
-      padding: 5rem 2rem 2.5rem 2rem;
+      padding: 6rem 2rem 3rem 2rem;
       text-align: center;
+      position: relative;
+      z-index: 2;
     }
 
     .footer-container {
@@ -912,8 +1515,94 @@
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 3rem;
+      gap: 4rem;
       align-items: center;
+    }
+
+    /* Formulario de Boletín HUD */
+    .footer-newsletter-wrapper {
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.01) 0%, rgba(255, 255, 255, 0.03) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 3rem 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    }
+
+    .newsletter-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.5px;
+      transform: skewX(-4deg);
+    }
+
+    .newsletter-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 10px;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 4px;
+      padding: 1rem 1.5rem;
+      color: #ffffff;
+      font-family: var(--font-hud);
+      font-size: 1.1rem;
+      outline: none;
+      transition: var(--transition-fast);
+    }
+
+    .newsletter-input:focus {
+      border-color: var(--neon-blue);
+      box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+    }
+
+    .newsletter-btn {
+      background: linear-gradient(135deg, var(--forza-orange), var(--neon-pink));
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      font-family: var(--font-display);
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 0 2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transform: skewX(-8deg);
+      transition: var(--transition-premium);
+    }
+    
+    .newsletter-btn span {
+      display: inline-block;
+      transform: skewX(8deg);
+    }
+
+    .newsletter-btn:hover {
+      filter: brightness(1.2);
+      box-shadow: 0 5px 20px rgba(255, 0, 85, 0.5);
+    }
+
+    @media (max-width: 600px) {
+      .newsletter-form {
+        flex-direction: column;
+        gap: 15px;
+      }
+      .newsletter-btn {
+        padding: 1rem;
+      }
     }
 
     .footer-brand {
@@ -925,12 +1614,12 @@
     .footer-logo {
       font-family: var(--font-display);
       font-weight: 900;
-      font-size: 2rem;
+      font-size: 2.2rem;
       text-transform: uppercase;
-      letter-spacing: -1.5px;
+      letter-spacing: -2px;
       color: #ffffff;
       transform: skewX(-8deg);
-      text-shadow: 0 0 15px rgba(255, 107, 0, 0.3);
+      text-shadow: 0 0 15px rgba(255, 107, 0, 0.4);
     }
 
     .footer-logo span {
@@ -938,23 +1627,23 @@
     }
 
     .footer-tagline {
-      font-family: var(--font-mono);
-      font-size: 0.88rem;
+      font-family: var(--font-hud);
+      font-size: 0.95rem;
       color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
     }
 
     .footer-socials {
       display: flex;
-      gap: 1.5rem;
+      gap: 1.8rem;
     }
 
     .social-btn {
-      width: 50px;
-      height: 50px;
+      width: 55px;
+      height: 55px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(255, 255, 255, 0.02);
       border: 1px solid rgba(255,255,255,0.08);
       color: var(--text-secondary);
       display: flex;
@@ -966,16 +1655,16 @@
     }
 
     .social-btn:hover {
-      background: rgba(255, 107, 0, 0.1);
-      border-color: var(--forza-orange);
-      color: var(--forza-orange);
-      box-shadow: 0 0 15px var(--forza-orange-glow);
-      transform: translateY(-3px);
+      background: rgba(0, 212, 255, 0.08);
+      border-color: var(--neon-blue);
+      color: var(--neon-blue);
+      box-shadow: 0 0 15px var(--neon-blue-glow);
+      transform: translateY(-4px) scale(1.05);
     }
 
     .footer-links {
       display: flex;
-      gap: 2.5rem;
+      gap: 3rem;
       list-style: none;
       flex-wrap: wrap;
       justify-content: center;
@@ -984,8 +1673,9 @@
     .footer-links a {
       color: var(--text-muted);
       text-decoration: none;
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       transition: var(--transition-premium);
+      font-weight: 500;
     }
 
     .footer-links a:hover {
@@ -993,8 +1683,8 @@
     }
 
     .footer-copyright {
-      font-size: 0.8rem;
-      color: rgba(100, 116, 139, 0.6);
+      font-size: 0.82rem;
+      color: rgba(100, 116, 139, 0.5);
       margin-top: 1.5rem;
     }
 
@@ -1002,7 +1692,7 @@
     .trailer-modal {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(2, 2, 4, 0.95);
+      background: rgba(2, 2, 4, 0.97);
       z-index: 9999;
       display: flex;
       justify-content: center;
@@ -1021,13 +1711,15 @@
     .trailer-modal-content {
       position: relative;
       width: 100%;
-      max-width: 960px;
+      max-width: 1000px;
       aspect-ratio: 16/9;
       background: #000000;
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
+      border: 1px solid rgba(0, 212, 255, 0.25);
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 25px 65px rgba(0,0,0,0.8);
+      box-shadow: 
+        0 30px 80px rgba(0,0,0,0.9),
+        0 0 40px rgba(0, 212, 255, 0.15);
       transform: scale(0.95);
       transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     }
@@ -1038,24 +1730,30 @@
 
     .trailer-close-btn {
       position: absolute;
-      top: -50px;
-      right: 0;
-      background: none;
-      border: none;
+      top: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.7);
+      border: 1px solid rgba(255,255,255,0.15);
       color: #ffffff;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      font-family: var(--font-mono);
+      font-family: var(--font-hud);
       font-size: 0.95rem;
       text-transform: uppercase;
       font-weight: 700;
       letter-spacing: 1px;
+      padding: 8px 16px;
+      border-radius: 6px;
+      z-index: 5;
+      transition: var(--transition-fast);
     }
 
     .trailer-close-btn:hover {
-      color: var(--forza-orange);
+      color: var(--neon-pink);
+      border-color: var(--neon-pink);
+      box-shadow: 0 0 10px var(--neon-pink-glow);
     }
 
     .trailer-modal iframe {
@@ -1064,11 +1762,11 @@
       border: none;
     }
 
-    /* ─── ANIMACIÓN EN SCROLL (SCROLL REVEAL) ─── */
+    /* ─── ANIMACIÓN SCROLL REVEAL ─── */
     .reveal {
       opacity: 0;
-      transform: translateY(40px);
-      transition: 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+      transform: translateY(50px);
+      transition: 0.9s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     .reveal.active {
@@ -1079,7 +1777,10 @@
 </head>
 <body>
 
-  <!-- BARRA DE NAVEGACIÓN (NAVBAR STICKY) -->
+  <!-- Canvas decorativo global (Sakura + Estelas) -->
+  <canvas id="canvas-decorations"></canvas>
+
+  <!-- BARRA DE NAVEGACIÓN (NAVBAR STICKY GLASSMORPHISM) -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <a href="#" class="logo">
@@ -1087,14 +1788,14 @@
       </a>
       
       <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú de navegación">
-        <i data-lucide="menu" size="28"></i>
+        <i data-lucide="menu" size="30"></i>
       </button>
 
       <ul class="nav-links" id="nav-links">
-        <li><a href="#hero">Inicio</a></li>
+        <li class="active"><a href="#hero">Inicio</a></li>
         <li><a href="#features">Características</a></li>
         <li><a href="#showcase">Galería</a></li>
-        <li><a href="#cars">Coches</a></li>
+        <li><a href="#cars">Garaje</a></li>
         <li><a href="#map">Mapa</a></li>
         <li><a href="#specs">Requisitos</a></li>
         <li>
@@ -1106,30 +1807,38 @@
     </div>
   </nav>
 
-  <!-- SECCIÓN HERO DE ALTO IMPACTO -->
+  <!-- SECCIÓN HERO DE ALTO IMPACTO (DOBLE FONDO) -->
   <header class="hero" id="hero">
-    <!-- Fondo Parallax por Javascript -->
+    <!-- Fallback Parallax -->
     <div class="hero-parallax-bg" id="hero-bg"></div>
+    
+    <!-- Reproductor de vídeo de fondo -->
+    <div class="hero-video-wrapper" id="hero-video-wrapper">
+      <!-- El iframe se inyecta por JS para controlar la API de YouTube -->
+      <div id="youtube-player"></div>
+    </div>
+    
+    <div class="hero-overlay"></div>
     <div class="hero-speed-lines"></div>
 
     <div class="hero-content">
-      <span class="hero-tag">FESTIVAL JAPAN • 2026</span>
+      <span class="hero-tag"><span>FESTIVAL JAPAN • 2026</span></span>
       <h1 class="hero-title">FORZA HORIZON <span>6</span></h1>
       <p class="hero-desc">
-        Siente la velocidad pura en las calles neón de Tokio y domina las curvas Touge del Monte Fuji. El festival automovilístico definitivo aterriza en Japón.
+        Siente la velocidad pura en las calles neón de Tokio, domina las curvas Touge del Monte Fuji y explora la costa tropical de Okinawa en un mundo abierto masivo y espectacular.
       </p>
       <div class="hero-ctas">
         <button class="btn btn-primary" onclick="openTrailer()">
-          <span><i data-lucide="play" size="18" style="vertical-align: middle; margin-right: 4px;"></i> Ver Tráiler</span>
+          <span><i data-lucide="play" size="18"></i> Ver Tráiler</span>
         </button>
         <a href="#features" class="btn btn-secondary">
-          <span>Explorar Festival</span>
+          <span>Explorar Festival <i data-lucide="arrow-right" size="18"></i></span>
         </a>
       </div>
     </div>
   </header>
 
-  <!-- SECCIÓN DE CARACTERÍSTICAS (FEATURES) -->
+  <!-- SECCIÓN DE CARACTERÍSTICAS (TARJETAS CON TILT 3D) -->
   <section class="section-padding reveal" id="features">
     <div class="section-title-wrapper">
       <span class="section-subtitle">Horizon Experience</span>
@@ -1140,42 +1849,42 @@
       <!-- Tarjeta 1: Mundo Abierto -->
       <div class="feature-card">
         <div class="feature-icon-wrapper">
-          <i data-lucide="map" size="32"></i>
+          <i data-lucide="map" size="34"></i>
         </div>
         <h3>Mundo Abierto de Japón</h3>
-        <p>Explora desde autopistas metropolitanas elevadas de Tokio de noche hasta senderos de montaña rurales bajo pétalos de cerezo en flor.</p>
+        <p>Explora autopistas metropolitanas elevadas de Tokio de noche, cañones Touge y senderos de montaña rurales bajo pétalos de cerezo en flor.</p>
       </div>
 
       <!-- Tarjeta 2: Coches Legendarios -->
       <div class="feature-card">
         <div class="feature-icon-wrapper">
-          <i data-lucide="gauge" size="32"></i>
+          <i data-lucide="gauge" size="34"></i>
         </div>
         <h3>+500 Coches Auténticos</h3>
-        <p>Colecciona, modifica y pilota el catálogo más completo de vehículos deportivos, hiperdeportivos modernos y leyendas clásicas de importación JDM.</p>
+        <p>Colecciona, modifica y pilota el catálogo más completo de vehículos hiperdeportivos modernos e importaciones JDM legendarias.</p>
       </div>
 
       <!-- Tarjeta 3: Horizon Multijugador -->
       <div class="feature-card">
         <div class="feature-icon-wrapper">
-          <i data-lucide="users" size="32"></i>
+          <i data-lucide="users" size="34"></i>
         </div>
-        <h3>Multijugador Horizon</h3>
+        <h3>Multijugador Sin Fisuras</h3>
         <p>Compite en carreras, únete a convoyes de derrape en puertos de montaña o disfruta de eventos espontáneos Arcade con la comunidad.</p>
       </div>
 
-      <!-- Tarjeta 4: Gráficos 4K HDR -->
+      <!-- Tarjeta 4: Gráficos de Nueva Generación -->
       <div class="feature-card">
         <div class="feature-icon-wrapper">
-          <i data-lucide="monitor" size="32"></i>
+          <i data-lucide="monitor" size="34"></i>
         </div>
-        <h3>Gráficos 4K HDR</h3>
-        <p>Vive una inmersión absoluta gracias a la iluminación global de última generación por Ray Tracing y condiciones climáticas extremas dinámicas.</p>
+        <h3>Gráficos 4K HDR Ray Tracing</h3>
+        <p>Vive una inmersión absoluta gracias a la iluminación global de última generación, Ray Tracing en tiempo real y clima dinámico.</p>
       </div>
     </div>
   </section>
 
-  <!-- SECCIÓN: SHOWCASE DE LA GALERÍA (CARUSEL INTERACTIVO) -->
+  <!-- SECCIÓN: SHOWCASE DE LA GALERÍA (CON PROGRESS BAR + LIGHTBOX) -->
   <section class="section-padding reveal" id="showcase">
     <div class="section-title-wrapper">
       <span class="section-subtitle">Showcase</span>
@@ -1185,8 +1894,8 @@
     <div class="showcase-slider-container">
       <div class="showcase-track">
         <!-- Slide 1: Tokyo Neon -->
-        <div class="showcase-slide active">
-          <img src="gallery_tokyo.png" alt="Coche deportivo de carreras en las calles neón de Tokio">
+        <div class="showcase-slide active" onclick="openLightbox(0)">
+          <img src="gallery_tokyo.png" alt="Shinjuku Drift Run">
           <div class="showcase-overlay"></div>
           <div class="showcase-caption">
             <h3>Shinjuku Drift Run</h3>
@@ -1195,8 +1904,8 @@
         </div>
 
         <!-- Slide 2: Monte Fuji -->
-        <div class="showcase-slide">
-          <img src="gallery_fuji.png" alt="Deportivos derrapando en el Monte Fuji con sakura">
+        <div class="showcase-slide" onclick="openLightbox(1)">
+          <img src="gallery_fuji.png" alt="Paso Touge del Monte Fuji">
           <div class="showcase-overlay"></div>
           <div class="showcase-caption">
             <h3>Paso Touge del Monte Fuji</h3>
@@ -1205,8 +1914,8 @@
         </div>
 
         <!-- Slide 3: Okinawa -->
-        <div class="showcase-slide">
-          <img src="gallery_okinawa.png" alt="Deportivo conduciendo por la costa tropical de Okinawa">
+        <div class="showcase-slide" onclick="openLightbox(2)">
+          <img src="gallery_okinawa.png" alt="Autopistas Costeras de Okinawa">
           <div class="showcase-overlay"></div>
           <div class="showcase-caption">
             <h3>Autopistas Costeras de Okinawa</h3>
@@ -1215,258 +1924,304 @@
         </div>
       </div>
 
-      <!-- Controles -->
+      <!-- Barra de progreso lineal -->
+      <div class="showcase-progress-bar" id="showcase-progress"></div>
+
+      <!-- Controles de navegación -->
       <button class="showcase-btn showcase-btn-prev" onclick="changeSlide(-1)" aria-label="Imagen anterior">
-        <i data-lucide="chevron-left" size="24"></i>
+        <i data-lucide="chevron-left" size="28"></i>
       </button>
       <button class="showcase-btn showcase-btn-next" onclick="changeSlide(1)" aria-label="Siguiente imagen">
-        <i data-lucide="chevron-right" size="24"></i>
+        <i data-lucide="chevron-right" size="28"></i>
       </button>
 
-      <!-- Dots -->
-      <div class="showcase-dots">
-        <div class="showcase-dot active" onclick="setSlide(0)"></div>
-        <div class="showcase-dot" onclick="setSlide(1)"></div>
-        <div class="showcase-dot" onclick="setSlide(2)"></div>
+      <!-- Dots e indicadores -->
+      <div class="showcase-controls-wrapper">
+        <div class="showcase-dots">
+          <div class="showcase-dot active" onclick="setSlide(0)"></div>
+          <div class="showcase-dot" onclick="setSlide(1)"></div>
+          <div class="showcase-dot" onclick="setSlide(2)"></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- SECCIÓN: COCHES DESTACADOS (CARS) -->
+  <!-- MODAL LIGHTBOX DE LA GALERÍA -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()">
+      <i data-lucide="x" size="20"></i> Cerrar
+    </button>
+    <div class="lightbox-content">
+      <img src="" alt="" class="lightbox-img" id="lightbox-img" onclick="toggleZoomLightbox(event)">
+      <div class="lightbox-caption" id="lightbox-caption">Caption de la captura</div>
+    </div>
+    <button class="lightbox-nav-btn lightbox-prev" onclick="changeLightboxImg(-1)">
+      <i data-lucide="chevron-left" size="30"></i>
+    </button>
+    <button class="lightbox-nav-btn lightbox-next" onclick="changeLightboxImg(1)">
+      <i data-lucide="chevron-right" size="30"></i>
+    </button>
+  </div>
+
+  <!-- SECCIÓN: GARAJE INTERACTIVO DE COCHES -->
   <section class="section-padding reveal" id="cars">
     <div class="section-title-wrapper">
       <span class="section-subtitle">Garaje Especializado</span>
       <h2 class="section-title">Coches <span>Destacados</span></h2>
     </div>
 
-    <div class="cars-grid">
-      <!-- Coche 1: Supra GR -->
-      <div class="car-card">
-        <div class="car-img-wrapper">
-          <img src="gallery_fuji.png" alt="Toyota Supra GR">
+    <!-- Pestañas Selectoras de Tipo de Coche -->
+    <div class="garage-selector">
+      <button class="garage-tab active" onclick="selectCarType(0)">
+        <span>JDM Classics</span>
+      </button>
+      <button class="garage-tab" onclick="selectCarType(1)">
+        <span>Hypercars</span>
+      </button>
+      <button class="garage-tab" onclick="selectCarType(2)">
+        <span>Drift Legends</span>
+      </button>
+    </div>
+
+    <!-- Panel de Visualización del Coche Seleccionado -->
+    <div class="garage-display" id="garage-display">
+      <div class="garage-car-visual">
+        <span class="garage-car-class" id="car-class">S1 CLASS</span>
+        <img id="car-image" src="gallery_tokyo.png" alt="Nissan Skyline GT-R R34">
+      </div>
+      <div class="garage-car-info">
+        <div class="garage-car-header">
+          <h3 id="car-name">Nissan Skyline GT-R R34 Mines</h3>
+          <span class="garage-car-sub" id="car-brand">Nissan JDM Spec</span>
         </div>
-        <div class="car-card-body">
-          <span class="car-class-badge">A CLASS</span>
-          <h3>Toyota Supra GR Horizon Edition</h3>
-          <div class="car-stats-container">
-            <div class="car-stat-row">
-              <div class="car-stat-info">
-                <span>Velocidad</span>
-                <span class="car-stat-value">9.2</span>
-              </div>
-              <div class="car-bar-bg">
-                <div class="car-bar-fill animate-bar" data-width="92%"></div>
-              </div>
+
+        <div class="garage-stats">
+          <!-- Stat 1 -->
+          <div class="garage-stat-row">
+            <div class="garage-stat-label">
+              <span>Velocidad</span>
+              <span class="garage-stat-val" id="val-speed">8.8</span>
             </div>
-            <div class="car-stat-row">
-              <div class="car-stat-info">
-                <span>Aceleración</span>
-                <span class="car-stat-value">9.8</span>
-              </div>
-              <div class="car-bar-bg">
-                <div class="car-bar-fill animate-bar" data-width="98%"></div>
-              </div>
+            <div class="garage-bar-bg">
+              <div class="garage-bar-fill" id="bar-speed" style="width: 0%;"></div>
             </div>
-            <div class="car-stat-row">
-              <div class="car-stat-info">
-                <span>Manejo</span>
-                <span class="car-stat-value">9.0</span>
-              </div>
-              <div class="car-bar-bg">
-                <div class="car-bar-fill animate-bar" data-width="90%"></div>
-              </div>
+          </div>
+          <!-- Stat 2 -->
+          <div class="garage-stat-row">
+            <div class="garage-stat-label">
+              <span>Aceleración</span>
+              <span class="garage-stat-val" id="val-accel">9.2</span>
+            </div>
+            <div class="garage-bar-bg">
+              <div class="garage-bar-fill" id="bar-accel" style="width: 0%;"></div>
+            </div>
+          </div>
+          <!-- Stat 3 -->
+          <div class="garage-stat-row">
+            <div class="garage-stat-label">
+              <span>Manejo</span>
+              <span class="garage-stat-val" id="val-handling">9.5</span>
+            </div>
+            <div class="garage-bar-bg">
+              <div class="garage-bar-fill" id="bar-handling" style="width: 0%;"></div>
+            </div>
+          </div>
+          <!-- Stat 4 -->
+          <div class="garage-stat-row">
+            <div class="garage-stat-label">
+              <span>Frenado</span>
+              <span class="garage-stat-val" id="val-braking">9.0</span>
+            </div>
+            <div class="garage-bar-bg">
+              <div class="garage-bar-fill" id="bar-braking" style="width: 0%;"></div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Coche 2: Skyline R34 -->
-      <div class="car-card neon-blue-theme">
-        <div class="car-img-wrapper">
-          <img src="gallery_tokyo.png" alt="Nissan Skyline GT-R R34">
-        </div>
-        <div class="car-card-body">
-          <span class="car-class-badge">S1 CLASS</span>
-          <h3>Nissan Skyline GT-R R34 Mines</h3>
-          <div class="car-stats-container">
-            <div class="car-stat-row">
-              <div class="car-stat-info">
-                <span>Velocidad</span>
-                <span class="car-stat-value">8.8</span>
-              </div>
-              <div class="car-bar-bg">
-                <div class="car-bar-fill animate-bar" data-width="88%"></div>
-              </div>
-            </div>
-            <div class="car-stat-row">
-              <div class="car-stat-info">
-                <span>Aceleración</span>
-                <span class="car-stat-value">9.2</span>
-              </div>
-              <div class="car-bar-bg">
-                <div class="car-bar-fill animate-bar" data-width="92%"></div>
-              </div>
-            </div>
-            <div class="car-stat-row">
-              <div class="car-stat-info">
-                <span>Manejo</span>
-                <span class="car-stat-value">9.5</span>
-              </div>
-              <div class="car-bar-bg">
-                <div class="car-bar-fill animate-bar" data-width="95%"></div>
-              </div>
-            </div>
+        <!-- Ficha técnica HUD -->
+        <div class="garage-spec-hud">
+          <div class="garage-spec-box">
+            <div class="garage-spec-title">Motor</div>
+            <div class="garage-spec-value" id="spec-engine">RB26DETT Twin-Turbo</div>
           </div>
-        </div>
-      </div>
-
-      <!-- Coche 3: Lotus Exige -->
-      <div class="car-card neon-pink-theme">
-        <div class="car-img-wrapper">
-          <img src="forza_bg.png" alt="Lotus Exige WTAC">
-        </div>
-        <div class="car-card-body">
-          <span class="car-class-badge">R CLASS</span>
-          <h3>Lotus Exige WTAC Time Attack</h3>
-          <div class="car-stats-container">
-            <div class="car-stat-row">
-              <div class="car-stat-info">
-                <span>Velocidad</span>
-                <span class="car-stat-value">9.0</span>
-              </div>
-              <div class="car-bar-bg">
-                <div class="car-bar-fill animate-bar" data-width="90%"></div>
-              </div>
-            </div>
-            <div class="car-stat-row">
-              <div class="car-stat-info">
-                <span>Aceleración</span>
-                <span class="car-stat-value">9.4</span>
-              </div>
-              <div class="car-bar-bg">
-                <div class="car-bar-fill animate-bar" data-width="94%"></div>
-              </div>
-            </div>
-            <div class="car-stat-row">
-              <div class="car-stat-info">
-                <span>Manejo</span>
-                <span class="car-stat-value">10.0</span>
-              </div>
-              <div class="car-bar-bg">
-                <div class="car-bar-fill animate-bar" data-width="100%"></div>
-              </div>
-            </div>
+          <div class="garage-spec-box">
+            <div class="garage-spec-title">Potencia</div>
+            <div class="garage-spec-value" id="spec-hp">650 CV</div>
+          </div>
+          <div class="garage-spec-box">
+            <div class="garage-spec-title">Tracción</div>
+            <div class="garage-spec-value" id="spec-drive">AWD (ATTESA E-TS)</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECCIÓN: MAPA E INFOGRAFÍA (MAP) -->
+  <!-- SECCIÓN: MAPA INTERACTIVO DE JAPÓN (HUD TACTICAL) -->
   <section class="section-padding reveal" id="map">
     <div class="section-title-wrapper">
       <span class="section-subtitle">Territorios Horizon</span>
       <h2 class="section-title">Mapa de <span>Japón</span></h2>
     </div>
 
-    <div class="map-grid">
-      <!-- Región 1: Tokyo -->
-      <div class="map-card">
-        <div class="map-card-bg" style="background-image: url('gallery_tokyo.png');"></div>
-        <div class="map-card-overlay"></div>
-        <div class="map-card-content">
-          <h3>Tokyo Metropolis</h3>
-          <p>Autopistas elevadas urbanas (C1 Loop), cañones urbanos repletos de neón tridimensional en Shibuya y zonas técnicas en muelles industriales.</p>
+    <div class="map-section-wrapper">
+      <!-- Radar HUD del Mapa de Japón -->
+      <div class="map-interactive-hud">
+        <div class="map-hud-grid"></div>
+        <div class="map-hud-circles"></div>
+        
+        <!-- SVG estilizado de Japón para el HUD de radar -->
+        <svg class="map-japan-vector" viewBox="0 0 500 500" fill="none" stroke="rgba(0, 212, 255, 0.4)" stroke-width="2.5" stroke-linecap="round">
+          <!-- Curvas simplificadas que representan las islas de Japón -->
+          <path d="M420 80 C400 110, 390 140, 380 180 C370 210, 340 230, 310 260 M300 270 C270 290, 240 330, 210 350 M200 360 C170 370, 140 400, 110 420 M290 280 C280 290, 270 310, 260 320 M120 430 C100 440, 80 460, 60 470" />
+          <path d="M430 60 C445 50, 455 70, 440 85 C425 100, 410 80, 430 60 Z" />
+        </svg>
+
+        <!-- Pines interactivos -->
+        <div class="map-pin active" id="pin-tokyo" onclick="selectMapRegion('tokyo')">
+          <div class="map-pin-pulse"></div>
+          <div class="map-pin-dot"></div>
+          <div class="map-pin-label">Tokyo Metropolis</div>
+        </div>
+
+        <div class="map-pin" id="pin-fuji" onclick="selectMapRegion('fuji')">
+          <div class="map-pin-pulse"></div>
+          <div class="map-pin-dot"></div>
+          <div class="map-pin-label">Monte Fuji Touge</div>
+        </div>
+
+        <div class="map-pin" id="pin-okinawa" onclick="selectMapRegion('okinawa')">
+          <div class="map-pin-pulse"></div>
+          <div class="map-pin-dot"></div>
+          <div class="map-pin-label">Costa de Okinawa</div>
+        </div>
+
+        <div class="map-pin" id="pin-alpes" onclick="selectMapRegion('alpes')">
+          <div class="map-pin-pulse"></div>
+          <div class="map-pin-dot"></div>
+          <div class="map-pin-label">Alpes Japoneses</div>
         </div>
       </div>
 
-      <!-- Región 2: Monte Fuji -->
-      <div class="map-card">
-        <div class="map-card-bg" style="background-image: url('gallery_fuji.png');"></div>
-        <div class="map-card-overlay"></div>
-        <div class="map-card-content">
-          <h3>Monte Fuji Touge</h3>
-          <p>La meca del drift. Curvas cerradas encadenadas, bajadas y subidas de asfalto rodeadas de templos sintoístas tradicionales y bosques frondosos.</p>
+      <!-- Panel de detalles de la región -->
+      <div class="map-region-panel" id="map-region-panel">
+        <div>
+          <div class="map-region-img">
+            <img id="region-image" src="gallery_tokyo.png" alt="Tokyo Metropolis">
+          </div>
+          <div class="map-region-header">
+            <h3 class="map-region-title" id="region-title">Tokyo Metropolis</h3>
+            <div class="map-region-type" id="region-type">Autopistas y Cañones Urbanos</div>
+          </div>
+          <p class="map-region-desc" id="region-desc">
+            Corre por las autopistas urbanas elevadas (Shuto Expressway), derrapa en los muelles industriales de Odaiba y domina las curvas de los distritos metropolitanos de Shinjuku iluminados por carteles de neón tridimensionales.
+          </p>
         </div>
-      </div>
 
-      <!-- Región 3: Okinawa -->
-      <div class="map-card">
-        <div class="map-card-bg" style="background-image: url('gallery_okinawa.png');"></div>
-        <div class="map-card-overlay"></div>
-        <div class="map-card-content">
-          <h3>Costa de Okinawa</h3>
-          <p>Puentes de autopista largos sobre aguas turquesas, pueblos costeros de arena blanca y clima subtropical húmedo.</p>
-        </div>
-      </div>
-
-      <!-- Región 4: Alpes Japoneses -->
-      <div class="map-card">
-        <div class="map-card-bg" style="background-image: url('forza_bg.png');"></div>
-        <div class="map-card-overlay"></div>
-        <div class="map-card-content">
-          <h3>Alpes Japoneses</h3>
-          <p>Subidas exigentes con vistas al horizonte, pasos de montaña nevados durante el invierno y pistas de tierra de rally de alta altitud.</p>
+        <!-- Evento Destacado -->
+        <div class="map-region-event">
+          <div class="map-event-icon">
+            <i data-lucide="trophy" size="22"></i>
+          </div>
+          <div class="map-event-details">
+            <span class="map-event-title" id="region-event-title">Midnight Shinjuku Club</span>
+            <span class="map-event-reward" id="region-event-reward">Premio: Nissan Skyline GT-R V-Spec II</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECCIÓN: REQUISITOS DEL SISTEMA (SPECS) -->
+  <!-- SECCIÓN: REQUISITOS DEL SISTEMA (DIAGNÓSTICO HUD) -->
   <section class="section-padding reveal" id="specs">
     <div class="section-title-wrapper">
       <span class="section-subtitle">Especificaciones PC</span>
       <h2 class="section-title">Requisitos del <span>Sistema</span></h2>
     </div>
 
-    <div class="specs-table-container">
-      <table class="specs-table">
-        <thead>
-          <tr>
-            <th>Componente</th>
-            <th>Mínimos (1080p @ 30 FPS)</th>
-            <th class="neon-blue-th">Recomendados (1440p @ 60 FPS)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="spec-name">Sistema Operativo</td>
-            <td class="spec-val">Windows 10 (versión 1909 o superior)</td>
-            <td class="spec-val">Windows 11 (64-bit)</td>
-          </tr>
-          <tr>
-            <td class="spec-name">Procesador (CPU)</td>
-            <td class="spec-val">Intel Core i5-4460 / AMD Ryzen 3 1200</td>
-            <td class="spec-val">Intel Core i7-10700K / AMD Ryzen 7 3800X</td>
-          </tr>
-          <tr>
-            <td class="spec-name">Memoria RAM</td>
-            <td class="spec-val">8 GB RAM</td>
-            <td class="spec-val">16 GB RAM</td>
-          </tr>
-          <tr>
-            <td class="spec-name">Tarjeta Gráfica (GPU)</td>
-            <td class="spec-val">NVIDIA GTX 970 / AMD RX 470 (4 GB VRAM)</td>
-            <td class="spec-val">NVIDIA RTX 3070 / AMD RX 6800 (8 GB VRAM)</td>
-          </tr>
-          <tr>
-            <td class="spec-name">Almacenamiento</td>
-            <td class="spec-val">110 GB HDD (SSD recomendado)</td>
-            <td class="spec-val">110 GB SSD NVMe M.2 (Obligatorio)</td>
-          </tr>
-          <tr>
-            <td class="spec-name">DirectX</td>
-            <td class="spec-val">DirectX 12 (API level 12_0)</td>
-            <td class="spec-val">DirectX 12 (API level 12_2 / Ultimate)</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="specs-hud-wrapper">
+      <!-- Esquinas decorativas -->
+      <div class="specs-hud-corner corner-tl"></div>
+      <div class="specs-hud-corner corner-tr"></div>
+      <div class="specs-hud-corner corner-bl"></div>
+      <div class="specs-hud-corner corner-br"></div>
+
+      <!-- Selector de Pestañas HUD -->
+      <div class="specs-selector">
+        <button class="specs-tab active" onclick="selectSpecs('min')">
+          <span>Especificaciones Mínimas</span>
+        </button>
+        <button class="specs-tab" onclick="selectSpecs('rec')">
+          <span>Especificaciones Recomendadas</span>
+        </button>
+        <button class="specs-tab" onclick="selectSpecs('ultra')">
+          <span>Especificaciones Ultra (RT)</span>
+        </button>
+      </div>
+
+      <!-- Grid de Componentes -->
+      <div class="specs-grid" id="specs-grid">
+        <!-- Item 1: SO -->
+        <div class="spec-item">
+          <div class="spec-item-icon"><i data-lucide="cpu" size="26"></i></div>
+          <div class="spec-item-name">Sistema Operativo</div>
+          <div class="spec-item-val" id="spec-os">Windows 10 (versión 1909 o superior)</div>
+        </div>
+
+        <!-- Item 2: Procesador -->
+        <div class="spec-item">
+          <div class="spec-item-icon"><i data-lucide="binary" size="26"></i></div>
+          <div class="spec-item-name">Procesador (CPU)</div>
+          <div class="spec-item-val" id="spec-cpu">Intel Core i5-4460 / AMD Ryzen 3 1200</div>
+        </div>
+
+        <!-- Item 3: RAM -->
+        <div class="spec-item">
+          <div class="spec-item-icon"><i data-lucide="database" size="26"></i></div>
+          <div class="spec-item-name">Memoria RAM</div>
+          <div class="spec-item-val" id="spec-ram">8 GB RAM</div>
+        </div>
+
+        <!-- Item 4: Tarjeta Gráfica -->
+        <div class="spec-item">
+          <div class="spec-item-icon"><i data-lucide="zap" size="26"></i></div>
+          <div class="spec-item-name">Tarjeta Gráfica (GPU)</div>
+          <div class="spec-item-val" id="spec-gpu">NVIDIA GTX 970 / AMD RX 470 (4 GB VRAM)</div>
+        </div>
+
+        <!-- Item 5: Almacenamiento -->
+        <div class="spec-item">
+          <div class="spec-item-icon"><i data-lucide="hard-drive" size="26"></i></div>
+          <div class="spec-item-name">Almacenamiento</div>
+          <div class="spec-item-val" id="spec-storage">110 GB HDD (SSD recomendado)</div>
+        </div>
+
+        <!-- Item 6: DirectX -->
+        <div class="spec-item">
+          <div class="spec-item-icon"><i data-lucide="shield" size="26"></i></div>
+          <div class="spec-item-name">API DirectX</div>
+          <div class="spec-item-val" id="spec-dx">DirectX 12 (API level 12_0)</div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- PIE DE PÁGINA (FOOTER) -->
+  <!-- PIE DE PÁGINA (FOOTER CON FORMULARIO HUD) -->
   <footer class="footer">
     <div class="footer-container">
+      
+      <!-- Formulario de Registro HUD -->
+      <div class="footer-newsletter-wrapper reveal">
+        <h3 class="newsletter-title">Únete al Boletín de Horizon</h3>
+        <p class="newsletter-desc">Recibe notificaciones de la beta cerrada, coches exclusivos y novedades del festival en Japón.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('¡Te has registrado con éxito al festival!');">
+          <input type="email" class="newsletter-input" placeholder="INGRESA TU DIRECCIÓN DE CORREO" required aria-label="Correo electrónico para boletín">
+          <button type="submit" class="newsletter-btn">
+            <span>Registrarse <i data-lucide="chevron-right" size="18" style="vertical-align: middle;"></i></span>
+          </button>
+        </form>
+      </div>
+
       <div class="footer-brand">
         <a href="#" class="footer-logo">
           FORZA <span>HORIZON 6</span>
@@ -1510,7 +2265,7 @@
       <button class="trailer-close-btn" onclick="closeTrailer()">
         <i data-lucide="x" size="20"></i> Cerrar
       </button>
-      <!-- Usamos el tráiler oficial conceptual viral de FH6 en Japón -->
+      <!-- El iframe se cargará dinámicamente con autoplay en alta resolución -->
       <iframe id="trailer-video" src="" title="Forza Horizon 6 Official Concept Trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     </div>
   </div>
@@ -1535,27 +2290,47 @@
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // 2. NAVBAR SCROLL EFFECT
+    // 2. NAVBAR SCROLL EFFECT & SCROLLSPY
     const navbar = document.getElementById('navbar');
+    const navSections = document.querySelectorAll('header, section');
+    const navItems = document.querySelectorAll('.nav-links li');
+
     window.addEventListener('scroll', () => {
+      // Cambio de fondo del Navbar
       if (window.scrollY > 50) {
         navbar.classList.add('scrolled');
       } else {
         navbar.classList.remove('scrolled');
       }
+
+      // Scrollspy
+      let currentActiveId = 'hero';
+      navSections.forEach(section => {
+        const sectionTop = section.offsetTop - 120;
+        if (window.scrollY >= sectionTop) {
+          currentActiveId = section.getAttribute('id');
+        }
+      });
+
+      navItems.forEach(item => {
+        item.classList.remove('active');
+        const link = item.querySelector('a');
+        if (link && link.getAttribute('href') === `#${currentActiveId}`) {
+          item.classList.add('active');
+        }
+      });
     });
 
-    // Menu hamburguesa móvil
+    // Menú hamburguesa móvil
     const navToggle = document.getElementById('nav-toggle');
     const navLinks = document.getElementById('nav-links');
 
     navToggle.addEventListener('click', () => {
       navLinks.classList.toggle('active');
-      const icon = navToggle.querySelector('i');
       if (navLinks.classList.contains('active')) {
-        navToggle.innerHTML = '<i data-lucide="x" size="28"></i>';
+        navToggle.innerHTML = '<i data-lucide="x" size="30"></i>';
       } else {
-        navToggle.innerHTML = '<i data-lucide="menu" size="28"></i>';
+        navToggle.innerHTML = '<i data-lucide="menu" size="30"></i>';
       }
       lucide.createIcons();
     });
@@ -1564,7 +2339,7 @@
     document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('active');
-        navToggle.innerHTML = '<i data-lucide="menu" size="28"></i>';
+        navToggle.innerHTML = '<i data-lucide="menu" size="30"></i>';
         lucide.createIcons();
       });
     });
@@ -1573,16 +2348,234 @@
     const heroBg = document.getElementById('hero-bg');
     if (window.innerWidth > 900) {
       window.addEventListener('mousemove', (e) => {
-        const moveX = (e.clientX - window.innerWidth / 2) * -0.015;
-        const moveY = (e.clientY - window.innerHeight / 2) * -0.015;
+        const moveX = (e.clientX - window.innerWidth / 2) * -0.012;
+        const moveY = (e.clientY - window.innerHeight / 2) * -0.012;
         heroBg.style.transform = `scale(1.05) translate(${moveX}px, ${moveY}px)`;
       });
     }
 
-    // 4. CARUSEL INTERACTIVO DE LA GALERÍA (SHOWCASE)
+    // 4. API DE REPRODUCTOR YOUTUBE DE FONDO EN EL HERO
+    // Carga de la API en segundo plano
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    let player;
+    function onYouTubeIframeAPIReady() {
+      // Solo cargamos el video de fondo en pantallas grandes por rendimiento y consumo de red
+      if (window.innerWidth > 900) {
+        player = new YT.Player('youtube-player', {
+          videoId: 'PcrXF6yT-cE',
+          playerVars: {
+            'autoplay': 1,
+            'mute': 1,
+            'controls': 0,
+            'loop': 1,
+            'playlist': 'PcrXF6yT-cE', // Requerido para loop
+            'showinfo': 0,
+            'rel': 0,
+            'playsinline': 1,
+            'enablejsapi': 1
+          },
+          events: {
+            'onReady': onPlayerReady
+          }
+        });
+      }
+    }
+
+    function onPlayerReady(event) {
+      event.target.playVideo();
+      // Mostramos el wrapper del video con una transición suave de opacidad
+      document.getElementById('hero-video-wrapper').classList.add('loaded');
+    }
+
+    // 5. CANVAS GLOBAL DE ANIMACIÓN: SAKURA EN FLOR + SPEEDLINES EN SCROLL
+    const canvas = document.getElementById('canvas-decorations');
+    const ctx = canvas.getContext('2d');
+
+    let canvasWidth = window.innerWidth;
+    let canvasHeight = window.innerHeight;
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
+
+    window.addEventListener('resize', () => {
+      canvasWidth = window.innerWidth;
+      canvasHeight = window.innerHeight;
+      canvas.width = canvasWidth;
+      canvas.height = canvasHeight;
+    });
+
+    // Clase Sakura
+    class Sakura {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = Math.random() * canvasWidth;
+        this.y = -20 - Math.random() * 50;
+        this.size = 6 + Math.random() * 10;
+        this.speedY = 1 + Math.random() * 2;
+        this.speedX = -1.5 + Math.random() * 3;
+        this.rotation = Math.random() * 360;
+        this.rotationSpeed = -1 + Math.random() * 2;
+        this.opacity = 0.5 + Math.random() * 0.5;
+      }
+
+      update() {
+        this.y += this.speedY;
+        this.x += this.speedX + Math.sin(this.y * 0.01) * 0.5; // Oscilación
+        this.rotation += this.rotationSpeed;
+
+        if (this.y > canvasHeight || this.x < -20 || this.x > canvasWidth + 20) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation * Math.PI / 180);
+        ctx.fillStyle = `rgba(255, 183, 197, ${this.opacity})`;
+        
+        // Dibujamos un pétalo de sakura estilizado
+        ctx.beginPath();
+        ctx.ellipse(0, 0, this.size, this.size * 0.6, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    // Líneas de velocidad en Hero/Scroll
+    class SpeedLine {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = Math.random() * canvasWidth;
+        this.y = Math.random() * canvasHeight;
+        this.length = 40 + Math.random() * 100;
+        // La dirección va de derecha a izquierda simulando ir hacia delante
+        this.speed = 8 + Math.random() * 15;
+        this.opacity = 0.05 + Math.random() * 0.12;
+      }
+
+      update(scrollVelocity) {
+        this.x -= this.speed + (scrollVelocity * 1.5);
+        if (this.x < -this.length) {
+          this.x = canvasWidth + Math.random() * 100;
+          this.y = Math.random() * canvasHeight;
+        }
+      }
+
+      draw() {
+        ctx.strokeStyle = `rgba(0, 212, 255, ${this.opacity})`;
+        ctx.lineWidth = 1 + Math.random() * 2;
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(this.x + this.length, this.y);
+        ctx.stroke();
+      }
+    }
+
+    // Instanciar partículas
+    const sakuraCount = window.innerWidth < 768 ? 20 : 45;
+    const speedLineCount = window.innerWidth < 768 ? 15 : 35;
+    const sakuras = [];
+    const speedLines = [];
+
+    for (let i = 0; i < sakuraCount; i++) sakuras.push(new Sakura());
+    for (let i = 0; i < speedLineCount; i++) speedLines.push(new SpeedLine());
+
+    let lastScrollY = window.scrollY;
+    let scrollVelocity = 0;
+
+    // Loop de renderizado
+    function animateCanvas() {
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+      // Calcular velocidad de scroll
+      const currentScrollY = window.scrollY;
+      scrollVelocity = Math.min(Math.abs(currentScrollY - lastScrollY), 30);
+      lastScrollY = currentScrollY;
+
+      // Dibujar estelas de velocidad
+      speedLines.forEach(line => {
+        line.update(scrollVelocity);
+        line.draw();
+      });
+
+      // Dibujar sakura
+      sakuras.forEach(sakura => {
+        sakura.update();
+        sakura.draw();
+      });
+
+      requestAnimationFrame(animateCanvas);
+    }
+    animateCanvas();
+
+    // 6. EFECTO HOVER 3D TILT EN CARDS
+    const featureCards = document.querySelectorAll('.feature-card');
+    featureCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        // Pasar coordenadas al gradiente neón CSS
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+
+        // Calcular ángulos de inclinación 3D (máx 10 grados)
+        const tiltX = ((y / rect.height) - 0.5) * -12;
+        const tiltY = ((x / rect.width) - 0.5) * 12;
+
+        card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-5px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
+      });
+    });
+
+    // 7. CARUSEL INTERACTIVO CON PROGRESS BAR
     let currentSlideIndex = 0;
     const slides = document.querySelectorAll('.showcase-slide');
     const dots = document.querySelectorAll('.showcase-dot');
+    const progressBar = document.getElementById('showcase-progress');
+    const slideDuration = 6000; // 6 segundos por diapositiva
+    let slideStartTime = Date.now();
+    let autoSlideInterval;
+    let progressAnimFrame;
+
+    function startAutoSlide() {
+      slideStartTime = Date.now();
+      updateProgressBar();
+      
+      autoSlideInterval = setInterval(() => {
+        changeSlide(1);
+      }, slideDuration);
+    }
+
+    function updateProgressBar() {
+      const elapsed = Date.now() - slideStartTime;
+      const progress = Math.min((elapsed / slideDuration) * 100, 100);
+      progressBar.style.width = `${progress}%`;
+
+      if (progress < 100) {
+        progressAnimFrame = requestAnimationFrame(updateProgressBar);
+      }
+    }
+
+    function resetAutoSlide() {
+      clearInterval(autoSlideInterval);
+      cancelAnimationFrame(progressAnimFrame);
+      startAutoSlide();
+    }
 
     function changeSlide(direction) {
       slides[currentSlideIndex].classList.remove('active');
@@ -1592,6 +2585,8 @@
       
       slides[currentSlideIndex].classList.add('active');
       dots[currentSlideIndex].classList.add('active');
+      
+      resetAutoSlide();
     }
 
     function setSlide(index) {
@@ -1602,54 +2597,320 @@
       
       slides[currentSlideIndex].classList.add('active');
       dots[currentSlideIndex].classList.add('active');
+      
+      resetAutoSlide();
     }
 
-    // Rotación automática del carrusel cada 6 segundos
-    let autoSlideInterval = setInterval(() => changeSlide(1), 6000);
+    // Inicializar carrusel
+    startAutoSlide();
 
-    // Resetear el intervalo cuando el usuario interactúe
-    document.querySelectorAll('.showcase-btn, .showcase-dot').forEach(el => {
-      el.addEventListener('click', () => {
-        clearInterval(autoSlideInterval);
-        autoSlideInterval = setInterval(() => changeSlide(1), 8000); // Dar más margen
-      });
+    // 8. LIGHTBOX CINEMATOGRÁFICO DE LA GALERÍA
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+
+    const galleryData = [
+      {
+        src: 'gallery_tokyo.png',
+        title: 'Shinjuku Drift Run',
+        desc: 'Siente la deriva en el corazón de Tokio de noche, rodeado por rascacielos iluminados con luces neón y asfalto húmedo.'
+      },
+      {
+        src: 'gallery_fuji.png',
+        title: 'Paso Touge del Monte Fuji',
+        desc: 'Domina las bajadas técnicas de montaña durante la hora dorada, esquivando curvas cerradas bordeadas por cerezos en flor.'
+      },
+      {
+        src: 'gallery_okinawa.png',
+        title: 'Autopistas Costeras de Okinawa',
+        desc: 'Velocidad punta libre en puentes y autopistas junto al mar turquesa del trópico japonés al amanecer.'
+      }
+    ];
+
+    let currentLightboxIndex = 0;
+
+    function openLightbox(index) {
+      currentLightboxIndex = index;
+      lightbox.classList.add('active');
+      updateLightboxContent();
+      document.body.style.overflow = 'hidden';
+      // Detener temporalmente el carrusel de fondo
+      clearInterval(autoSlideInterval);
+      cancelAnimationFrame(progressAnimFrame);
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      lightboxImg.classList.remove('zoomed');
+      document.body.style.overflow = 'auto';
+      // Reanudar carrusel
+      resetAutoSlide();
+    }
+
+    function updateLightboxContent() {
+      const data = galleryData[currentLightboxIndex];
+      lightboxImg.src = data.src;
+      lightboxImg.alt = data.title;
+      lightboxCaption.textContent = `${data.title} - ${data.desc}`;
+    }
+
+    function changeLightboxImg(direction) {
+      lightboxImg.classList.remove('zoomed');
+      currentLightboxIndex = (currentLightboxIndex + direction + galleryData.length) % galleryData.length;
+      updateLightboxContent();
+    }
+
+    function toggleZoomLightbox(event) {
+      event.stopPropagation();
+      lightboxImg.classList.toggle('zoomed');
+    }
+
+    // Cerrar lightbox con escape o haciendo clic fuera de la imagen
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox || e.target.classList.contains('lightbox-content')) {
+        closeLightbox();
+      }
     });
 
-    // 5. ANIMACIÓN DE BARRAS DE PROGRESO DE LOS COCHES
-    const barFillElements = document.querySelectorAll('.animate-bar');
-    const barObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const fillWidth = entry.target.getAttribute('data-width');
-          entry.target.style.width = fillWidth;
-          barObserver.unobserve(entry.target); // Animación una única vez
-        }
+    // 9. GARAJE INTERACTIVO DE COCHES DESTACADOS
+    const carsData = [
+      {
+        name: "Nissan Skyline GT-R R34 Mines",
+        brand: "Nissan JDM Spec",
+        image: "gallery_tokyo.png",
+        class: "S1 CLASS",
+        stats: { speed: 8.8, accel: 9.2, handling: 9.5, braking: 9.0 },
+        engine: "RB26DETT Twin-Turbo",
+        hp: "650 CV",
+        drive: "AWD (ATTESA E-TS)"
+      },
+      {
+        name: "Toyota Supra GR Horizon Edition",
+        brand: "Toyota Gazoo Racing",
+        image: "gallery_fuji.png",
+        class: "A CLASS",
+        stats: { speed: 9.2, accel: 9.8, handling: 9.0, braking: 8.8 },
+        engine: "3.0L B58 Twin-Scroll",
+        hp: "510 CV",
+        drive: "RWD (Trasera)"
+      },
+      {
+        name: "Lotus Exige WTAC Time Attack",
+        brand: "Lotus Motorsport",
+        image: "forza_bg.png",
+        class: "R CLASS",
+        stats: { speed: 9.0, accel: 9.4, handling: 10.0, braking: 9.8 },
+        engine: "1.8L Supercharged",
+        hp: "450 CV",
+        drive: "MR (Motor Central)"
+      }
+    ];
+
+    function selectCarType(index) {
+      // Actualizar pestañas activas
+      const tabs = document.querySelectorAll('.garage-tab');
+      tabs.forEach((tab, idx) => {
+        if (idx === index) tab.classList.add('active');
+        else tab.classList.remove('active');
       });
-    }, { threshold: 0.1 });
 
-    barFillElements.forEach(bar => barObserver.observe(bar));
+      const display = document.getElementById('garage-display');
+      display.style.opacity = 0.5; // Efecto transición rápido
+      
+      setTimeout(() => {
+        const car = carsData[index];
+        
+        // Actualizar textos e imágenes
+        document.getElementById('car-class').textContent = car.class;
+        document.getElementById('car-image').src = car.image;
+        document.getElementById('car-image').alt = car.name;
+        document.getElementById('car-name').textContent = car.name;
+        document.getElementById('car-brand').textContent = car.brand;
+        
+        // Ficha técnica HUD
+        document.getElementById('spec-engine').textContent = car.engine;
+        document.getElementById('spec-hp').textContent = car.hp;
+        document.getElementById('spec-drive').textContent = car.drive;
 
-    // 6. CONTROL DEL MODAL DE VIDEO DEL TRÁILER
+        // Actualizar estadísticas numéricas
+        document.getElementById('val-speed').textContent = car.stats.speed.toFixed(1);
+        document.getElementById('val-accel').textContent = car.stats.accel.toFixed(1);
+        document.getElementById('val-handling').textContent = car.stats.handling.toFixed(1);
+        document.getElementById('val-braking').textContent = car.stats.braking.toFixed(1);
+
+        // Animar barras
+        animateGarageBars(car.stats);
+        
+        display.style.opacity = 1;
+      }, 200);
+    }
+
+    function animateGarageBars(stats) {
+      document.getElementById('bar-speed').style.width = `${stats.speed * 10}%`;
+      document.getElementById('bar-accel').style.width = `${stats.accel * 10}%`;
+      document.getElementById('bar-handling').style.width = `${stats.handling * 10}%`;
+      document.getElementById('bar-braking').style.width = `${stats.braking * 10}%`;
+    }
+
+    // Inicializar barras del primer coche
+    setTimeout(() => {
+      animateGarageBars(carsData[0].stats);
+    }, 500);
+
+    // 10. MAPA INTERACTIVO DE JAPÓN (ACCESO HUD DE PINES)
+    const regionsData = {
+      tokyo: {
+        title: "Tokyo Metropolis",
+        type: "Autopistas y Cañones Urbanos",
+        image: "gallery_tokyo.png",
+        desc: "Corre por las autopistas urbanas elevadas (Shuto Expressway), derrapa en los muelles industriales de Odaiba y domina las curvas de los distritos metropolitanos de Shinjuku iluminados por carteles de neón tridimensionales.",
+        event: "Midnight Shinjuku Club",
+        reward: "Premio: Nissan Skyline GT-R R34"
+      },
+      fuji: {
+        title: "Monte Fuji Touge",
+        type: "Meca del Drift y Curvas Encadenadas",
+        image: "gallery_fuji.png",
+        desc: "Domina las famosas bajadas y subidas de asfalto (Touge). Realiza derrapes perfectos entre templos sintoístas ancestrales y densos bosques bajo los pétalos de sakura, en un circuito que exige precisión matemática.",
+        event: "Touge Mountain Drift King",
+        reward: "Premio: Mazda RX-7 Spirit R"
+      },
+      okinawa: {
+        title: "Costa de Okinawa",
+        type: "Puentes e Islas Subtropicales",
+        image: "gallery_okinawa.png",
+        desc: "Pisa a fondo en los kilométricos puentes de autopista construidos sobre las aguas turquesas del Pacífico. Conduce en una atmósfera subtropical relajada a lo largo de playas caribeñas y pueblos tradicionales costeros.",
+        event: "Okinawa Coastal Sprint",
+        reward: "Premio: Honda NSX-R GT"
+      },
+      alpes: {
+        title: "Alpes Japoneses",
+        type: "Pasos de Montaña y Rally de Tierra",
+        image: "forza_bg.png",
+        desc: "Desafía la altitud con espectaculares pasos montañosos nevados en la prefectura de Nagano. Compite en desafiantes pistas de tierra de rally con precipicios vertiginosos y condiciones climáticas de ventisca extrema.",
+        event: "Nagano Alpine Rallycross",
+        reward: "Premio: Subaru Impreza 22B STi"
+      }
+    };
+
+    function selectMapRegion(regionKey) {
+      const panel = document.getElementById('map-region-panel');
+      const pins = document.querySelectorAll('.map-pin');
+      
+      // Actualizar pin activo
+      pins.forEach(pin => {
+        if (pin.id === `pin-${regionKey}`) pin.classList.add('active');
+        else pin.classList.remove('active');
+      });
+
+      // Animar panel
+      panel.classList.add('animating');
+
+      setTimeout(() => {
+        const region = regionsData[regionKey];
+        document.getElementById('region-image').src = region.image;
+        document.getElementById('region-image').alt = region.title;
+        document.getElementById('region-title').textContent = region.title;
+        document.getElementById('region-type').textContent = region.type;
+        document.getElementById('region-desc').textContent = region.desc;
+        document.getElementById('region-event-title').textContent = region.event;
+        document.getElementById('region-event-reward').textContent = region.reward;
+        
+        panel.classList.remove('animating');
+      }, 250);
+    }
+
+    // 11. REQUISITOS DEL SISTEMA INTERACTIVOS HUD
+    const specsData = {
+      min: {
+        os: "Windows 10 (versión 1909 o superior)",
+        cpu: "Intel Core i5-4460 / AMD Ryzen 3 1200",
+        ram: "8 GB RAM",
+        gpu: "NVIDIA GTX 970 / AMD RX 470 (4 GB VRAM)",
+        storage: "110 GB HDD (SSD recomendado)",
+        dx: "DirectX 12 (API level 12_0)"
+      },
+      rec: {
+        os: "Windows 11 (64-bit)",
+        cpu: "Intel Core i7-10700K / AMD Ryzen 7 3800X",
+        ram: "16 GB RAM",
+        gpu: "NVIDIA RTX 3070 / AMD RX 6800 (8 GB VRAM)",
+        storage: "110 GB SSD NVMe M.2 (Obligatorio)",
+        dx: "DirectX 12 (API level 12_2 / Ultimate)"
+      },
+      ultra: {
+        os: "Windows 11 (64-bit)",
+        cpu: "Intel Core i9-12900K / AMD Ryzen 9 5900X",
+        ram: "32 GB RAM",
+        gpu: "NVIDIA RTX 4080 / AMD RX 7900 XTX (16 GB VRAM)",
+        storage: "110 GB SSD PCIe Gen4 NVMe (Ultra-rápido)",
+        dx: "DirectX 12 Ultimate con Ray Tracing Overdrive"
+      }
+    };
+
+    function selectSpecs(tier) {
+      const grid = document.getElementById('specs-grid');
+      const tabs = document.querySelectorAll('.specs-tab');
+      
+      // Actualizar pestañas activas
+      tabs.forEach(tab => {
+        if (tab.getAttribute('onclick').includes(tier)) tab.classList.add('active');
+        else tab.classList.remove('active');
+      });
+
+      // Animar grid
+      grid.classList.add('animating');
+
+      setTimeout(() => {
+        const spec = specsData[tier];
+        document.getElementById('spec-os').textContent = spec.os;
+        document.getElementById('spec-cpu').textContent = spec.cpu;
+        document.getElementById('spec-ram').textContent = spec.ram;
+        document.getElementById('spec-gpu').textContent = spec.gpu;
+        document.getElementById('spec-storage').textContent = spec.storage;
+        document.getElementById('spec-dx').textContent = spec.dx;
+
+        grid.classList.remove('animating');
+      }, 250);
+    }
+
+    // 12. CONTROL DEL MODAL DE VIDEO DEL TRÁILER
     const trailerModal = document.getElementById('trailer-modal');
     const trailerVideo = document.getElementById('trailer-video');
-    // Tráiler conceptual de FH6 Japan muy popular
-    const youtubeTrailerUrl = "https://www.youtube.com/embed/PcrXF6yT-cE?autoplay=1";
+    const youtubeTrailerUrl = "https://www.youtube.com/embed/PcrXF6yT-cE?autoplay=1&rel=0";
 
     function openTrailer() {
       trailerModal.classList.add('active');
       trailerVideo.src = youtubeTrailerUrl;
-      document.body.style.overflow = 'hidden'; // Detener scroll en body
+      document.body.style.overflow = 'hidden';
+      // Pausar reproductor de fondo si existe
+      if (player && typeof player.pauseVideo === 'function') {
+        player.pauseVideo();
+      }
     }
 
     function closeTrailer() {
       trailerModal.classList.remove('active');
       trailerVideo.src = "";
-      document.body.style.overflow = 'auto'; // Habilitar scroll de nuevo
+      document.body.style.overflow = 'auto';
+      // Reanudar reproductor de fondo si existe
+      if (player && typeof player.playVideo === 'function') {
+        player.playVideo();
+      }
     }
 
-    // Cerrar al pulsar escape
+    // Cerrar con Escape o clic fuera
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && trailerModal.classList.contains('active')) {
+        closeTrailer();
+      }
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
+
+    trailerModal.addEventListener('click', (e) => {
+      if (e.target === trailerModal || e.target.classList.contains('trailer-modal-content')) {
         closeTrailer();
       }
     });

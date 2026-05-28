@@ -2,7 +2,10 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
-export default defineConfig({
-  plugins: [react()],
-  base: '/forza-horizon-6/'
+export default defineConfig(({ command, mode }) => {
+  return {
+    plugins: [react()],
+    base: mode === 'production' ? '/forza-horizon-6/manual/' : '/'
+  }
 })
+
