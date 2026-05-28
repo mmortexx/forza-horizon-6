@@ -4,68 +4,14 @@ import carsEsRaw from './data/cars_es.json'
 import carsEnRaw from './data/cars_en.json'
 import './index.css'
 
-// ─── TEXTOS BILINGÜES PARA LA LANDING PAGE AAA ───
+// ─── TEXTOS BILINGÜES PARA LA PORTADA HERO ───
 const landingText = {
   es: {
     hero: {
       tag: "FESTIVAL JAPAN • 2026",
       desc: "Siente la velocidad pura en las calles neón de Tokio, domina las curvas Touge del Monte Fuji y explora la costa tropical de Okinawa en un mundo abierto masivo y espectacular.",
-      btn_trailer: "Ver Tráiler",
-      btn_explore: "Explorar Festival"
-    },
-    features: {
-      sub: "Horizon Experience",
-      title_1: "El Festival ",
-      title_2: "Definitivo",
-      card1_title: "Mundo Abierto de Japón",
-      card1_desc: "Explora autopistas metropolitanas elevadas de Tokio de noche, cañones Touge y senderos de montaña rurales bajo pétalos de cerezo en flor.",
-      card2_title: "+500 Coches Auténticos",
-      card2_desc: "Colecciona, modifica y pilota el catálogo más completo de vehículos hiperdeportivos modernos e importaciones JDM legendarias.",
-      card3_title: "Multijugador Sin Fisuras",
-      card3_desc: "Compite en carreras, únete a convoyes de derrape en puertos de montaña o disfruta de eventos espontáneos Arcade con la comunidad.",
-      card4_title: "Gráficos de Nueva Generación",
-      card4_desc: "Vive una inmersión absoluta gracias a la iluminación global de última generación, Ray Tracing en tiempo real y clima dinámico."
-    },
-    showcase: {
-      sub: "Showcase",
-      title_1: "Capturas ",
-      title_2: "Del Juego",
-      slide1_title: "Shinjuku Drift Run",
-      slide1_desc: "Siente la deriva en el corazón de Tokio de noche, rodeado por rascacielos iluminados con luces neón y asfalto húmedo.",
-      slide2_title: "Paso Touge del Monte Fuji",
-      slide2_desc: "Domina las bajadas técnicas de montaña durante la hora dorada, esquivando curvas cerradas bordeadas por cerezos en flor.",
-      slide3_title: "Autopistas Costeras de Okinawa",
-      slide3_desc: "Velocidad punta libre en puentes y autopistas junto al mar turquesa del trópico japonés al amanecer."
-    },
-    garage: {
-      sub: "Garaje Especializado",
-      title_1: "Coches ",
-      title_2: "Destacados",
-      btn_inspect: "Inspeccionar Reglaje",
-      power: "Potencia",
-      drive: "Tracción",
-      motor: "Motor",
-      speed: "Velocidad",
-      accel: "Aceleración",
-      handling: "Manejo",
-      braking: "Frenado"
-    },
-    map: {
-      sub: "Territorios Horizon",
-      title_1: "Mapa de ",
-      title_2: "Japón",
-      region: "Región",
-      terrain: "Terreno",
-      challenge: "Desafío del Festival",
-      reward: "Premio: "
-    },
-    specs: {
-      sub: "Especificaciones PC",
-      title_1: "Requisitos del ",
-      title_2: "Sistema",
-      tab_min: "Especificaciones Mínimas",
-      tab_rec: "Especificaciones Recomendadas",
-      tab_ultra: "Especificaciones Ultra (RT)"
+      btn_tuning: "Ver Reglajes",
+      btn_wheel: "Ajustar Volante"
     },
     newsletter: {
       title: "Únete al Boletín de Horizon",
@@ -79,62 +25,8 @@ const landingText = {
     hero: {
       tag: "FESTIVAL JAPAN • 2026",
       desc: "Feel pure speed in the neon streets of Tokyo, master the Touge turns of Mount Fuji, and explore the tropical coast of Okinawa in a massive and spectacular open world.",
-      btn_trailer: "Watch Trailer",
-      btn_explore: "Explore Festival"
-    },
-    features: {
-      sub: "Horizon Experience",
-      title_1: "The Ultimate ",
-      title_2: "Festival",
-      card1_title: "Open World Japan",
-      card1_desc: "Explore elevated highway loops in Tokyo at night, narrow mountain Touge, and rural roads decorated by cherry blossom petals.",
-      card2_title: "500+ Authentic Cars",
-      card2_desc: "Collect, customize, and drive the most complete roster of hypercars and iconic JDM import legends.",
-      card3_title: "Seamless Multiplayer",
-      card3_desc: "Compete in races, join drift convoys on mountain passes, or enjoy spontaneous Arcade events with the community.",
-      card4_title: "Next-Gen Visuals",
-      card4_desc: "Experience absolute immersion thanks to next-generation global illumination, real-time Ray Tracing, and dynamic weather."
-    },
-    showcase: {
-      sub: "Showcase",
-      title_1: "In-Game ",
-      title_2: "Screenshots",
-      slide1_title: "Shinjuku Drift Run",
-      slide1_desc: "Feel the drift in the heart of Tokyo at night, surrounded by towering neon skyscrapers and wet asphalt.",
-      slide2_title: "Mount Fuji Touge Pass",
-      slide2_desc: "Master technical downhill mountain passes during golden hour, dodging hairpin turns lined with cherry blossoms.",
-      slide3_title: "Okinawa Coastal Highways",
-      slide3_desc: "Unleash top speed on bridges and highways next to the turquoise sea of the Japanese tropics at sunrise."
-    },
-    garage: {
-      sub: "Specialized Garage",
-      title_1: "Featured ",
-      title_2: "Cars",
-      btn_inspect: "Inspect Setup",
-      power: "Power",
-      drive: "Drivetrain",
-      motor: "Engine",
-      speed: "Speed",
-      accel: "Acceleration",
-      handling: "Handling",
-      braking: "Braking"
-    },
-    map: {
-      sub: "Horizon Territories",
-      title_1: "Map of ",
-      title_2: "Japan",
-      region: "Region",
-      terrain: "Terrain",
-      challenge: "Festival Challenge",
-      reward: "Reward: "
-    },
-    specs: {
-      sub: "PC Specifications",
-      title_1: "System ",
-      title_2: "Requirements",
-      tab_min: "Minimum Specifications",
-      tab_rec: "Recommended Specifications",
-      tab_ultra: "Ultra Specifications (RT)"
+      btn_tuning: "View Setups",
+      btn_wheel: "Calibrate Wheel"
     },
     newsletter: {
       title: "Join the Horizon Newsletter",
@@ -146,122 +38,6 @@ const landingText = {
   }
 }
 
-// ─── DATOS DEL GARAJE DESTACADO DE LA LANDING (CONECTADOS AL MANUAL) ───
-const garageCars = [
-  {
-    id: "ff_skyline_r34",
-    category: "fast",
-    name: "Nissan Skyline GT-R R34 Mines",
-    brand: "Nissan JDM Spec",
-    image: "gallery_tokyo.png",
-    class: "S1 CLASS",
-    stats: { speed: 8.8, accel: 9.2, handling: 9.5, braking: 9.0 },
-    engine: "RB26DETT Twin-Turbo",
-    hp: "650 CV / 641 HP",
-    drive: "AWD (ATTESA E-TS)"
-  },
-  {
-    id: "ff_supra_94",
-    category: "fast",
-    name: "Toyota Supra RZ '94 (Brian's Orange)",
-    brand: "Toyota Gazoo Racing",
-    image: "gallery_fuji.png",
-    class: "A CLASS",
-    stats: { speed: 9.2, accel: 9.8, handling: 9.0, braking: 8.8 },
-    engine: "3.0L B58 Twin-Scroll",
-    hp: "510 CV / 503 HP",
-    drive: "RWD (Trasera)"
-  },
-  {
-    id: "lotus_exige_wtac",
-    category: "altas",
-    name: "Lotus Exige WTAC Time Attack",
-    brand: "Lotus Motorsport",
-    image: "forza_bg.png",
-    class: "R CLASS",
-    stats: { speed: 9.0, accel: 9.4, handling: 10.0, braking: 9.8 },
-    engine: "1.8L Supercharged",
-    hp: "450 CV / 444 HP",
-    drive: "MR (Motor Central)"
-  }
-]
-
-// ─── DATOS DEL MAPA INTERACTIVO DE LA LANDING ───
-const regionsData = {
-  tokyo: {
-    title: { es: "Tokyo Metropolis", en: "Tokyo Metropolis" },
-    type: { es: "Autopistas y Cañones Urbanos", en: "Highways and Urban Cañons" },
-    image: "gallery_tokyo.png",
-    desc: {
-      es: "Corre por las autopistas urbanas elevadas (Shuto Expressway), derrapa en los muelles industriales de Odaiba y domina las curvas de los distritos metropolitanos de Shinjuku iluminados por carteles de neón.",
-      en: "Race through elevated highway loops (Shuto Expressway), drift in Odaiba industrial docks, and master the corners of Shinjuku metropolitan districts illuminated by massive neon signs."
-    },
-    event: { es: "Midnight Shinjuku Club", en: "Midnight Shinjuku Club" },
-    reward: { es: "Nissan Skyline GT-R R34", en: "Nissan Skyline GT-R R34" }
-  },
-  fuji: {
-    title: { es: "Monte Fuji Touge", en: "Mount Fuji Touge" },
-    type: { es: "Meca del Drift y Curvas Encadenadas", en: "Drift Mecca and Linked Turns" },
-    image: "gallery_fuji.png",
-    desc: {
-      es: "Domina las famosas bajadas y subidas de asfalto (Touge). Realiza derrapes perfectos entre templos sintoístas ancestrales y densos bosques bajo los pétalos de sakura.",
-      en: "Master the famous asphalt downhills and uphills (Touge). Chain perfect drifts past ancient Shinto shrines and dense forests under cherry blossom petals."
-    },
-    event: { es: "Touge Mountain Drift King", en: "Touge Mountain Drift King" },
-    reward: { es: "Mazda RX-7 Spirit R", en: "Mazda RX-7 Spirit R" }
-  },
-  okinawa: {
-    title: { es: "Costa de Okinawa", en: "Okinawa Coast" },
-    type: { es: "Puentes e Islas Subtropicales", en: "Subtropical Islands and Bridges" },
-    image: "gallery_okinawa.png",
-    desc: {
-      es: "Pisa a fondo en los kilométricos puentes de autopista construidos sobre las aguas turquesas del Pacífico. Conduce en una atmósfera subtropical relajada a lo largo de playas y pueblos tradicionales.",
-      en: "Unleash top speed on miles-long highway bridges built over the turquoise waters of the Pacific. Drive in a relaxed subtropical atmosphere alongside sandy beaches."
-    },
-    event: { es: "Okinawa Coastal Sprint", en: "Okinawa Coastal Sprint" },
-    reward: { es: "Honda NSX-R GT", en: "Honda NSX-R GT" }
-  },
-  alpes: {
-    title: { es: "Alpes Japoneses", en: "Japanese Alps" },
-    type: { es: "Pasos de Montaña y Rally de Tierra", en: "Mountain Passes and Dirt Rally" },
-    image: "forza_bg.png",
-    desc: {
-      es: "Desafía la altitud con espectaculares pasos montañosos nevados en la prefectura de Nagano. Compite en desafiantes pistas de tierra de rally con precipicios vertiginosos y ventiscas extremas.",
-      en: "Challenge the altitude with spectacular snowy mountain passes in the Nagano prefecture. Compete on demanding dirt rally tracks with cliffside drops and extreme blizzards."
-    },
-    event: { es: "Nagano Alpine Rallycross", en: "Nagano Alpine Rallycross" },
-    reward: { es: "Subaru Impreza 22B STi", en: "Subaru Impreza 22B STi" }
-  }
-}
-
-// ─── DATOS DE LAS ESPECIFICACIONES HUD DE LA LANDING ───
-const specsData = {
-  min: {
-    os: "Windows 10 (version 1909 or higher)",
-    cpu: "Intel Core i5-4460 / AMD Ryzen 3 1200",
-    ram: "8 GB RAM",
-    gpu: "NVIDIA GTX 970 / AMD RX 470 (4 GB VRAM)",
-    storage: "110 GB HDD (SSD Recommended)",
-    dx: "DirectX 12 (API level 12_0)"
-  },
-  rec: {
-    os: "Windows 11 (64-bit)",
-    cpu: "Intel Core i7-10700K / AMD Ryzen 7 3800X",
-    ram: "16 GB RAM",
-    gpu: "NVIDIA RTX 3070 / AMD RX 6800 (8 GB VRAM)",
-    storage: "110 GB SSD NVMe M.2 (Required)",
-    dx: "DirectX 12 (API level 12_2 / Ultimate)"
-  },
-  ultra: {
-    os: "Windows 11 (64-bit)",
-    cpu: "Intel Core i9-12900K / AMD Ryzen 9 5900X",
-    ram: "32 GB RAM",
-    gpu: "NVIDIA RTX 4080 / AMD RX 7900 XTX (16 GB VRAM)",
-    storage: "110 GB SSD PCIe Gen4 NVMe (Ultra-fast)",
-    dx: "DirectX 12 Ultimate with Ray Tracing Overdrive"
-  }
-}
-
 function App() {
   const { t, i18n } = useTranslation()
   const currentLang = i18n.language === 'en' ? 'en' : 'es'
@@ -270,7 +46,7 @@ function App() {
   const carsDataRaw = i18n.language === 'en' ? carsEnRaw : carsEsRaw;
   const [carsData, setCarsData] = useState(carsDataRaw)
   
-  // 'home' carga la Landing Page AAA interactiva.
+  // 'home' carga la Portada Hero AAA + Menú JDM del Manual.
   // Otras vistas: 'altas', 'bajas', 'fe', 'rutas', 'joyas', 'fast', 'videos', 'wheel'
   const [view, setView] = useState('home')
   
@@ -292,28 +68,7 @@ function App() {
   const [globalSearchQuery, setGlobalSearchQuery] = useState('')
   const [showGlobalSuggestions, setShowGlobalSuggestions] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
-
-  // Estados de la Landing Page
-  const [heroVideoLoaded, setHeroVideoLoaded] = useState(false)
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const [lightboxActive, setLightboxActive] = useState(false)
-  const [lightboxIndex, setLightboxIndex] = useState(0)
-  const [lightboxZoom, setLightboxZoom] = useState(false)
-  
-  const [selectedGarageCarIndex, setSelectedGarageCarIndex] = useState(0)
-  const [garageBarsAnimated, setGarageBarsAnimated] = useState(false)
-  const [selectedRegion, setSelectedRegion] = useState('tokyo')
-  const [regionPanelAnimating, setRegionPanelAnimating] = useState(false)
-  const [selectedSpecsTier, setSelectedSpecsTier] = useState('rec')
-  const [specsAnimating, setSpecsAnimating] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [trailerModalActive, setTrailerModalActive] = useState(false)
-  
-  // Referencias de carrusel y barra de progreso
-  const progressAnimFrame = useRef()
-  const slideStartTime = useRef(Date.now())
-  const autoSlideInterval = useRef()
-  const slideDuration = 6000
 
   // 1. SCROLL PROGRESS
   useEffect(() => {
@@ -331,9 +86,9 @@ function App() {
     if (window.lucide) {
       window.lucide.createIcons()
     }
-  }, [view, activeSheetTab, activeMediaTab, activeWheelTab, selectedRegion, selectedSpecsTier, mobileMenuOpen])
+  }, [view, activeSheetTab, activeMediaTab, activeWheelTab, mobileMenuOpen])
 
-  // 3. CANVAS GLOBAL DE ANIMACIÓN (SAKURA Y SPEEDLINES)
+  // 3. CANVAS GLOBAL DE ANIMACIÓN (SAKURA, SPEEDLINES Y CHISPAS NEÓN)
   useEffect(() => {
     const canvas = document.getElementById('canvas-decorations')
     if (!canvas) return
@@ -413,10 +168,59 @@ function App() {
       }
     }
 
+    // Clase Chispas de Fricción (Cenizas incandescentes JDM)
+    class Spark {
+      constructor() { this.reset() }
+      reset() {
+        this.x = Math.random() * canvasWidth
+        this.y = canvasHeight * 0.82 + Math.random() * (canvasHeight * 0.18)
+        this.size = Math.random() * 2.2 + 1.0
+        this.vx = (Math.random() - 0.5) * 4.8
+        this.vy = -Math.random() * 3.8 - 2.2
+        this.opacity = Math.random() * 0.85 + 0.15
+        this.fade = Math.random() * 0.012 + 0.006
+        this.gravity = 0.025
+        const colors = [
+          '255, 107, 0',   // Naranja Forza
+          '255, 0, 85',    // Pink neón
+          '255, 210, 0',   // Amarillo chispa
+          '0, 212, 255'    // Destello cian
+        ]
+        this.color = colors[Math.floor(Math.random() * colors.length)]
+      }
+      update() {
+        this.vy += this.gravity
+        this.x += this.vx
+        this.y += this.vy
+        this.opacity -= this.fade
+        if (this.opacity <= 0 || this.y < 0 || this.x < 0 || this.x > canvasWidth) {
+          this.reset()
+        }
+      }
+      draw() {
+        if (this.opacity <= 0) return
+        ctx.save()
+        ctx.globalCompositeOperation = 'screen'
+        ctx.fillStyle = `rgba(${this.color}, ${this.opacity})`
+        
+        ctx.shadowBlur = Math.random() * 6 + 3
+        ctx.shadowColor = `rgb(${this.color})`
+        
+        ctx.beginPath()
+        const angle = Math.atan2(this.vy, this.vx)
+        ctx.translate(this.x, this.y)
+        ctx.rotate(angle)
+        ctx.fillRect(-this.size * 1.5, -this.size / 2, this.size * 3, this.size)
+        ctx.restore()
+      }
+    }
+
     const sCount = window.innerWidth < 768 ? 15 : 40
     const lCount = window.innerWidth < 768 ? 10 : 30
+    const sparkCount = window.innerWidth < 768 ? 18 : 45
     const sakuras = Array.from({ length: sCount }, () => new Sakura())
     const speedLines = Array.from({ length: lCount }, () => new SpeedLine())
+    const sparks = Array.from({ length: sparkCount }, () => new Spark())
 
     let lastScrollY = window.scrollY
     let scrollVelocity = 0
@@ -436,6 +240,11 @@ function App() {
       sakuras.forEach(sakura => {
         sakura.update()
         sakura.draw()
+      })
+
+      sparks.forEach(spark => {
+        spark.update()
+        spark.draw()
       })
 
       animationId = requestAnimationFrame(drawLoop)
@@ -463,91 +272,7 @@ function App() {
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [view])
 
-  // 5. EFECTO TILT EN CARDS DE CARACTERÍSTICAS
-  useEffect(() => {
-    if (view !== 'home') return
-    const cards = document.querySelectorAll('.feature-card')
-    cards.forEach(card => {
-      const handleMove = (e) => {
-        const rect = card.getBoundingClientRect()
-        const x = e.clientX - rect.left
-        const y = e.clientY - rect.top
-        card.style.setProperty('--mouse-x', `${x}px`)
-        card.style.setProperty('--mouse-y', `${y}px`)
-
-        const tiltX = ((y / rect.height) - 0.5) * -10
-        const tiltY = ((x / rect.width) - 0.5) * 10
-        card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-5px)`
-      }
-      const handleLeave = () => {
-        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)'
-      }
-      card.addEventListener('mousemove', handleMove)
-      card.addEventListener('mouseleave', handleLeave)
-      return () => {
-        card.removeEventListener('mousemove', handleMove)
-        card.removeEventListener('mouseleave', handleLeave)
-      }
-    })
-  }, [view])
-
-  // 6. CONTROL DEL AUTO-PLAY DEL CARRUSEL (SHOWCASE)
-  const updateProgressBar = () => {
-    const elapsed = Date.now() - slideStartTime.current
-    const progress = Math.min((elapsed / slideDuration) * 100, 100)
-    const pBar = document.getElementById('showcase-progress')
-    if (pBar) pBar.style.width = `${progress}%`
-
-    if (progress < 100) {
-      progressAnimFrame.current = requestAnimationFrame(updateProgressBar)
-    }
-  }
-
-  const startAutoSlide = () => {
-    slideStartTime.current = Date.now()
-    updateProgressBar()
-    autoSlideInterval.current = setInterval(() => {
-      setCurrentSlide(prev => (prev + 1) % 3)
-      slideStartTime.current = Date.now()
-    }, slideDuration)
-  }
-
-  const resetAutoSlide = () => {
-    clearInterval(autoSlideInterval.current)
-    cancelAnimationFrame(progressAnimFrame.current)
-    startAutoSlide()
-  }
-
-  useEffect(() => {
-    if (view !== 'home' || lightboxActive) {
-      clearInterval(autoSlideInterval.current)
-      cancelAnimationFrame(progressAnimFrame.current)
-      return
-    }
-    startAutoSlide()
-    return () => {
-      clearInterval(autoSlideInterval.current)
-      cancelAnimationFrame(progressAnimFrame.current)
-    }
-  }, [view, lightboxActive])
-
-  useEffect(() => {
-    if (view === 'home') {
-      slideStartTime.current = Date.now()
-      resetAutoSlide()
-    }
-  }, [currentSlide])
-
-  // 7. ANIMACIÓN DE BARRAS DE PROGRESO DEL GARAJE
-  useEffect(() => {
-    if (view !== 'home') return
-    // Disparar animación de barras
-    setGarageBarsAnimated(false)
-    const timer = setTimeout(() => setGarageBarsAnimated(true), 250)
-    return () => clearTimeout(timer)
-  }, [selectedGarageCarIndex, view])
-
-  // 8. BUSCADOR GLOBAL Y ENRUTADOR
+  // 5. BUSCADOR GLOBAL Y ENRUTADOR
   const allCars = useMemo(() => {
     return Object.keys(carsDataRaw).reduce((acc, category) => {
       if (['altas', 'bajas', 'fe', 'rutas', 'joyas', 'fast'].includes(category)) {
@@ -588,7 +313,6 @@ function App() {
     setActiveMediaTab('meta')
     setActiveWheelTab('ghub')
     setMobileMenuOpen(false)
-    // Hacer scroll arriba al cambiar de vista
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
@@ -598,12 +322,11 @@ function App() {
     setCarsData(nextLang === 'en' ? carsEnRaw : carsEsRaw)
   }
 
-  // 9. NAVEGACIÓN POR SCROLL INTERNO O REDIRECCIÓN EN LA NAVBAR
+  // NAVEGACIÓN INTERNA EN LA NAVBAR
   const handleNavScroll = (elementId) => {
     setMobileMenuOpen(false)
     if (view !== 'home') {
       setView('home')
-      // Esperar a que se monte el DOM de la landing
       setTimeout(() => {
         const el = document.getElementById(elementId)
         if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -614,68 +337,12 @@ function App() {
     }
   }
 
-  // 10. MODAL DE LIGHTBOX
-  const openLightbox = (index) => {
-    setLightboxIndex(index)
-    setLightboxActive(true)
-    setLightboxZoom(false)
-  }
-
-  const closeLightbox = () => {
-    setLightboxActive(false)
-    setLightboxZoom(false)
-  }
-
-  const changeLightboxImg = (dir) => {
-    setLightboxZoom(false)
-    setLightboxIndex(prev => (prev + dir + 3) % 3)
-  }
-
-  // 11. MAPA Y SPECS ANIMATION SWITCHERS
-  const selectMapRegion = (regionKey) => {
-    setRegionPanelAnimating(true)
-    setTimeout(() => {
-      setSelectedRegion(regionKey)
-      setRegionPanelAnimating(false)
-    }, 250)
-  }
-
-  const selectSpecs = (tier) => {
-    setSpecsAnimating(true)
-    setTimeout(() => {
-      setSelectedSpecsTier(tier)
-      setSpecsAnimating(false)
-    }, 250)
-  }
-
-  // 12. ENLAZAR COCHE DESTACADO DE LA LANDING AL MANUAL
-  const inspectGarageCar = (id, category) => {
-    handleCarSelect(id, category)
-    handleViewChange(category)
-  }
-
-  // Controladores de modal de video
-  const openTrailer = () => setTrailerModalActive(true)
-  const closeTrailer = () => setTrailerModalActive(false)
-
-  // Cerrar al pulsar Escape
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        closeTrailer()
-        closeLightbox()
-      }
-    }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [])
-
   return (
     <>
       {/* Barra de progreso de lectura global */}
       <div className="scroll-progress" style={{ width: `${scrollProgress}%` }} />
 
-      {/* BARRA DE NAVEGACIÓN UNIFICADA DE ALTURA FIJA */}
+      {/* BARRA DE NAVEGACIÓN UNIFICADA */}
       <nav className="navbar scrolled">
         <div className="nav-container">
           <a href="#" className="logo" onClick={(e) => { e.preventDefault(); handleViewChange('home'); }}>
@@ -693,23 +360,8 @@ function App() {
               </a>
             </li>
             <li>
-              <a href="#features" onClick={(e) => { e.preventDefault(); handleNavScroll('features'); }}>
-                {currentLang === 'en' ? 'Features' : 'Características'}
-              </a>
-            </li>
-            <li>
-              <a href="#showcase" onClick={(e) => { e.preventDefault(); handleNavScroll('showcase'); }}>
-                {currentLang === 'en' ? 'Gallery' : 'Galería'}
-              </a>
-            </li>
-            <li>
-              <a href="#map" onClick={(e) => { e.preventDefault(); handleNavScroll('map'); }}>
-                {currentLang === 'en' ? 'Map' : 'Mapa'}
-              </a>
-            </li>
-            <li className={isCarCategory ? 'active' : ''}>
-              <a href="#tuning-manual" onClick={(e) => { e.preventDefault(); handleViewChange('altas'); }}>
-                {currentLang === 'en' ? 'Tuning Manual' : 'Manual JDM'}
+              <a href="#tuning-menu" onClick={(e) => { e.preventDefault(); handleNavScroll('tuning-menu'); }}>
+                {currentLang === 'en' ? 'Setups' : 'Reglajes'}
               </a>
             </li>
             <li className={view === 'videos' ? 'active' : ''}>
@@ -723,7 +375,7 @@ function App() {
               </a>
             </li>
             
-            {/* Buscador Rápido en Navbar (Solo Escritorio) */}
+            {/* Buscador Rápido en Navbar */}
             <li className="nav-search-li">
               <div className="nav-search-wrapper">
                 <input 
@@ -792,26 +444,14 @@ function App() {
       <main style={{ minHeight: 'calc(100vh - 70px)' }}>
         
         {/* ========================================================
-            1. VISTA HOME: LANDING PAGE AAA INMERSIVA
+            1. VISTA HOME: PORTADA HERO + MENÚ JDM DEL MANUAL
             ======================================================== */}
         {view === 'home' && (
           <div className="landing-wrapper">
             
-            {/* HERO SECTION DE DOBLE FONDO */}
+            {/* HERO SECTION ESPECTACULAR (FALLBACK SEGURO A PARALLAX) */}
             <header className="hero" id="hero">
               <div className="hero-parallax-bg" id="hero-bg"></div>
-              
-              <div className={`hero-video-wrapper ${heroVideoLoaded ? 'loaded' : ''}`}>
-                {window.innerWidth > 900 && (
-                  <iframe 
-                    src="https://www.youtube.com/embed/PcrXF6yT-cE?autoplay=1&mute=1&controls=0&loop=1&playlist=PcrXF6yT-cE&showinfo=0&rel=0&playsinline=1&enablejsapi=1" 
-                    title="Forza Horizon 6 YouTube background"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    onLoad={() => setHeroVideoLoaded(true)}
-                  ></iframe>
-                )}
-              </div>
-              
               <div className="hero-overlay"></div>
               <div className="hero-speed-lines"></div>
 
@@ -820,11 +460,11 @@ function App() {
                 <h1 className="hero-title">FORZA HORIZON <span>6</span></h1>
                 <p className="hero-desc">{text.hero.desc}</p>
                 <div className="hero-ctas">
-                  <button className="btn btn-primary" onClick={openTrailer}>
-                    <span><i data-lucide="play" size="18"></i> {text.hero.btn_trailer}</span>
-                  </button>
-                  <a href="#features" className="btn btn-secondary" onClick={(e) => { e.preventDefault(); handleNavScroll('features'); }}>
-                    <span>{text.hero.btn_explore} <i data-lucide="arrow-right" size="18"></i></span>
+                  <a href="#tuning-menu" className="btn btn-primary" onClick={(e) => { e.preventDefault(); handleNavScroll('tuning-menu'); }}>
+                    <span><i data-lucide="wrench" size="18"></i> {text.hero.btn_tuning}</span>
+                  </a>
+                  <a href="#wheel" className="btn btn-secondary" onClick={(e) => { e.preventDefault(); handleViewChange('wheel'); }}>
+                    <span><i data-lucide="gamepad-2" size="18"></i> {text.hero.btn_wheel}</span>
                   </a>
                 </div>
               </div>
@@ -836,397 +476,142 @@ function App() {
               <span>{t('alert.text')}</span>
             </div>
 
-            {/* CARACTERÍSTICAS DEL FESTIVAL CON TILT 3D */}
-            <section className="section-padding reveal active" id="features">
-              <div className="section-title-wrapper">
-                <span className="section-subtitle">{text.features.sub}</span>
-                <h2 class="section-title">
-                  {text.features.title_1}<span>{text.features.title_2}</span>
-                </h2>
+            {/* MENÚ DE INICIO DE LA APLICACIÓN JDM (CARDS DE REGLAJES) */}
+            <div className="home-menu" id="tuning-menu" style={{ padding: '6rem 2rem' }}>
+              <div className="home-menu-title">
+                <h2>{t('home.title')}</h2>
+                <p>{t('home.subtitle')}</p>
               </div>
 
-              <div className="features-grid">
-                <div className="feature-card">
-                  <div className="feature-icon-wrapper">
-                    <i data-lucide="map" size="34"></i>
-                  </div>
-                  <h3>{text.features.card1_title}</h3>
-                  <p>{text.features.card1_desc}</p>
+              {/* BARRA DE ESTADÍSTICAS DEL MANUAL */}
+              <div className="stats-bar">
+                <div className="stat-card-mini">
+                  <span className="stat-num">🏆 18</span>
+                  <span className="stat-desc">{i18n.language === 'en' ? 'Meta Cars Verified' : 'Coches Meta Verificados'}</span>
                 </div>
-
-                <div className="feature-card">
-                  <div className="feature-icon-wrapper">
-                    <i data-lucide="gauge" size="34"></i>
-                  </div>
-                  <h3>{text.features.card2_title}</h3>
-                  <p>{text.features.card2_desc}</p>
+                <div className="stat-card-mini">
+                  <span className="stat-num">⚙️ 80+</span>
+                  <span className="stat-desc">{i18n.language === 'en' ? 'Share Codes' : 'Códigos de Tuneo'}</span>
                 </div>
-
-                <div className="feature-card">
-                  <div className="feature-icon-wrapper">
-                    <i data-lucide="users" size="34"></i>
-                  </div>
-                  <h3>{text.features.card3_title}</h3>
-                  <p>{text.features.card3_desc}</p>
+                <div className="stat-card-mini">
+                  <span className="stat-num">📹 100+</span>
+                  <span className="stat-desc">{i18n.language === 'en' ? 'Videos Audited' : 'Guías Auditadas'}</span>
                 </div>
-
-                <div className="feature-card">
-                  <div className="feature-icon-wrapper">
-                    <i data-lucide="monitor" size="34"></i>
-                  </div>
-                  <h3>{text.features.card4_title}</h3>
-                  <p>{text.features.card4_desc}</p>
+                <div className="stat-card-mini">
+                  <span className="stat-num">⚡ 650°</span>
+                  <span className="stat-desc">{i18n.language === 'en' ? 'Wheel Telemetry' : 'Ángulos G29 Listos'}</span>
                 </div>
               </div>
-            </section>
 
-            {/* SHOWCASE DE LA GALERÍA CON LIGHTBOX */}
-            <section className="section-padding reveal active" id="showcase">
-              <div className="section-title-wrapper">
-                <span className="section-subtitle">{text.showcase.sub}</span>
-                <h2 className="section-title">
-                  {text.showcase.title_1}<span>{text.showcase.title_2}</span>
-                </h2>
-              </div>
-
-              <div className="showcase-slider-container">
-                <div className="showcase-track">
-                  {/* Slide 1 */}
-                  <div className={`showcase-slide ${currentSlide === 0 ? 'active' : ''}`} onClick={() => openLightbox(0)}>
-                    <img src="gallery_tokyo.png" alt="Shinjuku Drift Run" />
-                    <div className="showcase-overlay"></div>
-                    <div className="showcase-caption">
-                      <h3>{text.showcase.slide1_title}</h3>
-                      <p>{text.showcase.slide1_desc}</p>
-                    </div>
-                  </div>
-
-                  {/* Slide 2 */}
-                  <div className={`showcase-slide ${currentSlide === 1 ? 'active' : ''}`} onClick={() => openLightbox(1)}>
-                    <img src="gallery_fuji.png" alt="Monte Fuji Touge" />
-                    <div className="showcase-overlay"></div>
-                    <div className="showcase-caption">
-                      <h3>{text.showcase.slide2_title}</h3>
-                      <p>{text.showcase.slide2_desc}</p>
-                    </div>
-                  </div>
-
-                  {/* Slide 3 */}
-                  <div className={`showcase-slide ${currentSlide === 2 ? 'active' : ''}`} onClick={() => openLightbox(2)}>
-                    <img src="gallery_okinawa.png" alt="Costa de Okinawa" />
-                    <div className="showcase-overlay"></div>
-                    <div className="showcase-caption">
-                      <h3>{text.showcase.slide3_title}</h3>
-                      <p>{text.showcase.slide3_desc}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="showcase-progress-bar" id="showcase-progress"></div>
-
-                <button className="showcase-btn showcase-btn-prev" onClick={() => setCurrentSlide(prev => (prev - 1 + 3) % 3)}>
-                  <i data-lucide="chevron-left" size="28"></i>
-                </button>
-                <button className="showcase-btn showcase-btn-next" onClick={() => setCurrentSlide(prev => (prev + 1) % 3)}>
-                  <i data-lucide="chevron-right" size="28"></i>
-                </button>
-
-                <div className="showcase-controls-wrapper">
-                  <div className="showcase-dots">
-                    <div className={`showcase-dot ${currentSlide === 0 ? 'active' : ''}`} onClick={() => setCurrentSlide(0)}></div>
-                    <div className={`showcase-dot ${currentSlide === 1 ? 'active' : ''}`} onClick={() => setCurrentSlide(1)}></div>
-                    <div className={`showcase-dot ${currentSlide === 2 ? 'active' : ''}`} onClick={() => setCurrentSlide(2)}></div>
+              {/* COCHE DESTACADO DEL FESTIVAL */}
+              <div className="featured-car-banner glass-panel">
+                <div className="featured-car-content">
+                  <span className="featured-tag">🔥 {i18n.language === 'en' ? 'FEATURED SETUP' : 'REGLAJE DESTACADO'}</span>
+                  <h3>Subaru BRZ Forza Edition JDM</h3>
+                  <p className="featured-desc">
+                    {i18n.language === 'en' 
+                      ? 'The absolute king of dirt tracks. Built with a lifted rally suspension, optimized AWD differentials (75% central split), and low center of gravity. Click below to inspect its blueprints.'
+                      : 'El monarca absoluto de las pistas de tierra. Altura de suspensión rally, reparto central de tracción al 75% y balance neutral de peso. Haz clic abajo para ver su ficha técnica.'}
+                  </p>
+                  <div className="featured-meta">
+                    <span className="featured-pi">PI 800</span>
+                    <span className="featured-class">A CLASS</span>
+                    <button className="featured-btn" onClick={() => {
+                      handleCarSelect("brz-fe-dirt", "fe")
+                      handleViewChange("fe")
+                    }}>
+                      {i18n.language === 'en' ? 'INSPECT SETUP ➔' : 'VER REGLAJE ➔'}
+                    </button>
                   </div>
                 </div>
               </div>
-            </section>
 
-            {/* GARAJE DE COCHES CON SELECTOR Y BARRAS DE PROGRESO */}
-            <section className="section-padding reveal active" id="cars">
-              <div className="section-title-wrapper">
-                <span className="section-subtitle">{text.garage.sub}</span>
-                <h2 className="section-title">
-                  {text.garage.title_1}<span>{text.garage.title_2}</span>
-                </h2>
-              </div>
-
-              <div className="garage-selector">
-                {garageCars.map((c, idx) => (
-                  <button 
-                    key={c.id} 
-                    className={`garage-tab ${selectedGarageCarIndex === idx ? 'active' : ''}`} 
-                    onClick={() => setSelectedGarageCarIndex(idx)}
-                  >
-                    <span>{c.name.split(' ')[0]} {c.name.split(' ')[1]}</span>
-                  </button>
-                ))}
-              </div>
-
-              <div className="garage-display">
-                <div className="garage-car-visual">
-                  <span className="garage-car-class">{garageCars[selectedGarageCarIndex].class}</span>
-                  <img src={garageCars[selectedGarageCarIndex].image} alt={garageCars[selectedGarageCarIndex].name} />
+              {/* GRID DE LAS 8 CATEGORÍAS */}
+              <div className="home-grid">
+                <div className="home-card card-elite" onClick={() => handleViewChange('altas')}>
+                  <span className="card-icon">🏆</span>
+                  <span className="card-title">{t('home.cards.elite.title')}</span>
+                  <span className="card-desc">{t('home.cards.elite.desc')}</span>
+                  <span className="card-badge">{t('home.cards.elite.badge')}</span>
                 </div>
-                <div className="garage-car-info">
-                  <div className="garage-car-header">
-                    <h3>{garageCars[selectedGarageCarIndex].name}</h3>
-                    <span className="garage-car-sub">{garageCars[selectedGarageCarIndex].brand}</span>
-                  </div>
-
-                  <div className="garage-stats">
-                    {/* Velocidad */}
-                    <div className="garage-stat-row">
-                      <div className="garage-stat-label">
-                        <span>{text.garage.speed}</span>
-                        <span className="garage-stat-val">{garageCars[selectedGarageCarIndex].stats.speed.toFixed(1)}</span>
-                      </div>
-                      <div className="garage-bar-bg">
-                        <div 
-                          className="garage-bar-fill" 
-                          style={{ width: garageBarsAnimated ? `${garageCars[selectedGarageCarIndex].stats.speed * 10}%` : '0%' }}
-                        ></div>
-                      </div>
-                    </div>
-                    {/* Aceleración */}
-                    <div className="garage-stat-row">
-                      <div className="garage-stat-label">
-                        <span>{text.garage.accel}</span>
-                        <span className="garage-stat-val">{garageCars[selectedGarageCarIndex].stats.accel.toFixed(1)}</span>
-                      </div>
-                      <div className="garage-bar-bg">
-                        <div 
-                          className="garage-bar-fill" 
-                          style={{ width: garageBarsAnimated ? `${garageCars[selectedGarageCarIndex].stats.accel * 10}%` : '0%' }}
-                        ></div>
-                      </div>
-                    </div>
-                    {/* Manejo */}
-                    <div className="garage-stat-row">
-                      <div className="garage-stat-label">
-                        <span>{text.garage.handling}</span>
-                        <span className="garage-stat-val">{garageCars[selectedGarageCarIndex].stats.handling.toFixed(1)}</span>
-                      </div>
-                      <div className="garage-bar-bg">
-                        <div 
-                          className="garage-bar-fill" 
-                          style={{ width: garageBarsAnimated ? `${garageCars[selectedGarageCarIndex].stats.handling * 10}%` : '0%' }}
-                        ></div>
-                      </div>
-                    </div>
-                    {/* Frenado */}
-                    <div className="garage-stat-row">
-                      <div className="garage-stat-label">
-                        <span>{text.garage.braking}</span>
-                        <span className="garage-stat-val">{garageCars[selectedGarageCarIndex].stats.braking.toFixed(1)}</span>
-                      </div>
-                      <div className="garage-bar-bg">
-                        <div 
-                          className="garage-bar-fill" 
-                          style={{ width: garageBarsAnimated ? `${garageCars[selectedGarageCarIndex].stats.braking * 10}%` : '0%' }}
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="garage-spec-hud">
-                    <div className="garage-spec-box">
-                      <div className="garage-spec-title">{text.garage.motor}</div>
-                      <div className="garage-spec-value">{garageCars[selectedGarageCarIndex].engine}</div>
-                    </div>
-                    <div className="garage-spec-box">
-                      <div className="garage-spec-title">{text.garage.power}</div>
-                      <div className="garage-spec-value">{garageCars[selectedGarageCarIndex].hp}</div>
-                    </div>
-                    <div className="garage-spec-box">
-                      <div className="garage-spec-title">{text.garage.drive}</div>
-                      <div className="garage-spec-value">{garageCars[selectedGarageCarIndex].drive}</div>
-                    </div>
-                  </div>
-
-                  <button 
-                    className="btn btn-primary" 
-                    style={{ marginTop: '1rem', width: 'fit-content' }}
-                    onClick={() => inspectGarageCar(garageCars[selectedGarageCarIndex].id, garageCars[selectedGarageCarIndex].category)}
-                  >
-                    <span><i data-lucide="wrench" size="18"></i> {text.garage.btn_inspect}</span>
-                  </button>
+                <div className="home-card card-warriors" onClick={() => handleViewChange('bajas')}>
+                  <span className="card-icon">⚔️</span>
+                  <span className="card-title">{t('home.cards.warriors.title')}</span>
+                  <span className="card-desc">{t('home.cards.warriors.desc')}</span>
+                  <span className="card-badge">{t('home.cards.warriors.badge')}</span>
+                </div>
+                <div className="home-card card-fe" onClick={() => handleViewChange('fe')}>
+                  <span className="card-icon">💎</span>
+                  <span className="card-title">{t('home.cards.fe.title')}</span>
+                  <span className="card-desc">{t('home.cards.fe.desc')}</span>
+                  <span className="card-badge">{t('home.cards.fe.badge')}</span>
+                </div>
+                <div className="home-card card-street" onClick={() => handleViewChange('rutas')}>
+                  <span className="card-icon">🚗</span>
+                  <span className="card-title">{t('home.cards.street.title')}</span>
+                  <span className="card-desc">{t('home.cards.street.desc')}</span>
+                  <span className="card-badge">{t('home.cards.street.badge')}</span>
+                </div>
+                <div className="home-card card-jdm" onClick={() => handleViewChange('joyas')}>
+                  <span className="card-icon">🇯🇵</span>
+                  <span className="card-title">{t('home.cards.jdm.title')}</span>
+                  <span className="card-desc">{t('home.cards.jdm.desc')}</span>
+                  <span className="card-badge">{t('home.cards.jdm.badge')}</span>
+                </div>
+                <div className="home-card card-fast" onClick={() => handleViewChange('fast')}>
+                  <span className="card-icon">🔥</span>
+                  <span className="card-title">{t('home.cards.fast.title')}</span>
+                  <span className="card-desc">{t('home.cards.fast.desc')}</span>
+                  <span className="card-badge">{t('home.cards.fast.badge')}</span>
+                </div>
+                <div className="home-card card-videos" onClick={() => handleViewChange('videos')}>
+                  <span className="card-icon">📹</span>
+                  <span className="card-title">{t('home.cards.videos.title')}</span>
+                  <span className="card-desc">{t('home.cards.videos.desc')}</span>
+                  <span className="card-badge">{t('home.cards.videos.badge')}</span>
+                </div>
+                <div className="home-card card-wheel" onClick={() => handleViewChange('wheel')}>
+                  <span className="card-icon">🎮</span>
+                  <span className="card-title">{t('home.cards.wheel.title')}</span>
+                  <span className="card-desc">{t('home.cards.wheel.desc')}</span>
+                  <span className="card-badge">{t('home.cards.wheel.badge')}</span>
                 </div>
               </div>
-            </section>
 
-            {/* MAPA INTERACTIVO DE JAPÓN (ACCESO RADAR HUD) */}
-            <section className="section-padding reveal active" id="map">
-              <div className="section-title-wrapper">
-                <span className="section-subtitle">{text.map.sub}</span>
-                <h2 className="section-title">
-                  {text.map.title_1}<span>{text.map.title_2}</span>
-                </h2>
-              </div>
-
-              <div className="map-section-wrapper">
-                <div className="map-interactive-hud">
-                  <div className="map-hud-grid"></div>
-                  <div className="map-hud-circles"></div>
-                  
-                  <svg className="map-japan-vector" viewBox="0 0 500 500" fill="none" stroke="rgba(0, 212, 255, 0.4)" strokeWidth="2.5">
-                    <path d="M420 80 C400 110, 390 140, 380 180 C370 210, 340 230, 310 260 M300 270 C270 290, 240 330, 210 350 M200 360 C170 370, 140 400, 110 420 M290 280 C280 290, 270 310, 260 320 M120 430 C100 440, 80 460, 60 470" />
-                    <path d="M430 60 C445 50, 455 70, 440 85 C425 100, 410 80, 430 60 Z" />
-                  </svg>
-
-                  <div className={`map-pin ${selectedRegion === 'tokyo' ? 'active' : ''}`} id="pin-tokyo" onClick={() => selectMapRegion('tokyo')}>
-                    <div className="map-pin-pulse"></div>
-                    <div className="map-pin-dot"></div>
-                    <div className="map-pin-label">Tokyo Metropolis</div>
-                  </div>
-
-                  <div className={`map-pin ${selectedRegion === 'fuji' ? 'active' : ''}`} id="pin-fuji" onClick={() => selectMapRegion('fuji')}>
-                    <div className="map-pin-pulse"></div>
-                    <div className="map-pin-dot"></div>
-                    <div className="map-pin-label">Monte Fuji Touge</div>
-                  </div>
-
-                  <div className={`map-pin ${selectedRegion === 'okinawa' ? 'active' : ''}`} id="pin-okinawa" onClick={() => selectMapRegion('okinawa')}>
-                    <div className="map-pin-pulse"></div>
-                    <div className="map-pin-dot"></div>
-                    <div className="map-pin-label">Costa de Okinawa</div>
-                  </div>
-
-                  <div className={`map-pin ${selectedRegion === 'alpes' ? 'active' : ''}`} id="pin-alpes" onClick={() => selectMapRegion('alpes')}>
-                    <div className="map-pin-pulse"></div>
-                    <div className="map-pin-dot"></div>
-                    <div className="map-pin-label">Alpes Japoneses</div>
-                  </div>
-                </div>
-
-                <div className={`map-region-panel ${regionPanelAnimating ? 'animating' : ''}`}>
+              {/* PLAYLIST DE LA TEMPORADA */}
+              <div className="festival-playlist glass-panel">
+                <div className="playlist-header">
                   <div>
-                    <div className="map-region-img">
-                      <img src={regionsData[selectedRegion].image} alt={regionsData[selectedRegion].title[currentLang]} />
+                    <span className="playlist-season">☀ {i18n.language === 'en' ? 'HORIZON RETRO SEASON' : 'TEMPORADA RETRO HORIZON'}</span>
+                    <h3>{i18n.language === 'en' ? 'Weekly Championship Challenges' : 'Desafíos del Campeonato Semanal'}</h3>
+                  </div>
+                  <span className="playlist-points">20 / 40 PTS</span>
+                </div>
+                <div className="playlist-grid">
+                  <div className="playlist-item">
+                    <div className="item-title-row">
+                      <span className="item-badge-active">ACTIVE</span>
+                      <h4>{i18n.language === 'en' ? 'Lotus WTAC Time Attack' : 'Time Attack Lotus WTAC'}</h4>
                     </div>
-                    <div className="map-region-header">
-                      <h3 className="map-region-title">{regionsData[selectedRegion].title[currentLang]}</h3>
-                      <div className="map-region-type">{regionsData[selectedRegion].type[currentLang]}</div>
+                    <p>{i18n.language === 'en' ? 'Achieve a clean lap under 2:10 on Mt. Akina sprint. Setup: R-Class Lotus Exige.' : 'Logra una vuelta limpia en menos de 2:10 en el sprint de Mt. Akina. Configuración: Lotus Exige Clase R.'}</p>
+                  </div>
+                  <div className="playlist-item">
+                    <div className="item-title-row">
+                      <span className="item-badge-active">ACTIVE</span>
+                      <h4>{i18n.language === 'en' ? 'Touge Drift King' : 'Rey del Drift Touge'}</h4>
                     </div>
-                    <p className="map-region-desc">{regionsData[selectedRegion].desc[currentLang]}</p>
+                    <p>{i18n.language === 'en' ? 'Accumulate 350,000 drift points in Irohazaka downhill. Setup: Nissan Silvia S15 Spec-R.' : 'Acumula 350,000 puntos de drift en el descenso de Irohazaka. Configuración: Nissan Silvia S15 Spec-R.'}</p>
                   </div>
-
-                  <div className="map-region-event">
-                    <div className="map-event-icon">
-                      <i data-lucide="trophy" size="22"></i>
+                  <div className="playlist-item completed">
+                    <div className="item-title-row">
+                      <span className="item-badge-done">COMPLETED</span>
+                      <h4>{i18n.language === 'en' ? 'Kei Car Revival' : 'Resurgimiento Kei Car'}</h4>
                     </div>
-                    <div className="map-event-details">
-                      <span className="map-event-title">{regionsData[selectedRegion].event[currentLang]}</span>
-                      <span className="map-event-reward">{text.map.reward}{regionsData[selectedRegion].reward[currentLang]}</span>
-                    </div>
+                    <p>{i18n.language === 'en' ? 'Win a road racing championship using the Honda Beat (CBR Swap). Setup: C-Class.' : 'Gana un campeonato de carretera usando el Honda Beat (CBR Swap). Configuración: Clase C.'}</p>
                   </div>
                 </div>
               </div>
-            </section>
-
-            {/* REQUISITOS DEL SISTEMA HUD */}
-            <section className="section-padding reveal active" id="specs">
-              <div className="section-title-wrapper">
-                <span className="section-subtitle">{text.specs.sub}</span>
-                <h2 className="section-title">
-                  {text.specs.title_1}<span>{text.specs.title_2}</span>
-                </h2>
-              </div>
-
-              <div className="specs-hud-wrapper">
-                <div className="specs-hud-corner corner-tl"></div>
-                <div className="specs-hud-corner corner-tr"></div>
-                <div className="specs-hud-corner corner-bl"></div>
-                <div className="specs-hud-corner corner-br"></div>
-
-                <div className="specs-selector">
-                  <button className={`specs-tab ${selectedSpecsTier === 'min' ? 'active' : ''}`} onClick={() => selectSpecs('min')}>
-                    <span>{text.specs.tab_min}</span>
-                  </button>
-                  <button className={`specs-tab ${selectedSpecsTier === 'rec' ? 'active' : ''}`} onClick={() => selectSpecs('rec')}>
-                    <span>{text.specs.tab_rec}</span>
-                  </button>
-                  <button className={`specs-tab ${selectedSpecsTier === 'ultra' ? 'active' : ''}`} onClick={() => selectSpecs('ultra')}>
-                    <span>{text.specs.tab_ultra}</span>
-                  </button>
-                </div>
-
-                <div className={`specs-grid ${specsAnimating ? 'animating' : ''}`}>
-                  <div className="spec-item">
-                    <div className="spec-item-icon"><i data-lucide="cpu" size="26"></i></div>
-                    <div className="spec-item-name">{currentLang === 'en' ? 'Operating System' : 'Sistema Operativo'}</div>
-                    <div className="spec-item-val">{specsData[selectedSpecsTier].os}</div>
-                  </div>
-
-                  <div className="spec-item">
-                    <div className="spec-item-icon"><i data-lucide="binary" size="26"></i></div>
-                    <div className="spec-item-name">{currentLang === 'en' ? 'Processor (CPU)' : 'Procesador (CPU)'}</div>
-                    <div className="spec-item-val">{specsData[selectedSpecsTier].cpu}</div>
-                  </div>
-
-                  <div className="spec-item">
-                    <div className="spec-item-icon"><i data-lucide="database" size="26"></i></div>
-                    <div className="spec-item-name">RAM</div>
-                    <div className="spec-item-val">{specsData[selectedSpecsTier].ram}</div>
-                  </div>
-
-                  <div className="spec-item">
-                    <div className="spec-item-icon"><i data-lucide="zap" size="26"></i></div>
-                    <div className="spec-item-name">{currentLang === 'en' ? 'Graphics (GPU)' : 'Tarjeta Gráfica (GPU)'}</div>
-                    <div className="spec-item-val">{specsData[selectedSpecsTier].gpu}</div>
-                  </div>
-
-                  <div className="spec-item">
-                    <div className="spec-item-icon"><i data-lucide="hard-drive" size="26"></i></div>
-                    <div className="spec-item-name">{currentLang === 'en' ? 'Storage' : 'Almacenamiento'}</div>
-                    <div className="spec-item-val">{specsData[selectedSpecsTier].storage}</div>
-                  </div>
-
-                  <div className="spec-item">
-                    <div className="spec-item-icon"><i data-lucide="shield" size="26"></i></div>
-                    <div className="spec-item-name">DirectX</div>
-                    <div className="spec-item-val">{specsData[selectedSpecsTier].dx}</div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* LIGHTBOX DE GALERÍA DE CAPTURAS */}
-            {lightboxActive && (
-              <div className="lightbox active">
-                <button className="lightbox-close" onClick={closeLightbox}>
-                  <i data-lucide="x" size="20"></i> {currentLang === 'en' ? 'Close' : 'Cerrar'}
-                </button>
-                <div className="lightbox-content">
-                  <img 
-                    src={galleryData[lightboxIndex].src} 
-                    alt={galleryData[lightboxIndex].title} 
-                    className={`lightbox-img ${lightboxZoom ? 'zoomed' : ''}`}
-                    onClick={() => setLightboxZoom(prev => !prev)}
-                  />
-                  <div className="lightbox-caption">
-                    {galleryData[lightboxIndex].title} - {galleryData[lightboxIndex].desc}
-                  </div>
-                </div>
-                <button className="lightbox-nav-btn lightbox-prev" onClick={() => changeLightboxImg(-1)}>
-                  <i data-lucide="chevron-left" size="30"></i>
-                </button>
-                <button className="lightbox-nav-btn lightbox-next" onClick={() => changeLightboxImg(1)}>
-                  <i data-lucide="chevron-right" size="30"></i>
-                </button>
-              </div>
-            )}
-
-            {/* MODAL DE TRÁILER */}
-            {trailerModalActive && (
-              <div className="trailer-modal active">
-                <div className="trailer-modal-content">
-                  <button className="trailer-close-btn" onClick={closeTrailer}>
-                    <i data-lucide="x" size="20"></i> {currentLang === 'en' ? 'Close' : 'Cerrar'}
-                  </button>
-                  <iframe src="https://www.youtube.com/embed/PcrXF6yT-cE?autoplay=1&rel=0" title="Forza Horizon 6 Official Concept Trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-              </div>
-            )}
+            </div>
 
           </div>
         )}
@@ -1311,7 +696,7 @@ function App() {
                     </div>
                   </div>
 
-                  {/* Pestañas del Detalle (Ficha / Modificaciones / Reglajes) */}
+                  {/* Pestañas del Detalle */}
                   <div className="sheet-tabs">
                     <button className={`sheet-tab-btn ${activeSheetTab === 'info' ? 'active' : ''}`} onClick={() => setActiveSheetTab('info')}>
                       {t('detail.tabs.info')}
@@ -1324,7 +709,7 @@ function App() {
                     </button>
                   </div>
 
-                  {/* 2.1 Pestaña Info */}
+                  {/* Pestaña Info */}
                   <div className={`sheet-content ${activeSheetTab === 'info' ? 'active' : ''}`}>
                     <div className="info-grid">
                       <div className="info-card">
@@ -1363,7 +748,7 @@ function App() {
                     </div>
                   </div>
 
-                  {/* 2.2 Pestaña Modificaciones */}
+                  {/* Pestaña Modificaciones */}
                   <div className={`sheet-content ${activeSheetTab === 'upgrades' ? 'active' : ''}`}>
                     {activeCar.upgrades ? (
                       <div className="upgrades-grid">
@@ -1403,7 +788,7 @@ function App() {
                     )}
                   </div>
 
-                  {/* 2.3 Pestaña Ajustes de Tuning */}
+                  {/* Pestaña Ajustes de Tuning */}
                   <div className={`sheet-content ${activeSheetTab === 'tuning' ? 'active' : ''}`}>
                     {activeCar.tuning ? (
                       <div className="tuning-grid">
@@ -1754,14 +1139,14 @@ function App() {
 
       </main>
 
-      {/* PIE DE PÁGINA (FOOTER CON FORMULARIO HUD BILINGÜE) */}
+      {/* PIE DE PÁGINA */}
       <footer className="footer">
         <div className="footer-container">
           
           <div className="footer-newsletter-wrapper reveal active">
             <h3 className="newsletter-title">{text.newsletter.title}</h3>
-            <p class="newsletter-desc">{text.newsletter.desc}</p>
-            <form className="newsletter-form" onsubmit="event.preventDefault(); alert('¡Te has registrado con éxito al festival!');">
+            <p className="newsletter-desc">{text.newsletter.desc}</p>
+            <form className="newsletter-form" onSubmit={(e) => { e.preventDefault(); alert(text.newsletter.alert); }}>
               <input type="email" className="newsletter-input" placeholder={text.newsletter.placeholder} required aria-label="Boletín de Forza Horizon" />
               <button type="submit" className="newsletter-btn">
                 <span>{text.newsletter.btn} <i data-lucide="chevron-right" size="18" style={{verticalAlign: 'middle'}}></i></span>
@@ -1777,16 +1162,16 @@ function App() {
           </div>
 
           <div className="footer-socials">
-            <a href="https://twitter.com/ForzaHorizon" class="social-btn" target="_blank" aria-label="Twitter">
+            <a href="https://twitter.com/ForzaHorizon" className="social-btn" target="_blank" aria-label="Twitter">
               <i data-lucide="twitter"></i>
             </a>
-            <a href="https://www.youtube.com/user/ForzaMotorsport" class="social-btn" target="_blank" aria-label="YouTube">
+            <a href="https://www.youtube.com/user/ForzaMotorsport" className="social-btn" target="_blank" aria-label="YouTube">
               <i data-lucide="youtube"></i>
             </a>
-            <a href="https://www.instagram.com/forzahorizon/" class="social-btn" target="_blank" aria-label="Instagram">
+            <a href="https://www.instagram.com/forzahorizon/" className="social-btn" target="_blank" aria-label="Instagram">
               <i data-lucide="instagram"></i>
             </a>
-            <a href="https://github.com/mmortexx/forza-horizon-6" class="social-btn" target="_blank" aria-label="GitHub">
+            <a href="https://github.com/mmortexx/forza-horizon-6" className="social-btn" target="_blank" aria-label="GitHub">
               <i data-lucide="github"></i>
             </a>
           </div>
@@ -1804,13 +1189,13 @@ function App() {
         </div>
       </footer>
 
-      {/* Efecto de humo de drift de fondo */}
+      {/* Efecto de humo de drift de fondo premium */}
       <DriftSmoke />
     </>
   )
 }
 
-// ─── VISOR DE HUMO DE DRIFT (CANVAS INFERIOR) ───
+// ─── VISOR DE HUMO DE DRIFT PREMIUM OPTIMIZADO (VAPOR Y NEÓN VOLUMÉTRICO) ───
 function DriftSmoke() {
   const canvasRef = useRef(null)
 
@@ -1828,41 +1213,73 @@ function DriftSmoke() {
     window.addEventListener('resize', resize, { passive: true })
 
     const dustParticles = []
-    const maxParticles = window.innerWidth < 768 ? 40 : 80
+    const maxParticles = window.innerWidth < 768 ? 25 : 55
 
     class DustParticle {
       constructor() { this.reset() }
       reset() {
         this.x = Math.random() * canvas.width
-        this.y = canvas.height + Math.random() * 100
-        this.width = Math.random() * 220 + 130
-        this.height = Math.random() * 45 + 15
-        this.growthRateW = Math.random() * 1.8 + 0.8
-        this.growthRateH = Math.random() * 0.6 + 0.3
-        this.opacity = Math.random() * 0.12 + 0.05
-        this.fadeRate = Math.random() * 0.0008 + 0.0002
-        this.driftX = (Math.random() - 0.5) * 3
-        this.driftY = -Math.random() * 0.8 - 0.3
-        const colors = ['120, 115, 108', '95, 90, 85', '135, 130, 125']
+        this.y = canvas.height * 0.72 + Math.random() * (canvas.height * 0.28)
+        
+        // Tamaños enormes para simular nubes de humo volumétricas
+        this.width = Math.random() * 400 + 300
+        this.height = Math.random() * 110 + 60
+        this.growthRateW = Math.random() * 1.2 + 0.6
+        this.growthRateH = Math.random() * 0.4 + 0.2
+        
+        // Opacidad ultra baja para traslapado orgánico y degradado muy sutil
+        this.opacity = Math.random() * 0.03 + 0.012
+        this.fadeRate = Math.random() * 0.00012 + 0.00006
+        
+        // Movimiento flotante
+        this.driftX = (Math.random() - 0.5) * 1.0
+        this.driftY = -Math.random() * 0.5 - 0.2
+        
+        // Rotación y vaivén horizontal
+        this.rotation = Math.random() * Math.PI * 2
+        this.rotationSpeed = (Math.random() - 0.5) * 0.0015
+        this.oscillationFreq = Math.random() * 0.006 + 0.002
+        this.oscillationAmp = Math.random() * 1.4 + 0.4
+        
+        const colors = [
+          '0, 212, 255',   // Cyber cian
+          '255, 0, 85',    // FH6 Pink
+          '146, 0, 255',   // FH6 Purple
+          '98, 92, 86',    // Gris goma quemada
+          '45, 45, 55'     // Bruma oscura
+        ]
         this.color = colors[Math.floor(Math.random() * colors.length)]
       }
       update() {
         this.width += this.growthRateW
         this.height += this.growthRateH
-        this.x += this.driftX
+        this.rotation += this.rotationSpeed
+        
+        this.x += this.driftX + Math.sin(this.y * this.oscillationFreq) * this.oscillationAmp
         this.y += this.driftY
+        
         this.opacity -= this.fadeRate
-        if (this.opacity <= 0 || this.y < -this.height) this.reset()
+        if (this.opacity <= 0 || this.y < -this.height || this.x < -this.width || this.x > canvas.width + this.width) {
+          this.reset()
+        }
       }
       draw() {
         if (this.opacity <= 0) return
         ctx.save()
+        
+        // Fusión aditiva neón
+        ctx.globalCompositeOperation = 'screen'
+        
         ctx.translate(this.x, this.y)
+        ctx.rotate(this.rotation)
         ctx.scale(1, this.height / this.width)
+        
         const g = ctx.createRadialGradient(0, 0, 0, 0, 0, this.width / 2)
         g.addColorStop(0, `rgba(${this.color}, ${this.opacity})`)
-        g.addColorStop(0.6, `rgba(${this.color}, ${this.opacity * 0.35})`)
-        g.addColorStop(1, `rgba(${this.color}, 0)`)
+        g.addColorStop(0.4, `rgba(${this.color}, ${this.opacity * 0.5})`)
+        g.addColorStop(0.8, `rgba(${this.color}, ${this.opacity * 0.15})`)
+        g.addColorStop(1, 'rgba(0,0,0,0)')
+        
         ctx.fillStyle = g
         ctx.beginPath()
         ctx.arc(0, 0, this.width / 2, 0, Math.PI * 2)
@@ -1891,24 +1308,5 @@ function DriftSmoke() {
 
   return <canvas ref={canvasRef} id="drift-smoke-canvas" />
 }
-
-// DATOS E IMÁGENES DE LA GALERÍA
-const galleryData = [
-  {
-    src: 'gallery_tokyo.png',
-    title: 'Shinjuku Drift Run',
-    desc: 'Siente la deriva en el corazón de Tokio de noche, rodeado por rascacielos iluminados con luces neón y asfalto húmedo.'
-  },
-  {
-    src: 'gallery_fuji.png',
-    title: 'Paso Touge del Monte Fuji',
-    desc: 'Domina las bajadas técnicas de montaña durante la hora dorada, esquivando curvas cerradas bordeadas por cerezos en flor.'
-  },
-  {
-    src: 'gallery_okinawa.png',
-    title: 'Autopistas Costeras de Okinawa',
-    desc: 'Velocidad punta libre en puentes y autopistas junto al mar turquesa del trópico japonés al amanecer.'
-  }
-]
 
 export default App
