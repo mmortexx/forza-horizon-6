@@ -434,7 +434,9 @@ body {
   transform: scale(1.05);
   transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
   will-change: transform;
-  filter: contrast(1.1) brightness(0.72) saturate(1.25) sepia(0.03);
+  filter: contrast(1.18) brightness(0.68) saturate(1.22) sepia(0.02);
+  image-rendering: -webkit-optimize-contrast; /* Evita que el navegador emborrone los bordes al estirar */
+  image-rendering: crisp-edges; /* Optimización estándar para Firefox/Safari */
 }
 
 .hero-video-wrapper {
