@@ -88,39 +88,40 @@ function App() {
     }
   }, [view, activeSheetTab, activeMediaTab, activeWheelTab, mobileMenuOpen])
 
-  // 3. CANVAS GLOBAL DE ANIMACIÓN (SAKURA, SPEEDLINES Y CHISPAS NEÓN)
+  // 3. CANVAS DE ANIMACIONES DEL HERO (SAKURA, HUMO DE DRIFT, PÁJAROS Y DESTELLOS LED)
   useEffect(() => {
     const canvas = document.getElementById('canvas-decorations')
     if (!canvas) return
     const ctx = canvas.getContext('2d')
     let animationId
 
-    let canvasWidth = window.innerWidth
-    let canvasHeight = window.innerHeight
+    // Dimensionar canvas con respecto a su contenedor absoluto en el Hero para sincronía de paralaje
+    let canvasWidth = canvas.offsetWidth || window.innerWidth
+    let canvasHeight = canvas.offsetHeight || window.innerHeight
     canvas.width = canvasWidth
     canvas.height = canvasHeight
 
     const handleResize = () => {
-      canvasWidth = window.innerWidth
-      canvasHeight = window.innerHeight
+      canvasWidth = canvas.offsetWidth || window.innerWidth
+      canvasHeight = canvas.offsetHeight || window.innerHeight
       canvas.width = canvasWidth
       canvas.height = canvasHeight
     }
-    window.addEventListener('resize', handleResize)
+    window.addEventListener('resize', handleResize, { passive: true })
 
     let mouseX = 0
     let mouseY = 0
     const handleCanvasMouseMove = (e) => {
       if (window.innerWidth <= 900) return
-      mouseX = (e.clientX - window.innerWidth / 2) * -0.012
-      mouseY = (e.clientY - window.innerHeight / 2) * -0.012
+      mouseX = (e.clientX - window.innerWidth / 2) * -0.015
+      mouseY = (e.clientY - window.innerHeight / 2) * -0.015
     }
-    window.addEventListener('mousemove', handleCanvasMouseMove)
+    window.addEventListener('mousemove', handleCanvasMouseMove, { passive: true })
 
-    // Proyección 2D que mapea coordenadas de la imagen 3439x1411 (con background-size: cover) al viewport del canvas
+    // Proyección 2D del fondo del Monte Fuji (dimensión nativa: 3439x1439)
     const getCanvasCoords = (imgX, imgY, mx, my) => {
       const iw = 3439
-      const ih = 1411
+      const ih = 1439
       const aspectRatioImg = iw / ih
       const aspectRatioCanvas = canvasWidth / canvasHeight
       
@@ -138,31 +139,34 @@ function App() {
       let px = imgX * scale + offsetX
       let py = imgY * scale + offsetY
       
-      // Ajustar con la traslación del paralaje
+      // Aplicar desplazamiento de paralaje
       px += mx
       py += my
       
       return { x: px, y: py }
     }
 
-    // Clase Sakura
+    // Clase Pétalo de Sakura (Caída en diagonal hacia la derecha con rotación 3D)
     class Sakura {
       constructor() { this.reset() }
       reset() {
-        this.x = Math.random() * canvasWidth
+        this.x = Math.random() * (canvasWidth * 0.6) - 100
         this.y = -20 - Math.random() * 50
         this.size = 5 + Math.random() * 8
-        this.speedY = 1 + Math.random() * 1.5
-        this.speedX = -1.2 + Math.random() * 2.4
+        this.speedY = 1.0 + Math.random() * 1.5
+        this.speedX = 1.2 + Math.random() * 2.0 // El viento sopla hacia la derecha
         this.rotation = Math.random() * 360
-        this.rotationSpeed = -1 + Math.random() * 2
-        this.opacity = 0.4 + Math.random() * 0.5
+        this.rotationSpeed = -1.5 + Math.random() * 3
+        this.opacity = 0.45 + Math.random() * 0.45
+        this.swingPhase = Math.random() * Math.PI * 2
+        this.swingSpeed = 0.02 + Math.random() * 0.05
       }
       update() {
         this.y += this.speedY
-        this.x += this.speedX + Math.sin(this.y * 0.01) * 0.4
+        this.x += this.speedX + Math.sin(this.y * 0.012) * 0.5
         this.rotation += this.rotationSpeed
-        if (this.y > canvasHeight || this.x < -20 || this.x > canvasWidth + 20) {
+        this.swingPhase += this.swingSpeed
+        if (this.y > canvasHeight || this.x > canvasWidth + 20) {
           this.reset()
         }
       }
@@ -172,24 +176,177 @@ function App() {
         ctx.rotate(this.rotation * Math.PI / 180)
         ctx.fillStyle = `rgba(255, 183, 197, ${this.opacity})`
         ctx.beginPath()
-        ctx.ellipse(0, 0, this.size, this.size * 0.65, 0, 0, Math.PI * 2)
+        // Simular volteo 3D variando la escala del eje vertical de la elipse
+        const scaleY = Math.abs(Math.cos(this.swingPhase)) * 0.6 + 0.15
+        ctx.ellipse(0, 0, this.size, this.size * scaleY, 0, 0, Math.PI * 2)
         ctx.fill()
         ctx.restore()
       }
     }
 
-    // Líneas de velocidad
+    // Clase Pájaro (Vuelo en bandada orgánica con aleteo sutil y planeo)
+    class Bird {
+      constructor(leader = null) {
+        this.leader = leader
+        this.reset()
+      }
+      reset() {
+        if (this.leader === null) {
+          // Líder de bandada: define el curso por la zona superior
+          this.x = -150 - Math.random() * 200
+          this.y = 40 + Math.random() * (canvasHeight * 0.25)
+          this.vx = 1.1 + Math.random() * 0.7
+          this.vy = -0.06 + Math.random() * 0.12
+        } else {
+          // Seguidor: se posiciona en formación detrás del líder con ligeros offsets
+          this.offsetX = -35 - Math.random() * 45
+          this.offsetY = (Math.random() - 0.5) * 60
+          this.x = this.leader.x + this.offsetX
+          this.y = this.leader.y + this.offsetY
+          this.vx = this.leader.vx
+          this.vy = this.leader.vy
+        }
+        this.wingPhase = Math.random() * Math.PI * 2
+        this.wingSpeed = 0.08 + Math.random() * 0.06
+        this.scale = 0.35 + Math.random() * 0.4 // Escala pequeña para dar sensación de profundidad respecto al Monte Fuji
+        this.opacity = 0.45 + Math.random() * 0.35
+      }
+      update() {
+        if (this.leader) {
+          // Movimiento de seguimiento amortiguado con respecto al líder
+          const targetX = this.leader.x + this.offsetX
+          const targetY = this.leader.y + this.offsetY
+          this.x += (targetX - this.x) * 0.07
+          this.y += (targetY - this.y) * 0.07
+          this.vx = this.leader.vx
+          this.vy = this.leader.vy
+        } else {
+          this.x += this.vx
+          this.y += this.vy
+        }
+        this.wingPhase += this.wingSpeed
+
+        // Control de reseteo cuando la bandada se aleja por el borde derecho
+        if (this.leader === null) {
+          if (this.x > canvasWidth + 150) {
+            this.reset()
+          }
+        } else {
+          if (this.leader.x < 0 && this.x > canvasWidth) {
+            this.reset()
+          }
+        }
+      }
+      draw() {
+        // Proyección con paralaje para alineación exacta en el cielo del Monte Fuji
+        const fracX = this.x / (canvasWidth || 1)
+        const fracY = this.y / (canvasHeight || 1)
+        const pos = getCanvasCoords(fracX * 3439, fracY * 700, mouseX, mouseY)
+
+        ctx.save()
+        ctx.translate(pos.x, pos.y)
+        ctx.scale(this.scale, this.scale)
+        ctx.strokeStyle = `rgba(32, 35, 52, ${this.opacity})`
+        ctx.lineWidth = 1.3
+        ctx.lineCap = 'round'
+        ctx.lineJoin = 'round'
+        
+        ctx.beginPath()
+        const wingY = Math.sin(this.wingPhase) * 5.0
+        // Dibujo de silueta estilizada de ala a ala
+        ctx.moveTo(-10, wingY)
+        ctx.quadraticCurveTo(-5, wingY - 3, 0, 1)
+        ctx.quadraticCurveTo(5, wingY - 3, 10, wingY)
+        
+        // Cuerpo y cola
+        ctx.moveTo(-1, 1)
+        ctx.lineTo(0, 3.5)
+        ctx.lineTo(1, 1)
+        
+        ctx.stroke()
+        ctx.restore()
+      }
+    }
+
+    // Clase Partícula de Humo de Derrape (Drift Smoke - Volumétrico y Realista)
+    class DriftSmokeParticle {
+      constructor(emitterX, emitterY, color = '235, 238, 245') {
+        this.emitterX = emitterX
+        this.emitterY = emitterY
+        this.color = color
+        this.reset()
+      }
+      reset() {
+        // Dispersión inicial concentrada cerca del neumático derrapando
+        this.imgX = this.emitterX + (Math.random() - 0.5) * 50
+        this.imgY = this.emitterY + (Math.random() - 0.5) * 12
+        
+        this.size = 10 + Math.random() * 12
+        this.maxSize = 85 + Math.random() * 75
+        this.growth = 0.8 + Math.random() * 1.2
+        
+        this.opacity = 0.18 + Math.random() * 0.18
+        this.fade = 0.0035 + Math.random() * 0.0035 // Desintegración fluida
+        
+        // Velocidad lateral (viento) y ascendente térmica de fricción
+        this.vx = 1.6 + Math.random() * 2.4
+        this.vy = -0.4 - Math.random() * 0.8
+        
+        // Estructurar un racimo (puff) de 3 sub-círculos internos para volumen denso
+        this.puffs = Array.from({ length: 3 }, () => ({
+          ox: (Math.random() - 0.5) * 24,
+          oy: (Math.random() - 0.5) * 24,
+          sizeMult: 0.75 + Math.random() * 0.4
+        }))
+      }
+      update() {
+        this.imgX += this.vx
+        // Añadir turbulencia de viento mediante oscilación sinusoidal
+        this.imgY += this.vy + Math.sin(this.imgX * 0.018) * 0.5
+        this.size = Math.min(this.size + this.growth, this.maxSize)
+        this.opacity -= this.fade
+      }
+      draw() {
+        if (this.opacity <= 0) return
+        
+        ctx.save()
+        ctx.globalCompositeOperation = 'screen'
+        
+        // Renderizar el racimo volumétrico de humo
+        this.puffs.forEach(puff => {
+          const subImgX = this.imgX + puff.ox * (this.size / 18)
+          const subImgY = this.imgY + puff.oy * (this.size / 18)
+          const pos = getCanvasCoords(subImgX, subImgY, mouseX, mouseY)
+          const currentSize = this.size * puff.sizeMult
+          
+          const grad = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, currentSize)
+          grad.addColorStop(0, `rgba(${this.color}, ${this.opacity * 0.5})`)
+          grad.addColorStop(0.35, `rgba(${this.color}, ${this.opacity * 0.25})`)
+          grad.addColorStop(0.7, `rgba(${this.color}, ${this.opacity * 0.08})`)
+          grad.addColorStop(1, 'rgba(0,0,0,0)')
+          
+          ctx.fillStyle = grad
+          ctx.beginPath()
+          ctx.arc(pos.x, pos.y, currentSize, 0, Math.PI * 2)
+          ctx.fill()
+        })
+        
+        ctx.restore()
+      }
+    }
+
+    // Líneas de velocidad de la portada
     class SpeedLine {
       constructor() { this.reset() }
       reset() {
         this.x = Math.random() * canvasWidth
         this.y = Math.random() * canvasHeight
-        this.length = 35 + Math.random() * 80
-        this.speed = 6 + Math.random() * 12
-        this.opacity = 0.04 + Math.random() * 0.08
+        this.length = 30 + Math.random() * 65
+        this.speed = 5 + Math.random() * 9
+        this.opacity = 0.03 + Math.random() * 0.06
       }
       update(scrollVel) {
-        this.x -= this.speed + (scrollVel * 1.2)
+        this.x -= this.speed + (scrollVel * 1.0)
         if (this.x < -this.length) {
           this.x = canvasWidth + Math.random() * 80
           this.y = Math.random() * canvasHeight
@@ -197,7 +354,7 @@ function App() {
       }
       draw() {
         ctx.strokeStyle = `rgba(0, 212, 255, ${this.opacity})`
-        ctx.lineWidth = 1 + Math.random() * 1.5
+        ctx.lineWidth = 1.0 + Math.random() * 1.0
         ctx.beginPath()
         ctx.moveTo(this.x, this.y)
         ctx.lineTo(this.x + this.length, this.y)
@@ -205,24 +362,19 @@ function App() {
       }
     }
 
-    // Clase Chispas de Fricción (Cenizas incandescentes JDM)
+    // Clase Chispas de Fricción (Asfalto JDM)
     class Spark {
       constructor() { this.reset() }
       reset() {
         this.x = Math.random() * canvasWidth
-        this.y = canvasHeight * 0.82 + Math.random() * (canvasHeight * 0.18)
-        this.size = Math.random() * 2.2 + 1.0
-        this.vx = (Math.random() - 0.5) * 4.8
-        this.vy = -Math.random() * 3.8 - 2.2
-        this.opacity = Math.random() * 0.85 + 0.15
-        this.fade = Math.random() * 0.012 + 0.006
-        this.gravity = 0.025
-        const colors = [
-          '255, 107, 0',   // Naranja Forza
-          '255, 0, 85',    // Pink neón
-          '255, 210, 0',   // Amarillo chispa
-          '0, 212, 255'    // Destello cian
-        ]
+        this.y = canvasHeight * 0.85 + Math.random() * (canvasHeight * 0.15)
+        this.size = Math.random() * 2.0 + 0.8
+        this.vx = (Math.random() - 0.5) * 4.0
+        this.vy = -Math.random() * 3.0 - 1.8
+        this.opacity = Math.random() * 0.8 + 0.2
+        this.fade = Math.random() * 0.015 + 0.007
+        this.gravity = 0.02
+        const colors = ['255, 107, 0', '255, 0, 85', '255, 210, 0']
         this.color = colors[Math.floor(Math.random() * colors.length)]
       }
       update() {
@@ -239,10 +391,8 @@ function App() {
         ctx.save()
         ctx.globalCompositeOperation = 'screen'
         ctx.fillStyle = `rgba(${this.color}, ${this.opacity})`
-        
-        ctx.shadowBlur = Math.random() * 6 + 3
+        ctx.shadowBlur = Math.random() * 5 + 2
         ctx.shadowColor = `rgb(${this.color})`
-        
         ctx.beginPath()
         const angle = Math.atan2(this.vy, this.vx)
         ctx.translate(this.x, this.y)
@@ -256,25 +406,22 @@ function App() {
     class Cloud {
       constructor() { this.reset() }
       reset() {
-        this.x = -200 - Math.random() * 300
-        this.y = Math.random() * (canvasHeight * 0.25)
-        this.width = 250 + Math.random() * 350
-        this.height = 70 + Math.random() * 100
-        this.speed = 0.05 + Math.random() * 0.12
-        this.opacity = 0.015 + Math.random() * 0.02
+        this.x = -250 - Math.random() * 300
+        this.y = Math.random() * (canvasHeight * 0.20)
+        this.width = 200 + Math.random() * 300
+        this.height = 60 + Math.random() * 80
+        this.speed = 0.04 + Math.random() * 0.08
+        this.opacity = 0.012 + Math.random() * 0.015
       }
       update() {
         this.x += this.speed
-        if (this.x > canvasWidth + 200) {
+        if (this.x > canvasWidth + 250) {
           this.reset()
         }
       }
       draw() {
         ctx.save()
-        const grad = ctx.createRadialGradient(
-          this.x, this.y, 10,
-          this.x, this.y, this.width * 0.6
-        )
+        const grad = ctx.createRadialGradient(this.x, this.y, 10, this.x, this.y, this.width * 0.5)
         grad.addColorStop(0, `rgba(255, 255, 255, ${this.opacity})`)
         grad.addColorStop(0.5, `rgba(180, 210, 255, ${this.opacity * 0.5})`)
         grad.addColorStop(1, 'rgba(0, 0, 0, 0)')
@@ -286,82 +433,165 @@ function App() {
       }
     }
 
-    // Clase Ramas oscilantes (Viento en primer plano)
+    // Clase Ramas de Sakura oscilantes (Viento en primer plano de la izquierda)
     class WindBranch {
-      constructor(getX, y, scale, angleBase, flip = false) {
+      constructor(getX, y, scale, angleBase) {
         this.getX = getX
         this.y = y
         this.scale = scale
         this.angleBase = angleBase
         this.angleOffset = 0
-        this.flip = flip
       }
       update(time) {
-        // Oscilación sinusoidal muy suave simulando brisa
-        this.angleOffset = Math.sin(time * 0.001) * 0.04
+        this.angleOffset = Math.sin(time * 0.0008) * 0.035
       }
       draw() {
         const actualX = typeof this.getX === 'function' ? this.getX() : this.getX
         ctx.save()
         ctx.translate(actualX, this.y)
-        if (this.flip) ctx.scale(-1, 1)
         ctx.rotate(this.angleBase + this.angleOffset)
         ctx.scale(this.scale, this.scale)
         
-        ctx.fillStyle = 'rgba(5, 5, 10, 0.95)'
-        ctx.shadowBlur = 8
-        ctx.shadowColor = 'rgba(255, 0, 85, 0.15)'
+        ctx.fillStyle = 'rgba(12, 10, 18, 0.95)'
+        ctx.shadowBlur = 6
+        ctx.shadowColor = 'rgba(255, 180, 200, 0.12)'
         
+        // Ramas
         ctx.beginPath()
         ctx.moveTo(0, 0)
-        ctx.bezierCurveTo(40, -10, 80, -5, 120, -20)
-        ctx.bezierCurveTo(90, 5, 50, 5, 0, 0)
+        ctx.bezierCurveTo(35, -8, 70, -4, 110, -15)
+        ctx.bezierCurveTo(80, 4, 45, 4, 0, 0)
         ctx.fill()
         
-        ctx.fillStyle = 'rgba(10, 8, 15, 0.98)'
-        for (let i = 20; i < 120; i += 12) {
+        // Pétalos de la rama
+        ctx.fillStyle = 'rgba(15, 12, 22, 0.98)'
+        for (let i = 15; i < 110; i += 10) {
           ctx.beginPath()
-          ctx.ellipse(i, -10 - (i * 0.05), 8 + (i * 0.04), 16 + (i * 0.06), (35 + i * 0.2) * Math.PI / 180, 0, Math.PI * 2)
+          ctx.ellipse(i, -8 - (i * 0.04), 7 + (i * 0.03), 14 + (i * 0.05), (30 + i * 0.2) * Math.PI / 180, 0, Math.PI * 2)
           ctx.fill()
           
-          ctx.fillStyle = 'rgba(255, 100, 150, 0.25)'
+          ctx.fillStyle = 'rgba(255, 180, 200, 0.3)'
           ctx.beginPath()
-          ctx.ellipse(i + 2, -15 - (i * 0.05), 3, 6, 45 * Math.PI / 180, 0, Math.PI * 2)
+          ctx.ellipse(i + 1, -12 - (i * 0.04), 2.5, 5, 45 * Math.PI / 180, 0, Math.PI * 2)
           ctx.fill()
-          ctx.fillStyle = 'rgba(10, 8, 15, 0.98)'
+          ctx.fillStyle = 'rgba(15, 12, 22, 0.98)'
         }
-        
         ctx.restore()
       }
     }
 
-    const sCount = window.innerWidth < 768 ? 15 : 40
-    const lCount = window.innerWidth < 768 ? 10 : 30
-    const sparkCount = window.innerWidth < 768 ? 18 : 45
+    // Inicializar elementos decorativos
+    const sCount = window.innerWidth < 768 ? 15 : 35
+    const lCount = window.innerWidth < 768 ? 8 : 22
+    const sparkCount = window.innerWidth < 768 ? 15 : 35
     const sakuras = Array.from({ length: sCount }, () => new Sakura())
     const speedLines = Array.from({ length: lCount }, () => new SpeedLine())
     const sparks = Array.from({ length: sparkCount }, () => new Spark())
-
-    // Inicializar 45 luces de la ciudad parpadeantes en el skyline
-    const cityLights = []
-    for (let i = 0; i < 45; i++) {
-      cityLights.push({
-        imgX: 400 + Math.random() * 2600,
-        imgY: 480 + Math.random() * 150,
-        size: Math.random() * 1.5 + 0.8,
-        glow: Math.random() * 4 + 2,
-        pulseSpeed: 1 + Math.random() * 3,
-        pulseOffset: Math.random() * Math.PI * 2,
-        color: Math.random() > 0.45 ? '255, 255, 255' : (Math.random() > 0.5 ? '255, 220, 100' : '0, 212, 255')
-      })
+    const clouds = Array.from({ length: 3 }, () => new Cloud())
+    
+    // Inicializar bandadas de pájaros
+    const birds = []
+    // Bandada A (Líder + 3 seguidores)
+    const leaderA = new Bird(null)
+    birds.push(leaderA)
+    for (let i = 0; i < 3; i++) {
+      birds.push(new Bird(leaderA))
     }
-
-    // Inicializar nubes y ramas
-    const clouds = Array.from({ length: 4 }, () => new Cloud())
+    // Bandada B (Líder + 2 seguidores)
+    const leaderB = new Bird(null)
+    birds.push(leaderB)
+    for (let i = 0; i < 2; i++) {
+      birds.push(new Bird(leaderB))
+    }
+    
     const branches = [
-      new WindBranch(() => 0, 0, 1.25, 0.18),
-      new WindBranch(() => canvasWidth, 0, 1.05, 0.18, true)
+      new WindBranch(() => 0, 0, 1.2, 0.15)
     ]
+
+    // Array dinámico para las partículas de humo de derrape
+    const smokeParticles = []
+
+    // Emisores de ruedas de los coches derrapando (imágenes nativas 3439x1439)
+    const smokeEmitters = [
+      { x: 1220, y: 845, color: '240, 240, 245' }, // Rueda izquierda Coche Rojo (Gris claro)
+      { x: 1580, y: 845, color: '240, 240, 245' }, // Rueda derecha Coche Rojo (Gris claro)
+      { x: 2560, y: 780, color: '225, 238, 255' }, // Rueda trasera izquierda Todoterreno Azul (Vapor azulado)
+      { x: 2680, y: 790, color: '225, 238, 255' }  // Rueda trasera derecha Todoterreno Azul
+    ]
+
+    // Función premium para dibujar destellos de faros en cruz y refracciones de lente (lens flares)
+    const drawLensFlare = (x, y, size, pulse) => {
+      ctx.save()
+      ctx.globalCompositeOperation = 'screen'
+      
+      // Halo radial difuminado de fondo
+      const grad = ctx.createRadialGradient(x, y, 0, x, y, size * pulse)
+      grad.addColorStop(0, `rgba(255, 255, 255, ${0.48 * pulse})`)
+      grad.addColorStop(0.3, `rgba(255, 220, 160, ${0.16 * pulse})`)
+      grad.addColorStop(1, 'rgba(0, 0, 0, 0)')
+      ctx.fillStyle = grad
+      ctx.beginPath()
+      ctx.arc(x, y, size * pulse, 0, Math.PI * 2)
+      ctx.fill()
+      
+      // Brillos en cruz (Horizontal y Vertical)
+      ctx.strokeStyle = `rgba(255, 240, 215, ${0.45 * pulse})`
+      ctx.lineWidth = 1.0
+      
+      // Línea horizontal
+      ctx.beginPath()
+      ctx.moveTo(x - size * 0.95 * pulse, y)
+      ctx.lineTo(x + size * 0.95 * pulse, y)
+      ctx.stroke()
+      
+      // Línea vertical
+      ctx.beginPath()
+      ctx.moveTo(x, y - size * 0.95 * pulse)
+      ctx.lineTo(x, y + size * 0.95 * pulse)
+      ctx.stroke()
+      
+      // Destello diagonal secundario sutil (cruz de 8 puntas)
+      ctx.strokeStyle = `rgba(255, 230, 195, ${0.28 * pulse})`
+      ctx.lineWidth = 0.7
+      
+      ctx.beginPath()
+      ctx.moveTo(x - size * 0.55 * pulse, y - size * 0.55 * pulse)
+      ctx.lineTo(x + size * 0.55 * pulse, y + size * 0.55 * pulse)
+      ctx.stroke()
+      
+      ctx.beginPath()
+      ctx.moveTo(x + size * 0.55 * pulse, y - size * 0.55 * pulse)
+      ctx.lineTo(x - size * 0.55 * pulse, y + size * 0.55 * pulse)
+      ctx.stroke()
+
+      // Refracciones de lente secundarias (Lens Flare) alineadas hacia el centro de la pantalla
+      const cx = canvasWidth / 2
+      const cy = canvasHeight / 2
+      const dx = x - cx
+      const dy = y - cy
+      
+      const reflections = [
+        { dist: -0.28, sizeMult: 0.16, opacityMult: 0.12, color: '255, 210, 160' },
+        { dist: -0.55, sizeMult: 0.24, opacityMult: 0.09, color: '190, 215, 255' }
+      ]
+      
+      reflections.forEach(ref => {
+        const rx = x + dx * ref.dist
+        const ry = y + dy * ref.dist
+        const rSize = size * ref.sizeMult * pulse
+        
+        ctx.beginPath()
+        ctx.arc(rx, ry, rSize, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(${ref.color}, ${0.14 * ref.opacityMult * pulse})`
+        ctx.fill()
+        
+        ctx.strokeStyle = `rgba(${ref.color}, ${0.06 * ref.opacityMult * pulse})`
+        ctx.lineWidth = 0.5
+        ctx.stroke()
+      })
+      
+      ctx.restore()
+    }
 
     let lastScrollY = window.scrollY
     let scrollVelocity = 0
@@ -373,103 +603,72 @@ function App() {
       scrollVelocity = Math.min(Math.abs(currentScrollY - lastScrollY), 25)
       lastScrollY = currentScrollY
 
-      // ── Nubes nocturnas flotantes (capa de fondo) ──
+      const t = time || 0
+
+      // ── 1. Nubes (Fondo) ──
       clouds.forEach(cloud => {
         cloud.update()
         cloud.draw()
       })
 
-      // ── Luces de la ciudad parpadeantes en el skyline ──
-      const t = time || 0
-      cityLights.forEach(light => {
-        const pos = getCanvasCoords(light.imgX, light.imgY, mouseX, mouseY)
-        const pulse = 0.3 + 0.7 * ((Math.sin(t * 0.001 * light.pulseSpeed + light.pulseOffset) + 1) / 2)
-        ctx.save()
-        ctx.globalCompositeOperation = 'screen'
-        ctx.shadowBlur = light.glow * pulse * 2
-        ctx.shadowColor = `rgba(${light.color}, ${pulse})`
-        ctx.fillStyle = `rgba(${light.color}, ${pulse * 0.85})`
-        ctx.beginPath()
-        ctx.arc(pos.x, pos.y, light.size * pulse, 0, Math.PI * 2)
-        ctx.fill()
-        ctx.restore()
+      // ── 2. Pájaros volando en bandadas sobre el Monte Fuji ──
+      birds.forEach(bird => {
+        bird.update()
+        bird.draw()
       })
 
-      // ── Baliza roja de la Torre de Tokio ──
-      const towerPos = getCanvasCoords(1720, 370, mouseX, mouseY)
-      const beaconPulse = 0.4 + 0.6 * ((Math.sin(t * 0.003) + 1) / 2)
-      ctx.save()
-      ctx.globalCompositeOperation = 'screen'
-      ctx.shadowBlur = 25 * beaconPulse
-      ctx.shadowColor = `rgba(255, 40, 20, ${beaconPulse})`
-      ctx.fillStyle = `rgba(255, 60, 30, ${beaconPulse * 0.9})`
-      ctx.beginPath()
-      ctx.arc(towerPos.x, towerPos.y, 3 * beaconPulse, 0, Math.PI * 2)
-      ctx.fill()
-      ctx.restore()
-
-      // ── Destellos del faro izquierdo del Golf R ──
-      const headlightL = getCanvasCoords(1340, 860, mouseX, mouseY)
-      const headlightR = getCanvasCoords(1430, 860, mouseX, mouseY)
-      const hPulse = 0.6 + 0.4 * ((Math.sin(t * 0.002 + 0.5) + 1) / 2)
-      ;[headlightL, headlightR].forEach(hl => {
-        ctx.save()
-        ctx.globalCompositeOperation = 'screen'
-        // Halo de destello
-        const hlGrad = ctx.createRadialGradient(hl.x, hl.y, 0, hl.x, hl.y, 35 * hPulse)
-        hlGrad.addColorStop(0, `rgba(255, 230, 180, ${0.35 * hPulse})`)
-        hlGrad.addColorStop(0.4, `rgba(255, 200, 120, ${0.12 * hPulse})`)
-        hlGrad.addColorStop(1, 'rgba(0, 0, 0, 0)')
-        ctx.fillStyle = hlGrad
-        ctx.beginPath()
-        ctx.arc(hl.x, hl.y, 35 * hPulse, 0, Math.PI * 2)
-        ctx.fill()
-        // Núcleo brillante
-        ctx.fillStyle = `rgba(255, 255, 240, ${0.5 * hPulse})`
-        ctx.beginPath()
-        ctx.arc(hl.x, hl.y, 3, 0, Math.PI * 2)
-        ctx.fill()
-        ctx.restore()
+      // ── 3. Humo de Derrape Activo ──
+      // Generar partículas nuevas de humo con un tope máximo mayor y continuo
+      smokeEmitters.forEach(em => {
+        if (smokeParticles.length < 180) {
+          smokeParticles.push(new DriftSmokeParticle(em.x, em.y, em.color))
+        }
       })
 
-      // ── Destello de Sedán xenón (derecha de la escena) ──
-      const sedanHL = getCanvasCoords(2350, 820, mouseX, mouseY)
-      const sPulse = 0.5 + 0.5 * ((Math.sin(t * 0.0015 + 2.0) + 1) / 2)
-      ctx.save()
-      ctx.globalCompositeOperation = 'screen'
-      const sGrad = ctx.createRadialGradient(sedanHL.x, sedanHL.y, 0, sedanHL.x, sedanHL.y, 28 * sPulse)
-      sGrad.addColorStop(0, `rgba(180, 220, 255, ${0.3 * sPulse})`)
-      sGrad.addColorStop(0.5, `rgba(100, 180, 255, ${0.08 * sPulse})`)
-      sGrad.addColorStop(1, 'rgba(0, 0, 0, 0)')
-      ctx.fillStyle = sGrad
-      ctx.beginPath()
-      ctx.arc(sedanHL.x, sedanHL.y, 28 * sPulse, 0, Math.PI * 2)
-      ctx.fill()
-      ctx.fillStyle = `rgba(200, 230, 255, ${0.45 * sPulse})`
-      ctx.beginPath()
-      ctx.arc(sedanHL.x, sedanHL.y, 2.5, 0, Math.PI * 2)
-      ctx.fill()
-      ctx.restore()
+      // Actualizar y dibujar partículas de humo volumétrico
+      for (let i = smokeParticles.length - 1; i >= 0; i--) {
+        const p = smokeParticles[i]
+        p.update()
+        if (p.opacity <= 0) {
+          smokeParticles.splice(i, 1)
+        } else {
+          p.draw()
+        }
+      }
 
-      // ── Líneas de velocidad ──
+      // ── 4. Destellos LED Premium de los Coches ──
+      // Coche Rojo (Delante Centro): faros en imgX: 1335 e imgX: 1530
+      const pulseRed = 0.7 + 0.3 * ((Math.sin(t * 0.002) + 1) / 2)
+      const headlightRedL = getCanvasCoords(1335, 760, mouseX, mouseY)
+      const headlightRedR = getCanvasCoords(1530, 760, mouseX, mouseY)
+      
+      drawLensFlare(headlightRedL.x, headlightRedL.y, 25, pulseRed)
+      drawLensFlare(headlightRedR.x, headlightRedR.y, 25, pulseRed)
+
+      // Todoterreno Azul (Derecha): faros en imgX: 2360, imgY: 660
+      const pulseBlue = 0.6 + 0.4 * ((Math.sin(t * 0.0018 + 1.2) + 1) / 2)
+      const headlightBlue = getCanvasCoords(2360, 660, mouseX, mouseY)
+      drawLensFlare(headlightBlue.x, headlightBlue.y, 18, pulseBlue)
+
+      // ── 5. Líneas de velocidad ──
       speedLines.forEach(line => {
         line.update(scrollVelocity)
         line.draw()
       })
 
-      // ── Pétalos de Sakura ──
-      sakuras.forEach(sakura => {
-        sakura.update()
-        sakura.draw()
-      })
-
-      // ── Chispas de fricción ──
+      // ── 6. Chispas de Fricción ──
       sparks.forEach(spark => {
         spark.update()
         spark.draw()
       })
 
-      // ── Ramas de sakura oscilantes (viento) ──
+      // ── 7. Pétalos de Sakura ──
+      sakuras.forEach(sakura => {
+        sakura.update()
+        sakura.draw()
+      })
+
+      // ── 8. Ramas de Sakura (Primer plano) ──
       branches.forEach(branch => {
         branch.update(t)
         branch.draw()
@@ -681,6 +880,7 @@ function App() {
             {/* HERO SECTION ESPECTACULAR (FALLBACK SEGURO A PARALLAX) */}
             <header className="hero" id="hero">
               <div className="hero-parallax-bg" id="hero-bg"></div>
+              <canvas id="canvas-decorations" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 1 }}></canvas>
               <div className="hero-overlay"></div>
               <div className="hero-speed-lines"></div>
 
