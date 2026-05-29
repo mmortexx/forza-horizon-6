@@ -113,33 +113,48 @@ function App() {
     let mouseY = 0
     const handleCanvasMouseMove = (e) => {
       if (window.innerWidth <= 900) return
-      mouseX = (e.clientX - window.innerWidth / 2) * -0.015
-      mouseY = (e.clientY - window.innerHeight / 2) * -0.015
+      mouseX = (e.clientX - window.innerWidth / 2) * -0.012
+      mouseY = (e.clientY - window.innerHeight / 2) * -0.012
     }
     window.addEventListener('mousemove', handleCanvasMouseMove, { passive: true })
 
-    // Proyección 2D del fondo de Tokio Nocturno (dimensión nativa: 3439x1411)
+    // Proyección 2D del fondo de Tokio Nocturno (dimensión nativa: 3439x1411) con alineación de transform y offset de CSS
     const getCanvasCoords = (imgX, imgY, mx, my) => {
       const iw = 3439
       const ih = 1411
       const aspectRatioImg = iw / ih
-      const aspectRatioCanvas = canvasWidth / canvasHeight
+      
+      // Dimensiones del contenedor real .hero-parallax-bg (incluye el 20% de desborde)
+      const bgWidth = canvasWidth * 1.2
+      const bgHeight = canvasHeight * 1.2
+      const aspectRatioCanvas = bgWidth / bgHeight
       
       let scale, offsetX, offsetY
       if (aspectRatioCanvas > aspectRatioImg) {
-        scale = canvasWidth / iw
+        scale = bgWidth / iw
         offsetX = 0
-        offsetY = (canvasHeight - (scale * ih)) / 2
+        offsetY = (bgHeight - (scale * ih)) / 2
       } else {
-        scale = canvasHeight / ih
-        offsetX = (canvasWidth - (scale * iw)) / 2
+        scale = bgHeight / ih
+        offsetX = (bgWidth - (scale * iw)) / 2
         offsetY = 0
       }
       
+      // Posición del pixel respecto al contenedor de fondo (.hero-parallax-bg)
       let px = imgX * scale + offsetX
       let py = imgY * scale + offsetY
       
-      // Aplicar desplazamiento de paralaje
+      // Ajustar por el desplazamiento de posición del background (márgenes negativos -10% left, -10% top)
+      px -= canvasWidth * 0.1
+      py -= canvasHeight * 0.1
+      
+      // Ajustar por el transform: scale(1.05) que se escala desde el centro del contenedor
+      const cx = canvasWidth / 2
+      const cy = canvasHeight / 2
+      px = cx + (px - cx) * 1.05
+      py = cy + (py - cy) * 1.05
+      
+      // Sumar el paralaje del ratón
       px += mx
       py += my
       
