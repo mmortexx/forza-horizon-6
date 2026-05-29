@@ -133,5 +133,237 @@
       "profiles": "🏁 Perfiles",
       "troubleshoot": "🔄 Troubleshooting"
     }
+  },
+  "featured": {
+    "tag": "REGLAJE DESTACADO",
+    "desc": "El monarca absoluto de las pistas de tierra. Altura de suspensión rally, reparto central de tracción al 75% y balance neutral de peso. Haz clic abajo para ver su ficha técnica.",
+    "btn": "VER REGLAJE ➔"
+  },
+  "playlist": {
+    "season": "TEMPORADA RETRO HORIZON",
+    "title": "Desafíos del Campeonato Semanal",
+    "item1": {
+      "title": "Time Attack Lotus WTAC",
+      "desc": "Logra una vuelta limpia en menos de 2:10 en el sprint de Mt. Akina. Configuración: Lotus Exige Clase R."
+    },
+    "item2": {
+      "title": "Rey del Drift Touge",
+      "desc": "Acumula 350,000 puntos de drift en el descenso de Irohazaka. Configuración: Nissan Silvia S15 Spec-R."
+    },
+    "item3": {
+      "title": "Resurgimiento Kei Car",
+      "desc": "Gana un campeonato de carretera usando el Honda Beat (CBR Swap). Configuración: Clase C."
+    }
+  },
+  "videos_meta": {
+    "intro": "El Performance Index (PI) de Forza Horizon 6 implementa la <1>Clase R (PI 998+)</1> para aislar prototipos de resistencia e hiperdeportivos extremos. El comportamiento dinámico de los vehículos RWD en asfalto seco se ha optimizado notablemente.",
+    "table": {
+      "headers": {
+        "class": "Clase",
+        "specialty": "Especialidad",
+        "car": "Vehículo Meta",
+        "engine": "Motor Swap / Configuración Recomendada",
+        "code": "Share / Tune Code",
+        "notes": "Comportamiento y Notas del Meta"
+      },
+      "rows": [
+        {
+          "class": "R (998+)",
+          "specialty": "Asfalto / Grip",
+          "car": "Lotus Exige WTAC",
+          "engine": "Stock (1.8L I4 SC) / 3.0L V8 de carreras",
+          "code": "Tuning Grip",
+          "notes": "Máximo paso por curva y fuerza G lateral del juego."
+        },
+        {
+          "class": "R (998+)",
+          "specialty": "Asfalto / Goliath",
+          "car": "Mazda 787B",
+          "engine": "Stock (2.6L R26B 4-Rotor)",
+          "notes": "Líder absoluto de zonas rápidas y resistencia en asfalto."
+        },
+        {
+          "class": "S2 (901-998)",
+          "specialty": "Asfalto / Grip",
+          "car": "Nissan #11 Skyline Silhouette",
+          "engine": "Stock (2.0L Turbo I4)",
+          "notes": "Inmejorable paso por curva y balance de PI en tramos sinuosos."
+        },
+        {
+          "class": "S1 (801-900)",
+          "specialty": "Asfalto / Launch",
+          "car": "Acura NSX Type S '23",
+          "engine": "Electric Powertrain Conversion + AWD",
+          "notes": "Lanzamiento masivo de tracción gracias a la conversión eléctrica."
+        }
+      ]
+    },
+    "trends": {
+      "title": "Tendencias Clave del Meta",
+      "i1_strong": "Preferencia por los swaps de motocicleta:",
+      "i1_text": " En las clases C y D, motores de la Honda CBR1000RR-R y Suzuki Hayabusa maximizan la relación potencia-peso de Kei cars sin disparar el PI.",
+      "i2_strong": "Dominio de \"Powerbuilds\" en Clase A:",
+      "i2_text": " Vehículos pesados de alta potencia como la GMC Syclone (con V8) dominan la aceleración debido a vacíos del PI en marchas superiores."
+    },
+    "tips": {
+      "title": "Tips de Ingeniería de Competición",
+      "i1_strong": "Uso de Transmisión Sport en clases bajas:",
+      "i1_text": " Evita instalar cajas de cambio de carreras de muchas marchas en clases D y C; ahorra ese PI valioso para neumáticos o motor.",
+      "i2_strong": "Balances de Suspensión:",
+      "i2_text": " Suavizar barras estabilizadoras en vehículos ligeros permite transferir el peso transversalmente y mejorar el agarre mecánico."
+    }
+  },
+  "videos_drift": {
+    "cam": {
+      "title": "La Nueva \"Drift Cam\" en Cabina",
+      "desc": "La cámara interior sigue dinámicamente el ápice según el <1>Slip Angle</1>:",
+      "pros": "Ventajas (Pros):",
+      "i1": "Aumenta la inmersión al permitir mirar la salida de las curvas de montaña en tiempo real.",
+      "i2": "Mejora notablemente el control de contra-volanteo y la transición de derrapes en mandos tradicionales."
+    },
+    "culture": {
+      "title": "Cultura Touge & Initial D",
+      "desc": "La fidelidad del mapa JDM de Forza Horizon 6 (con puertos como Mt. Akina) ha provocado una oleada de contenido de recreación del anime:",
+      "i1_strong": "Toyota Sprinter Trueno AE86 (Fujiwara Spec):",
+      "i1_text": " Construido en su mayoría con el motor 4A-GE clásico de altas revoluciones.",
+      "i2_strong": "Nissan Silvia S15 (Spec-R):",
+      "i2_text": " La plataforma de derrape RWD más noble del juego, ideal para tándems."
+    },
+    "setup": {
+      "title": "Fórmula de Reglaje de Suspensión de Derrape Viral",
+      "headers": {
+        "param": "Parámetro de Competición",
+        "front": "Eje Delantero",
+        "rear": "Eje Trasero",
+        "effect": "Propósito / Efecto de Físicas"
+      },
+      "rows": [
+        {
+          "param": "Alineación Caída (Camber)",
+          "front": "-4.5° a -5.0°",
+          "rear": "-0.5° a -1.0°",
+          "effect": "Máxima huella de contacto del neumático delantero en contra-volanteo. Evita derrapes impredecibles."
+        },
+        {
+          "param": "Barras Estabilizadoras (ARB)",
+          "front": "18.00 lb/in",
+          "rear": "12.00 lb/in",
+          "effect": "Blandas para inducir balanceo controlado y retener tracción interior al derrapar."
+        },
+        {
+          "param": "Muelles y Altura (Springs)",
+          "front": "650.0 lb/in / +12mm",
+          "rear": "550.0 lb/in / +15mm",
+          "effect": "Muelles traseros un 15% más blandos para sentar la masa trasera."
+        }
+      ]
+    }
+  },
+  "videos_secrets": {
+    "glitches": {
+      "title": "Glitches de Velocidad Punta (+500 km/h)",
+      "subtitle": "Koenigsegg Jesko Express Setup:",
+      "i1_strong": "Tracción AWD Swap:",
+      "i1_text": " Obligatorio para asegurar la estabilidad lineal sobre los viaductos elevados de Tokio.",
+      "i2_strong": "Relación final del diferencial:",
+      "i2_text": " Alargar manualmente la relación final (Final Drive) a un rango entre <1>2.20 y 2.45</1>."
+    },
+    "easter_eggs": {
+      "title": "Secretos & Huevos de Pascua",
+      "i1_strong": "El Vaso de Agua del AE86 FE:",
+      "i1_text": " Al conducir el AE86 en vista interior, el portavasos incluye un vaso de agua que se inclina por inercia pero nunca se desborda, emulando la mítica prueba física del anime.",
+      "i2_strong": "Timbre de los Konbini:",
+      "i2_text": " Pasar a velocidad moderada frente a las tiendas de conveniencia \"365\" reproduce el característico timbre electrónico de bienvenida de los establecimientos japoneses reales."
+    },
+    "barn_finds": {
+      "title": "Lista de Barn Finds (Coches Abandonados)",
+      "headers": {
+        "num": "Nro",
+        "car": "Vehículo Abandonado",
+        "loc": "Ubicación en el Mapa de Japón (Región)",
+        "stamp": "Nivel de Sello Requerido (Stamp Level)"
+      },
+      "rows": [
+        {
+          "car": "Honda NSX-R GT",
+          "loc": "Ohtani (Inmediaciones del Templo Kinkaku-Ji)",
+          "stamp": "Sello Amarillo (Inicial)"
+        },
+        {
+          "car": "Ford Sierra Cosworth RS500",
+          "loc": "Ito (Campos agrícolas inundados de arroz)",
+          "stamp": "Sello Amarillo / Verde"
+        },
+        {
+          "car": "Toyota 2000GT (1969)",
+          "loc": "Ito (Costa Pacífica del Este)",
+          "stamp": "Sello Verde"
+        },
+        {
+          "car": "Nissan PAO",
+          "loc": "Minamino (Zona rural boscosa)",
+          "stamp": "Sello Azul"
+        },
+        {
+          "car": "Nissan Skyline 2000 GT-R (1971)",
+          "loc": "Nangan (Base de montaña)",
+          "stamp": "Sello Azul"
+        }
+      ]
+    }
+  },
+  "wheel_ghub": {
+    "title": "Logitech G HUB — Configurar ANTES de iniciar el juego",
+    "desc": "Ajustes obligatorios en el software de Logitech:",
+    "headers": {
+      "param": "Parámetro",
+      "racing": "Carreras / General",
+      "drift": "Drift",
+      "notes": "Notas"
+    },
+    "rows": [
+      {
+        "param": "Rango Operativo (Ángulo)",
+        "notes": "720° → equilibrio de agilidad. 900° → rango completo para derrapadas."
+      },
+      {
+        "param": "Sensibilidad",
+        "notes": "Mantener siempre en 50 (neutral)."
+      },
+      {
+        "param": "Fuerza Muelle Central",
+        "notes": "Desactivar SIEMPRE. Evita interferencias con el FFB del juego."
+      }
+    ]
+  },
+  "wheel_ffb": {
+    "title": "Force Feedback & Sensación del Volante — Perfiles Comparados"
+  },
+  "wheel_profiles": {
+    "racing": "🏁 Perfil COMPETITIVO — Asfalto",
+    "drift": "🌀 Perfil DRIFT — Contra-volanteo",
+    "angle": "G HUB Ángulo",
+    "steering": "Dirección In-Game",
+    "sim": "Simulación"
+  },
+  "wheel_troubleshoot": {
+    "bug": {
+      "title": "🔄 Bug del Muelle Central",
+      "symptom_strong": "Síntoma:",
+      "symptom_text": " El volante tira agresivamente al centro al estar parado.",
+      "solution_strong": "Solución:",
+      "solution_text": " Desconecta y reconecta el cable USB del G29 <1>mientras estás sentado en el coche en el juego</1>. Esto resetea el FFB."
+    },
+    "note": {
+      "title": "⚠️ Nota Importante sobre el G29",
+      "text": "El Logitech G29 es un volante de engranajes (gear-driven). Subir en exceso el FFB o el Damper provoca calor y ruidos de traqueteo mecánicos. Mantén valores moderados para preservar la vida útil del hardware."
+    }
+  },
+  "footer": {
+    "privacy": "Privacidad",
+    "terms": "Términos",
+    "manual": "Manual de Competición",
+    "official": "Página Oficial de Forza",
+    "copyright": "© 2026 Playground Games & Xbox Game Studios. Forza Horizon 6 es una marca registrada de Microsoft Corporation. Desarrollado de forma ficticia como tributo."
   }
 }

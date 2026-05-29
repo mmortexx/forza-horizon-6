@@ -133,5 +133,237 @@
       "profiles": "🏁 Profiles",
       "troubleshoot": "🔄 Troubleshooting"
     }
+  },
+  "featured": {
+    "tag": "FEATURED SETUP",
+    "desc": "The absolute king of dirt tracks. Built with a lifted rally suspension, optimized AWD differentials (75% central split), and low center of gravity. Click below to inspect its blueprints.",
+    "btn": "INSPECT SETUP ➔"
+  },
+  "playlist": {
+    "season": "HORIZON RETRO SEASON",
+    "title": "Weekly Championship Challenges",
+    "item1": {
+      "title": "Lotus WTAC Time Attack",
+      "desc": "Achieve a clean lap under 2:10 on Mt. Akina sprint. Setup: R-Class Lotus Exige."
+    },
+    "item2": {
+      "title": "Touge Drift King",
+      "desc": "Accumulate 350,000 drift points in Irohazaka downhill. Setup: Nissan Silvia S15 Spec-R."
+    },
+    "item3": {
+      "title": "Kei Car Revival",
+      "desc": "Win a road racing championship using the Honda Beat (CBR Swap). Setup: C-Class."
+    }
+  },
+  "videos_meta": {
+    "intro": "The Performance Index (PI) of Forza Horizon 6 implements the <1>R Class (PI 998+)</1> to isolate endurance prototypes and extreme hypercars. The dynamic behavior of RWD vehicles on dry asphalt has been significantly optimized.",
+    "table": {
+      "headers": {
+        "class": "Class",
+        "specialty": "Specialty",
+        "car": "Meta Vehicle",
+        "engine": "Engine Swap / Recommended Setup",
+        "code": "Share / Tune Code",
+        "notes": "Behavior & Meta Notes"
+      },
+      "rows": [
+        {
+          "class": "R (998+)",
+          "specialty": "Asphalt / Grip",
+          "car": "Lotus Exige WTAC",
+          "engine": "Stock (1.8L I4 SC) / 3.0L Racing V8",
+          "code": "Grip Tuning",
+          "notes": "Maximum cornering speed and lateral G-force in the game."
+        },
+        {
+          "class": "R (998+)",
+          "specialty": "Asphalt / Goliath",
+          "car": "Mazda 787B",
+          "engine": "Stock (2.6L R26B 4-Rotor)",
+          "notes": "Absolute leader in fast zones and asphalt endurance."
+        },
+        {
+          "class": "S2 (901-998)",
+          "specialty": "Asphalt / Grip",
+          "car": "Nissan #11 Skyline Silhouette",
+          "engine": "Stock (2.0L Turbo I4)",
+          "notes": "Unbeatable cornering and PI balance in winding sections."
+        },
+        {
+          "class": "S1 (801-900)",
+          "specialty": "Asphalt / Launch",
+          "car": "Acura NSX Type S '23",
+          "engine": "Electric Powertrain Conversion + AWD",
+          "notes": "Massive launch traction thanks to the electric conversion."
+        }
+      ]
+    },
+    "trends": {
+      "title": "Key Meta Trends",
+      "i1_strong": "Preference for motorcycle swaps:",
+      "i1_text": " In C and D classes, Honda CBR1000RR-R and Suzuki Hayabusa engines maximize the power-to-weight ratio of Kei cars without skyrocketing the PI.",
+      "i2_strong": "Dominance of \"Powerbuilds\" in A Class:",
+      "i2_text": " Heavy, high-power vehicles like the GMC Syclone (with V8) dominate acceleration due to PI gaps in higher gears."
+    },
+    "tips": {
+      "title": "Competition Engineering Tips",
+      "i1_strong": "Use of Sport Transmission in lower classes:",
+      "i1_text": " Avoid installing racing gearboxes with many gears in D and C classes; save that valuable PI for tires or engine.",
+      "i2_strong": "Suspension Balances:",
+      "i2_text": " Softening anti-roll bars on light vehicles allows transverse weight transfer and improves mechanical grip."
+    }
+  },
+  "videos_drift": {
+    "cam": {
+      "title": "The New In-Cabin \"Drift Cam\"",
+      "desc": "The interior camera dynamically tracks the apex based on the <1>Slip Angle</1>:",
+      "pros": "Advantages (Pros):",
+      "i1": "Increases immersion by allowing you to look at the exit of mountain corners in real time.",
+      "i2": "Significantly improves counter-steering control and drift transitions on traditional controllers."
+    },
+    "culture": {
+      "title": "Touge & Initial D Culture",
+      "desc": "The fidelity of the Forza Horizon 6 JDM map (with passes like Mt. Akina) has triggered a wave of anime recreation content:",
+      "i1_strong": "Toyota Sprinter Trueno AE86 (Fujiwara Spec):",
+      "i1_text": " Built mostly with the classic high-revving 4A-GE engine.",
+      "i2_strong": "Nissan Silvia S15 (Spec-R):",
+      "i2_text": " The noblest RWD drift platform in the game, ideal for tandems."
+    },
+    "setup": {
+      "title": "Viral Drift Suspension Setup Formula",
+      "headers": {
+        "param": "Competition Parameter",
+        "front": "Front Axle",
+        "rear": "Rear Axle",
+        "effect": "Purpose / Physics Effect"
+      },
+      "rows": [
+        {
+          "param": "Camber Alignment",
+          "front": "-4.5° to -5.0°",
+          "rear": "-0.5° to -1.0°",
+          "effect": "Maximum front tire contact patch during counter-steer. Prevents unpredictable slides."
+        },
+        {
+          "param": "Anti-roll Bars (ARB)",
+          "front": "18.00 lb/in",
+          "rear": "12.00 lb/in",
+          "effect": "Soft to induce controlled body roll and retain inner traction while drifting."
+        },
+        {
+          "param": "Springs and Ride Height",
+          "front": "650.0 lb/in / +12mm",
+          "rear": "550.0 lb/in / +15mm",
+          "effect": "Rear springs 15% softer to settle the rear mass."
+        }
+      ]
+    }
+  },
+  "videos_secrets": {
+    "glitches": {
+      "title": "Top Speed Glitches (+500 km/h)",
+      "subtitle": "Koenigsegg Jesko Express Setup:",
+      "i1_strong": "AWD Swap:",
+      "i1_text": " Mandatory to ensure linear stability over Tokyo's elevated viaducts.",
+      "i2_strong": "Final Drive Ratio:",
+      "i2_text": " Manually lengthen the Final Drive to a range between <1>2.20 and 2.45</1>."
+    },
+    "easter_eggs": {
+      "title": "Secrets & Easter Eggs",
+      "i1_strong": "The AE86 FE Water Cup:",
+      "i1_text": " When driving the AE86 in interior view, the cup holder includes a water cup that tilts by inertia but never overflows, emulating the mythical anime physics test.",
+      "i2_strong": "Konbini Chime:",
+      "i2_text": " Driving at moderate speed past \"365\" convenience stores plays the characteristic electronic welcome chime of real Japanese establishments."
+    },
+    "barn_finds": {
+      "title": "Barn Finds List",
+      "headers": {
+        "num": "No.",
+        "car": "Abandoned Vehicle",
+        "loc": "Location on Japan Map (Region)",
+        "stamp": "Required Stamp Level"
+      },
+      "rows": [
+        {
+          "car": "Honda NSX-R GT",
+          "loc": "Ohtani (Near Kinkaku-Ji Temple)",
+          "stamp": "Yellow Stamp (Initial)"
+        },
+        {
+          "car": "Ford Sierra Cosworth RS500",
+          "loc": "Ito (Flooded rice fields)",
+          "stamp": "Yellow / Green Stamp"
+        },
+        {
+          "car": "Toyota 2000GT (1969)",
+          "loc": "Ito (East Pacific Coast)",
+          "stamp": "Green Stamp"
+        },
+        {
+          "car": "Nissan PAO",
+          "loc": "Minamino (Forested rural area)",
+          "stamp": "Blue Stamp"
+        },
+        {
+          "car": "Nissan Skyline 2000 GT-R (1971)",
+          "loc": "Nangan (Mountain base)",
+          "stamp": "Blue Stamp"
+        }
+      ]
+    }
+  },
+  "wheel_ghub": {
+    "title": "Logitech G HUB — Configure BEFORE starting the game",
+    "desc": "Mandatory settings in the Logitech software:",
+    "headers": {
+      "param": "Parameter",
+      "racing": "Racing / General",
+      "drift": "Drift",
+      "notes": "Notes"
+    },
+    "rows": [
+      {
+        "param": "Operating Range (Angle)",
+        "notes": "720° → agility balance. 900° → full range for drifting."
+      },
+      {
+        "param": "Sensitivity",
+        "notes": "Always keep at 50 (neutral)."
+      },
+      {
+        "param": "Centering Spring Strength",
+        "notes": "ALWAYS disable. Prevents interference with the game's FFB."
+      }
+    ]
+  },
+  "wheel_ffb": {
+    "title": "Force Feedback & Steering Feel — Compared Profiles"
+  },
+  "wheel_profiles": {
+    "racing": "🏁 COMPETITIVE Profile — Asphalt",
+    "drift": "🌀 DRIFT Profile — Counter-steer",
+    "angle": "G HUB Angle",
+    "steering": "In-Game Steering",
+    "sim": "Simulation"
+  },
+  "wheel_troubleshoot": {
+    "bug": {
+      "title": "🔄 Centering Spring Bug",
+      "symptom_strong": "Symptom:",
+      "symptom_text": " The wheel pulls aggressively to the center when stationary.",
+      "solution_strong": "Solution:",
+      "solution_text": " Disconnect and reconnect the G29 USB cable <1>while sitting in the car in-game</1>. This resets the FFB."
+    },
+    "note": {
+      "title": "⚠️ Important Note about the G29",
+      "text": "The Logitech G29 is a gear-driven wheel. Raising the FFB or Damper excessively causes heat and mechanical rattling noises. Keep moderate values to preserve hardware lifespan."
+    }
+  },
+  "footer": {
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "manual": "Competition Manual",
+    "official": "Official Forza Page",
+    "copyright": "© 2026 Playground Games & Xbox Game Studios. Forza Horizon 6 is a registered trademark of Microsoft Corporation. Developed fictitiously as a tribute."
   }
 }

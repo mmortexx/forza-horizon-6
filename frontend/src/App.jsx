@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, useRef } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useTranslation, Trans } from 'react-i18next'
 import carsEsRaw from './data/cars_es.json'
 import carsEnRaw from './data/cars_en.json'
 import './index.css'
@@ -739,12 +739,10 @@ function App() {
               {/* COCHE DESTACADO DEL FESTIVAL */}
               <div className="featured-car-banner glass-panel">
                 <div className="featured-car-content">
-                  <span className="featured-tag">🔥 {i18n.language === 'en' ? 'FEATURED SETUP' : 'REGLAJE DESTACADO'}</span>
+                  <span className="featured-tag">🔥 {t('featured.tag')}</span>
                   <h3>Subaru BRZ Forza Edition JDM</h3>
                   <p className="featured-desc">
-                    {i18n.language === 'en' 
-                      ? 'The absolute king of dirt tracks. Built with a lifted rally suspension, optimized AWD differentials (75% central split), and low center of gravity. Click below to inspect its blueprints.'
-                      : 'El monarca absoluto de las pistas de tierra. Altura de suspensión rally, reparto central de tracción al 75% y balance neutral de peso. Haz clic abajo para ver su ficha técnica.'}
+                    {t('featured.desc')}
                   </p>
                   <div className="featured-meta">
                     <span className="featured-pi">PI 800</span>
@@ -753,7 +751,7 @@ function App() {
                       handleCarSelect("brz-fe-dirt", "fe")
                       handleViewChange("fe")
                     }}>
-                      {i18n.language === 'en' ? 'INSPECT SETUP ➔' : 'VER REGLAJE ➔'}
+                      {t('featured.btn')}
                     </button>
                   </div>
                 </div>
@@ -815,8 +813,8 @@ function App() {
               <div className="festival-playlist glass-panel">
                 <div className="playlist-header">
                   <div>
-                    <span className="playlist-season">☀ {i18n.language === 'en' ? 'HORIZON RETRO SEASON' : 'TEMPORADA RETRO HORIZON'}</span>
-                    <h3>{i18n.language === 'en' ? 'Weekly Championship Challenges' : 'Desafíos del Campeonato Semanal'}</h3>
+                    <span className="playlist-season">☀ {t('playlist.season')}</span>
+                    <h3>{t('playlist.title')}</h3>
                   </div>
                   <span className="playlist-points">20 / 40 PTS</span>
                 </div>
@@ -824,23 +822,23 @@ function App() {
                   <div className="playlist-item">
                     <div className="item-title-row">
                       <span className="item-badge-active">ACTIVE</span>
-                      <h4>{i18n.language === 'en' ? 'Lotus WTAC Time Attack' : 'Time Attack Lotus WTAC'}</h4>
+                      <h4>{t('playlist.item1.title')}</h4>
                     </div>
-                    <p>{i18n.language === 'en' ? 'Achieve a clean lap under 2:10 on Mt. Akina sprint. Setup: R-Class Lotus Exige.' : 'Logra una vuelta limpia en menos de 2:10 en el sprint de Mt. Akina. Configuración: Lotus Exige Clase R.'}</p>
+                    <p>{t('playlist.item1.desc')}</p>
                   </div>
                   <div className="playlist-item">
                     <div className="item-title-row">
                       <span className="item-badge-active">ACTIVE</span>
-                      <h4>{i18n.language === 'en' ? 'Touge Drift King' : 'Rey del Drift Touge'}</h4>
+                      <h4>{t('playlist.item2.title')}</h4>
                     </div>
-                    <p>{i18n.language === 'en' ? 'Accumulate 350,000 drift points in Irohazaka downhill. Setup: Nissan Silvia S15 Spec-R.' : 'Acumula 350,000 puntos de drift en el descenso de Irohazaka. Configuración: Nissan Silvia S15 Spec-R.'}</p>
+                    <p>{t('playlist.item2.desc')}</p>
                   </div>
                   <div className="playlist-item completed">
                     <div className="item-title-row">
                       <span className="item-badge-done">COMPLETED</span>
-                      <h4>{i18n.language === 'en' ? 'Kei Car Revival' : 'Resurgimiento Kei Car'}</h4>
+                      <h4>{t('playlist.item3.title')}</h4>
                     </div>
-                    <p>{i18n.language === 'en' ? 'Win a road racing championship using the Honda Beat (CBR Swap). Setup: C-Class.' : 'Gana un campeonato de carretera usando el Honda Beat (CBR Swap). Configuración: Clase C.'}</p>
+                    <p>{t('playlist.item3.desc')}</p>
                   </div>
                 </div>
               </div>
@@ -1097,68 +1095,68 @@ function App() {
             {/* TAB: COCHES META */}
             <div className={`media-content ${activeMediaTab === 'meta' ? 'active' : ''}`}>
               <p style={{fontSize: '0.95rem', color: 'var(--text-secondary)', marginBottom: '1.2rem'}}>
-                El Performance Index (PI) de Forza Horizon 6 implementa la <strong>Clase R (PI 998+)</strong> para aislar prototipos de resistencia e hiperdeportivos extremos. El comportamiento dinámico de los vehículos RWD en asfalto seco se ha optimizado notablemente.
+                <Trans i18nKey="videos_meta.intro">The Performance Index (PI) of Forza Horizon 6 implements the <strong>R Class (PI 998+)</strong> to isolate endurance prototypes and extreme hypercars. The dynamic behavior of RWD vehicles on dry asphalt has been significantly optimized.</Trans>
               </p>
               <table className="media-table">
                 <thead>
                   <tr>
-                    <th>Clase</th>
-                    <th>Especialidad</th>
-                    <th>Vehículo Meta</th>
-                    <th>Motor Swap / Configuración Recomendada</th>
-                    <th>Share / Tune Code</th>
-                    <th>Comportamiento y Notas del Meta</th>
+                    <th>{t('videos_meta.table.headers.class')}</th>
+                    <th>{t('videos_meta.table.headers.specialty')}</th>
+                    <th>{t('videos_meta.table.headers.car')}</th>
+                    <th>{t('videos_meta.table.headers.engine')}</th>
+                    <th>{t('videos_meta.table.headers.code')}</th>
+                    <th>{t('videos_meta.table.headers.notes')}</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td className="class-cell">R (998+)</td>
-                    <td>Asfalto / Grip</td>
-                    <td className="car-cell">Lotus Exige WTAC</td>
-                    <td>Stock (1.8L I4 SC) / 3.0L V8 de carreras</td>
-                    <td><span style={{color: 'var(--text-muted)'}}>Tuning Grip</span></td>
-                    <td>Máximo paso por curva y fuerza G lateral del juego.</td>
+                    <td>{t('videos_meta.table.rows.0.specialty')}</td>
+                    <td className="car-cell">{t('videos_meta.table.rows.0.car')}</td>
+                    <td>{t('videos_meta.table.rows.0.engine')}</td>
+                    <td><span style={{color: 'var(--text-muted)'}}>{t('videos_meta.table.rows.0.code')}</span></td>
+                    <td>{t('videos_meta.table.rows.0.notes')}</td>
                   </tr>
                   <tr>
                     <td className="class-cell">R (998+)</td>
-                    <td>Asfalto / Goliath</td>
-                    <td className="car-cell">Mazda 787B</td>
-                    <td>Stock (2.6L R26B 4-Rotor)</td>
+                    <td>{t('videos_meta.table.rows.1.specialty')}</td>
+                    <td className="car-cell">{t('videos_meta.table.rows.1.car')}</td>
+                    <td>{t('videos_meta.table.rows.1.engine')}</td>
                     <td className="code-cell">650 341 143</td>
-                    <td>Líder absoluto de zonas rápidas y resistencia en asfalto.</td>
+                    <td>{t('videos_meta.table.rows.1.notes')}</td>
                   </tr>
                   <tr>
                     <td className="class-cell">S2 (901-998)</td>
-                    <td>Asfalto / Grip</td>
-                    <td className="car-cell">Nissan #11 Skyline Silhouette</td>
-                    <td>Stock (2.0L Turbo I4)</td>
+                    <td>{t('videos_meta.table.rows.2.specialty')}</td>
+                    <td className="car-cell">{t('videos_meta.table.rows.2.car')}</td>
+                    <td>{t('videos_meta.table.rows.2.engine')}</td>
                     <td className="code-cell">174 027 996</td>
-                    <td>Inmejorable paso por curva y balance de PI en tramos sinuosos.</td>
+                    <td>{t('videos_meta.table.rows.2.notes')}</td>
                   </tr>
                   <tr>
                     <td className="class-cell">S1 (801-900)</td>
-                    <td>Asfalto / Launch</td>
-                    <td className="car-cell">Acura NSX Type S '23</td>
-                    <td>Electric Powertrain Conversion + AWD</td>
+                    <td>{t('videos_meta.table.rows.3.specialty')}</td>
+                    <td className="car-cell">{t('videos_meta.table.rows.3.car')}</td>
+                    <td>{t('videos_meta.table.rows.3.engine')}</td>
                     <td className="code-cell">174 665 126</td>
-                    <td>Lanzamiento masivo de tracción gracias a la conversión eléctrica.</td>
+                    <td>{t('videos_meta.table.rows.3.notes')}</td>
                   </tr>
                 </tbody>
               </table>
 
               <div className="media-grid-2" style={{marginTop: '2rem'}}>
                 <div className="media-card">
-                  <h3>Tendencias Clave del Meta</h3>
+                  <h3>{t('videos_meta.trends.title')}</h3>
                   <ul>
-                    <li><strong>Preferencia por los swaps de motocicleta:</strong> En las clases C y D, motores de la Honda CBR1000RR-R y Suzuki Hayabusa maximizan la relación potencia-peso de Kei cars sin disparar el PI.</li>
-                    <li><strong>Dominio de "Powerbuilds" en Clase A:</strong> Vehículos pesados de alta potencia como la GMC Syclone (con V8) dominan la aceleración debido a vacíos del PI en marchas superiores.</li>
+                    <li><strong>{t('videos_meta.trends.i1_strong')}</strong>{t('videos_meta.trends.i1_text')}</li>
+                    <li><strong>{t('videos_meta.trends.i2_strong')}</strong>{t('videos_meta.trends.i2_text')}</li>
                   </ul>
                 </div>
                 <div className="media-card">
-                  <h3>Tips de Ingeniería de Competición</h3>
+                  <h3>{t('videos_meta.tips.title')}</h3>
                   <ul>
-                    <li><strong>Uso de Transmisión Sport en clases bajas:</strong> Evita instalar cajas de cambio de carreras de muchas marchas en clases D y C; ahorra ese PI valioso para neumáticos o motor.</li>
-                    <li><strong>Balances de Suspensión:</strong> Suavizar barras estabilizadoras en vehículos ligeros permite transferir el peso transversalmente y mejorar el agarre mecánico.</li>
+                    <li><strong>{t('videos_meta.tips.i1_strong')}</strong>{t('videos_meta.tips.i1_text')}</li>
+                    <li><strong>{t('videos_meta.tips.i2_strong')}</strong>{t('videos_meta.tips.i2_text')}</li>
                   </ul>
                 </div>
               </div>
@@ -1168,53 +1166,53 @@ function App() {
             <div className={`media-content ${activeMediaTab === 'drift' ? 'active' : ''}`}>
               <div className="media-grid-2">
                 <div className="media-card">
-                  <h3>La Nueva "Drift Cam" en Cabina</h3>
-                  <p>La cámara interior sigue dinámicamente el ápice según el <em>Slip Angle</em>:</p>
-                  <h4>Ventajas (Pros):</h4>
+                  <h3>{t('videos_drift.cam.title')}</h3>
+                  <p><Trans i18nKey="videos_drift.cam.desc">La cámara interior sigue dinámicamente el ápice según el <em>Slip Angle</em>:</Trans></p>
+                  <h4>{t('videos_drift.cam.pros')}</h4>
                   <ul>
-                    <li>Aumenta la inmersión al permitir mirar la salida de las curvas de montaña en tiempo real.</li>
-                    <li>Mejora notablemente el control de contra-volanteo y la transición de derrapes en mandos tradicionales.</li>
+                    <li>{t('videos_drift.cam.i1')}</li>
+                    <li>{t('videos_drift.cam.i2')}</li>
                   </ul>
                 </div>
                 <div className="media-card">
-                  <h3>Cultura Touge & Initial D</h3>
-                  <p>La fidelidad del mapa JDM de Forza Horizon 6 (con puertos como Mt. Akina) ha provocado una oleada de contenido de recreación del anime:</p>
+                  <h3>{t('videos_drift.culture.title')}</h3>
+                  <p>{t('videos_drift.culture.desc')}</p>
                   <ul>
-                    <li><strong>Toyota Sprinter Trueno AE86 (Fujiwara Spec):</strong> Construido en su mayoría con el motor 4A-GE clásico de altas revoluciones.</li>
-                    <li><strong>Nissan Silvia S15 (Spec-R):</strong> La plataforma de derrape RWD más noble del juego, ideal para tándems.</li>
+                    <li><strong>{t('videos_drift.culture.i1_strong')}</strong>{t('videos_drift.culture.i1_text')}</li>
+                    <li><strong>{t('videos_drift.culture.i2_strong')}</strong>{t('videos_drift.culture.i2_text')}</li>
                   </ul>
                 </div>
               </div>
 
               <div className="media-card" style={{marginTop: '2rem'}}>
-                <h3>Fórmula de Reglaje de Suspensión de Derrape Viral</h3>
+                <h3>{t('videos_drift.setup.title')}</h3>
                 <table className="media-table">
                   <thead>
                     <tr>
-                      <th>Parámetro de Competición</th>
-                      <th>Eje Delantero</th>
-                      <th>Eje Trasero</th>
-                      <th>Propósito / Efecto de Físicas</th>
+                      <th>{t('videos_drift.setup.headers.param')}</th>
+                      <th>{t('videos_drift.setup.headers.front')}</th>
+                      <th>{t('videos_drift.setup.headers.rear')}</th>
+                      <th>{t('videos_drift.setup.headers.effect')}</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>Alineación Caída (Camber)</td>
-                      <td>-4.5° a -5.0°</td>
-                      <td>-0.5° a -1.0°</td>
-                      <td>Máxima huella de contacto del neumático delantero en contra-volanteo. Evita derrapes impredecibles.</td>
+                      <td>{t('videos_drift.setup.rows.0.param')}</td>
+                      <td>{t('videos_drift.setup.rows.0.front')}</td>
+                      <td>{t('videos_drift.setup.rows.0.rear')}</td>
+                      <td>{t('videos_drift.setup.rows.0.effect')}</td>
                     </tr>
                     <tr>
-                      <td>Barras Estabilizadoras (ARB)</td>
-                      <td>18.00 lb/in</td>
-                      <td>12.00 lb/in</td>
-                      <td>Blandas para inducir balanceo controlado y retener tracción interior al derrapar.</td>
+                      <td>{t('videos_drift.setup.rows.1.param')}</td>
+                      <td>{t('videos_drift.setup.rows.1.front')}</td>
+                      <td>{t('videos_drift.setup.rows.1.rear')}</td>
+                      <td>{t('videos_drift.setup.rows.1.effect')}</td>
                     </tr>
                     <tr>
-                      <td>Muelles y Altura (Springs)</td>
-                      <td>650.0 lb/in / +12mm</td>
-                      <td>550.0 lb/in / +15mm</td>
-                      <td>Muelles traseros un 15% más blandos para sentar la masa trasera.</td>
+                      <td>{t('videos_drift.setup.rows.2.param')}</td>
+                      <td>{t('videos_drift.setup.rows.2.front')}</td>
+                      <td>{t('videos_drift.setup.rows.2.rear')}</td>
+                      <td>{t('videos_drift.setup.rows.2.effect')}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -1225,39 +1223,39 @@ function App() {
             <div className={`media-content ${activeMediaTab === 'secretos' ? 'active' : ''}`}>
               <div className="media-grid-2">
                 <div className="media-card">
-                  <h3>Glitches de Velocidad Punta (+500 km/h)</h3>
-                  <h4>Koenigsegg Jesko Express Setup:</h4>
+                  <h3>{t('videos_secrets.glitches.title')}</h3>
+                  <h4>{t('videos_secrets.glitches.subtitle')}</h4>
                   <ul>
-                    <li><strong>Tracción AWD Swap:</strong> Obligatorio para asegurar la estabilidad lineal sobre los viaductos elevados de Tokio.</li>
-                    <li><strong>Relación final del diferencial:</strong> Alargar manualmente la relación final (Final Drive) a un rango entre <strong>2.20 y 2.45</strong>.</li>
+                    <li><strong>{t('videos_secrets.glitches.i1_strong')}</strong>{t('videos_secrets.glitches.i1_text')}</li>
+                    <li><strong>{t('videos_secrets.glitches.i2_strong')}</strong><Trans i18nKey="videos_secrets.glitches.i2_text">Alargar manualmente la relación final (Final Drive) a un rango entre <strong>2.20 y 2.45</strong>.</Trans></li>
                   </ul>
                 </div>
                 <div className="media-card">
-                  <h3>Secretos & Huevos de Pascua</h3>
+                  <h3>{t('videos_secrets.easter_eggs.title')}</h3>
                   <ul>
-                    <li><strong>El Vaso de Agua del AE86 FE:</strong> Al conducir el AE86 en vista interior, el portavasos incluye un vaso de agua que se inclina por inercia pero nunca se desborda, emulando la mítica prueba física del anime.</li>
-                    <li><strong>Timbre de los Konbini:</strong> Pasar a velocidad moderada frente a las tiendas de conveniencia "365" reproduce el característico timbre electrónico de bienvenida de los establecimientos japoneses reales.</li>
+                    <li><strong>{t('videos_secrets.easter_eggs.i1_strong')}</strong>{t('videos_secrets.easter_eggs.i1_text')}</li>
+                    <li><strong>{t('videos_secrets.easter_eggs.i2_strong')}</strong>{t('videos_secrets.easter_eggs.i2_text')}</li>
                   </ul>
                 </div>
               </div>
 
               <div className="media-card" style={{marginTop: '2rem'}}>
-                <h3>Lista de Barn Finds (Coches Abandonados)</h3>
+                <h3>{t('videos_secrets.barn_finds.title')}</h3>
                 <table className="media-table">
                   <thead>
                     <tr>
-                      <th>Nro</th>
-                      <th>Vehículo Abandonado</th>
-                      <th>Ubicación en el Mapa de Japón (Región)</th>
-                      <th>Nivel de Sello Requerido (Stamp Level)</th>
+                      <th>{t('videos_secrets.barn_finds.headers.num')}</th>
+                      <th>{t('videos_secrets.barn_finds.headers.car')}</th>
+                      <th>{t('videos_secrets.barn_finds.headers.loc')}</th>
+                      <th>{t('videos_secrets.barn_finds.headers.stamp')}</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td>1</td><td className="car-cell">Honda NSX-R GT</td><td>Ohtani (Inmediaciones del Templo Kinkaku-Ji)</td><td>Sello Amarillo (Inicial)</td></tr>
-                    <tr><td>2</td><td className="car-cell">Ford Sierra Cosworth RS500</td><td>Ito (Campos agrícolas inundados de arroz)</td><td>Sello Amarillo / Verde</td></tr>
-                    <tr><td>3</td><td className="car-cell">Toyota 2000GT (1969)</td><td>Ito (Costa Pacífica del Este)</td><td>Sello Verde</td></tr>
-                    <tr><td>4</td><td className="car-cell">Nissan PAO</td><td>Minamino (Zona rural boscosa)</td><td>Sello Azul</td></tr>
-                    <tr><td>5</td><td className="car-cell">Nissan Skyline 2000 GT-R (1971)</td><td>Nangan (Base de montaña)</td><td>Sello Azul</td></tr>
+                    <tr><td>1</td><td className="car-cell">{t('videos_secrets.barn_finds.rows.0.car')}</td><td>{t('videos_secrets.barn_finds.rows.0.loc')}</td><td>{t('videos_secrets.barn_finds.rows.0.stamp')}</td></tr>
+                    <tr><td>2</td><td className="car-cell">{t('videos_secrets.barn_finds.rows.1.car')}</td><td>{t('videos_secrets.barn_finds.rows.1.loc')}</td><td>{t('videos_secrets.barn_finds.rows.1.stamp')}</td></tr>
+                    <tr><td>3</td><td className="car-cell">{t('videos_secrets.barn_finds.rows.2.car')}</td><td>{t('videos_secrets.barn_finds.rows.2.loc')}</td><td>{t('videos_secrets.barn_finds.rows.2.stamp')}</td></tr>
+                    <tr><td>4</td><td className="car-cell">{t('videos_secrets.barn_finds.rows.3.car')}</td><td>{t('videos_secrets.barn_finds.rows.3.loc')}</td><td>{t('videos_secrets.barn_finds.rows.3.stamp')}</td></tr>
+                    <tr><td>5</td><td className="car-cell">{t('videos_secrets.barn_finds.rows.4.car')}</td><td>{t('videos_secrets.barn_finds.rows.4.loc')}</td><td>{t('videos_secrets.barn_finds.rows.4.stamp')}</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -1294,16 +1292,16 @@ function App() {
             {/* TAB: Logitech G HUB */}
             <div className={`media-content ${activeWheelTab === 'ghub' ? 'active' : ''}`}>
               <div className="media-card">
-                <h3>Logitech G HUB — Configurar ANTES de iniciar el juego</h3>
-                <p>Ajustes obligatorios en el software de Logitech:</p>
+                <h3>{t('wheel_ghub.title')}</h3>
+                <p>{t('wheel_ghub.desc')}</p>
                 <table className="media-table">
                   <thead>
-                    <tr><th>Parámetro</th><th>Carreras / General</th><th>Drift</th><th>Notas</th></tr>
+                    <tr><th>{t('wheel_ghub.headers.param')}</th><th>{t('wheel_ghub.headers.racing')}</th><th>{t('wheel_ghub.headers.drift')}</th><th>{t('wheel_ghub.headers.notes')}</th></tr>
                   </thead>
                   <tbody>
-                    <tr><td className="car-cell">Rango Operativo (Ángulo)</td><td>720°</td><td>900°</td><td>720° → equilibrio de agilidad. 900° → rango completo para derrapadas.</td></tr>
-                    <tr><td className="car-cell">Sensibilidad</td><td>50</td><td>50</td><td>Mantener siempre en 50 (neutral).</td></tr>
-                    <tr><td className="car-cell">Fuerza Muelle Central</td><td>OFF (0%)</td><td>OFF (0%)</td><td>Desactivar SIEMPRE. Evita interferencias con el FFB del juego.</td></tr>
+                    <tr><td className="car-cell">{t('wheel_ghub.rows.0.param')}</td><td>720°</td><td>900°</td><td>{t('wheel_ghub.rows.0.notes')}</td></tr>
+                    <tr><td className="car-cell">{t('wheel_ghub.rows.1.param')}</td><td>50</td><td>50</td><td>{t('wheel_ghub.rows.1.notes')}</td></tr>
+                    <tr><td className="car-cell">{t('wheel_ghub.rows.2.param')}</td><td>OFF (0%)</td><td>OFF (0%)</td><td>{t('wheel_ghub.rows.2.notes')}</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -1312,7 +1310,7 @@ function App() {
             {/* TAB: Force Feedback in-game */}
             <div className={`media-content ${activeWheelTab === 'ffb' ? 'active' : ''}`}>
               <div className="media-card">
-                <h3>Force Feedback & Sensación del Volante — Perfiles Comparados</h3>
+                <h3>{t('wheel_ffb.title')}</h3>
                 <table className="media-table">
                   <thead>
                     <tr><th>Parámetro</th><th>🏁 Carreras</th><th>🌀 Drift</th><th>🏔️ Off-Road</th></tr>
@@ -1332,19 +1330,19 @@ function App() {
             <div className={`media-content ${activeWheelTab === 'profiles' ? 'active' : ''}`}>
               <div className="media-grid-2">
                 <div className="media-card" style={{borderColor: 'rgba(0, 255, 102, 0.3)'}}>
-                  <h3 style={{color: '#00FF66'}}>🏁 Perfil COMPETITIVO — Asfalto</h3>
+                  <h3 style={{color: '#00FF66'}}>{t('wheel_profiles.racing')}</h3>
                   <table className="media-table"><tbody>
-                    <tr><td className="car-cell">G HUB Ángulo</td><td>720°</td></tr>
-                    <tr><td className="car-cell">Dirección In-Game</td><td style={{color: '#00FF66', fontWeight: 900}}>Simulación</td></tr>
+                    <tr><td className="car-cell">{t('wheel_profiles.angle')}</td><td>720°</td></tr>
+                    <tr><td className="car-cell">{t('wheel_profiles.steering')}</td><td style={{color: '#00FF66', fontWeight: 900}}>{t('wheel_profiles.sim')}</td></tr>
                     <tr><td className="car-cell">Force Feedback Scale</td><td>1.0</td></tr>
                     <tr><td className="car-cell">Center Spring Scale</td><td>0.0</td></tr>
                   </tbody></table>
                 </div>
                 <div className="media-card" style={{borderColor: 'rgba(255, 0, 85, 0.3)'}}>
-                  <h3 style={{color: '#ff0055'}}>🌀 Perfil DRIFT — Contra-volanteo</h3>
+                  <h3 style={{color: '#ff0055'}}>{t('wheel_profiles.drift')}</h3>
                   <table className="media-table"><tbody>
-                    <tr><td className="car-cell">G HUB Ángulo</td><td>900°</td></tr>
-                    <tr><td className="car-cell">Dirección In-Game</td><td style={{color: '#00FF66', fontWeight: 900}}>Simulación</td></tr>
+                    <tr><td className="car-cell">{t('wheel_profiles.angle')}</td><td>900°</td></tr>
+                    <tr><td className="car-cell">{t('wheel_profiles.steering')}</td><td style={{color: '#00FF66', fontWeight: 900}}>{t('wheel_profiles.sim')}</td></tr>
                     <tr><td className="car-cell">Force Feedback Scale</td><td>0.9</td></tr>
                     <tr><td className="car-cell">Center Spring Scale</td><td style={{color: '#00D4FF', fontWeight: 700}}>1.0</td></tr>
                   </tbody></table>
@@ -1356,13 +1354,13 @@ function App() {
             <div className={`media-content ${activeWheelTab === 'troubleshoot' ? 'active' : ''}`}>
               <div className="media-grid-2">
                 <div className="media-card">
-                  <h3>🔄 Bug del Muelle Central</h3>
-                  <p><strong>Síntoma:</strong> El volante tira agresivamente al centro al estar parado.</p>
-                  <p><strong>Solución:</strong> Desconecta y reconecta el cable USB del G29 <strong>mientras estás sentado en el coche en el juego</strong>. Esto resetea el FFB.</p>
+                  <h3>{t('wheel_troubleshoot.bug.title')}</h3>
+                  <p><strong>{t('wheel_troubleshoot.bug.symptom_strong')}</strong>{t('wheel_troubleshoot.bug.symptom_text')}</p>
+                  <p><strong>{t('wheel_troubleshoot.bug.solution_strong')}</strong><Trans i18nKey="wheel_troubleshoot.bug.solution_text">Desconecta y reconecta el cable USB del G29 <strong>mientras estás sentado en el coche en el juego</strong>. Esto resetea el FFB.</Trans></p>
                 </div>
                 <div className="media-card" style={{borderLeft: '4px solid #ff0055'}}>
-                  <h3 style={{color: '#ff0055'}}>⚠️ Nota Importante sobre el G29</h3>
-                  <p>El Logitech G29 es un volante de engranajes (gear-driven). Subir en exceso el FFB o el Damper provoca calor y ruidos de traqueteo mecánicos. Mantén valores moderados para preservar la vida útil del hardware.</p>
+                  <h3 style={{color: '#ff0055'}}>{t('wheel_troubleshoot.note.title')}</h3>
+                  <p>{t('wheel_troubleshoot.note.text')}</p>
                 </div>
               </div>
             </div>
@@ -1399,14 +1397,14 @@ function App() {
           </div>
 
           <ul className="footer-links">
-            <li><a href="#" onClick={(e) => { e.preventDefault(); handleViewChange('home'); }}>{currentLang === 'en' ? 'Privacy' : 'Privacidad'}</a></li>
-            <li><a href="#" onClick={(e) => { e.preventDefault(); handleViewChange('home'); }}>{currentLang === 'en' ? 'Terms' : 'Términos'}</a></li>
-            <li><a href="#tuning" onClick={(e) => { e.preventDefault(); handleViewChange('altas'); }}>{currentLang === 'en' ? 'Competition Manual' : 'Manual de Competición'}</a></li>
-            <li><a href="https://forza.net" target="_blank">{currentLang === 'en' ? 'Official Forza Page' : 'Página Oficial de Forza'}</a></li>
+            <li><a href="#" onClick={(e) => { e.preventDefault(); handleViewChange('home'); }}>{t('footer.privacy')}</a></li>
+            <li><a href="#" onClick={(e) => { e.preventDefault(); handleViewChange('home'); }}>{t('footer.terms')}</a></li>
+            <li><a href="#tuning" onClick={(e) => { e.preventDefault(); handleViewChange('altas'); }}>{t('footer.manual')}</a></li>
+            <li><a href="https://forza.net" target="_blank">{t('footer.official')}</a></li>
           </ul>
 
           <p className="footer-copyright">
-            &copy; 2026 Playground Games & Xbox Game Studios. Forza Horizon 6 es una marca registrada de Microsoft Corporation. Desarrollado de forma ficticia como tributo.
+            {t('footer.copyright')}
           </p>
         </div>
       </footer>
