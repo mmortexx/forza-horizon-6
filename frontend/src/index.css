@@ -263,24 +263,25 @@ body {
   position: relative;
   display: flex;
   align-items: center;
-  margin-left: 3.5rem; /* Separación elegante del logo en el hueco de la izquierda */
+  flex: 1;
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
 }
 
 .nav-search-input {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 8px; /* Estilo visual HUD angular más JDM */
+  border-radius: 8px;
   padding: 0.4rem 1.2rem;
   font-family: var(--font-hud);
   font-size: 0.95rem;
   color: #ffffff;
   outline: none;
-  width: 240px; /* Mayor presencia por defecto para poblar el hueco */
+  width: 100%;
   transition: var(--transition-premium);
 }
 
 .nav-search-input:focus {
-  width: 320px; /* Expansión limpia en focus */
   border-color: var(--neon-blue);
   background: rgba(0, 212, 255, 0.05);
   box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
