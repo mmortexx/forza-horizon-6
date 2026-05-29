@@ -268,72 +268,7 @@ function App() {
       }
     }
 
-    // Clase Partícula de Humo de Derrape (Drift Smoke - Volumétrico y Realista)
-    class DriftSmokeParticle {
-      constructor(emitterX, emitterY, color = '235, 238, 245') {
-        this.emitterX = emitterX
-        this.emitterY = emitterY
-        this.color = color
-        this.reset()
-      }
-      reset() {
-        // Dispersión inicial concentrada cerca del neumático derrapando
-        this.imgX = this.emitterX + (Math.random() - 0.5) * 50
-        this.imgY = this.emitterY + (Math.random() - 0.5) * 12
-        
-        this.size = 10 + Math.random() * 12
-        this.maxSize = 85 + Math.random() * 75
-        this.growth = 0.8 + Math.random() * 1.2
-        
-        this.opacity = 0.18 + Math.random() * 0.18
-        this.fade = 0.0035 + Math.random() * 0.0035 // Desintegración fluida
-        
-        // Velocidad lateral (viento) y ascendente térmica de fricción
-        this.vx = 1.6 + Math.random() * 2.4
-        this.vy = -0.4 - Math.random() * 0.8
-        
-        // Estructurar un racimo (puff) de 3 sub-círculos internos para volumen denso
-        this.puffs = Array.from({ length: 3 }, () => ({
-          ox: (Math.random() - 0.5) * 24,
-          oy: (Math.random() - 0.5) * 24,
-          sizeMult: 0.75 + Math.random() * 0.4
-        }))
-      }
-      update() {
-        this.imgX += this.vx
-        // Añadir turbulencia de viento mediante oscilación sinusoidal
-        this.imgY += this.vy + Math.sin(this.imgX * 0.018) * 0.5
-        this.size = Math.min(this.size + this.growth, this.maxSize)
-        this.opacity -= this.fade
-      }
-      draw() {
-        if (this.opacity <= 0) return
-        
-        ctx.save()
-        ctx.globalCompositeOperation = 'screen'
-        
-        // Renderizar el racimo volumétrico de humo
-        this.puffs.forEach(puff => {
-          const subImgX = this.imgX + puff.ox * (this.size / 18)
-          const subImgY = this.imgY + puff.oy * (this.size / 18)
-          const pos = getCanvasCoords(subImgX, subImgY, mouseX, mouseY)
-          const currentSize = this.size * puff.sizeMult
-          
-          const grad = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, currentSize)
-          grad.addColorStop(0, `rgba(${this.color}, ${this.opacity * 0.5})`)
-          grad.addColorStop(0.35, `rgba(${this.color}, ${this.opacity * 0.25})`)
-          grad.addColorStop(0.7, `rgba(${this.color}, ${this.opacity * 0.08})`)
-          grad.addColorStop(1, 'rgba(0,0,0,0)')
-          
-          ctx.fillStyle = grad
-          ctx.beginPath()
-          ctx.arc(pos.x, pos.y, currentSize, 0, Math.PI * 2)
-          ctx.fill()
-        })
-        
-        ctx.restore()
-      }
-    }
+
 
     // Líneas de velocidad de la portada
     class SpeedLine {
@@ -508,17 +443,6 @@ function App() {
       new WindBranch(() => 0, 0, 1.2, 0.15)
     ]
 
-    // Array dinámico para las partículas de humo de derrape
-    const smokeParticles = []
-
-    // Emisores de ruedas de los coches derrapando (imágenes nativas 3439x1439)
-    const smokeEmitters = [
-      { x: 1220, y: 845, color: '240, 240, 245' }, // Rueda izquierda Coche Rojo (Gris claro)
-      { x: 1580, y: 845, color: '240, 240, 245' }, // Rueda derecha Coche Rojo (Gris claro)
-      { x: 2560, y: 780, color: '225, 238, 255' }, // Rueda trasera izquierda Todoterreno Azul (Vapor azulado)
-      { x: 2680, y: 790, color: '225, 238, 255' }  // Rueda trasera derecha Todoterreno Azul
-    ]
-
     // Función premium para dibujar destellos de faros en cruz y refracciones de lente (lens flares)
     const drawLensFlare = (x, y, size, pulse) => {
       ctx.save()
@@ -616,25 +540,6 @@ function App() {
         bird.update()
         bird.draw()
       })
-
-      // ── 3. Humo de Derrape Activo ──
-      // Generar partículas nuevas de humo con un tope máximo mayor y continuo
-      smokeEmitters.forEach(em => {
-        if (smokeParticles.length < 180) {
-          smokeParticles.push(new DriftSmokeParticle(em.x, em.y, em.color))
-        }
-      })
-
-      // Actualizar y dibujar partículas de humo volumétrico
-      for (let i = smokeParticles.length - 1; i >= 0; i--) {
-        const p = smokeParticles[i]
-        p.update()
-        if (p.opacity <= 0) {
-          smokeParticles.splice(i, 1)
-        } else {
-          p.draw()
-        }
-      }
 
       // ── 4. Destellos LED Premium de los Coches ──
       // Coche Rojo (Delante Centro): faros en imgX: 1335 e imgX: 1530
@@ -1617,124 +1522,10 @@ function App() {
         </div>
       </footer>
 
-      {/* Efecto de humo de drift de fondo premium */}
-      <DriftSmoke />
     </>
   )
 }
 
-// ─── VISOR DE HUMO DE DRIFT PREMIUM OPTIMIZADO (VAPOR Y NEÓN VOLUMÉTRICO) ───
-function DriftSmoke() {
-  const canvasRef = useRef(null)
 
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    let animationId
-
-    const resize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
-    }
-    resize()
-    window.addEventListener('resize', resize, { passive: true })
-
-    const dustParticles = []
-    const maxParticles = window.innerWidth < 768 ? 25 : 55
-
-    class DustParticle {
-      constructor() { this.reset() }
-      reset() {
-        this.x = Math.random() * canvas.width
-        this.y = canvas.height * 0.72 + Math.random() * (canvas.height * 0.28)
-        
-        // Tamaños enormes para simular nubes de humo volumétricas
-        this.width = Math.random() * 400 + 300
-        this.height = Math.random() * 110 + 60
-        this.growthRateW = Math.random() * 1.2 + 0.6
-        this.growthRateH = Math.random() * 0.4 + 0.2
-        
-        // Opacidad ultra baja para traslapado orgánico y degradado muy sutil
-        this.opacity = Math.random() * 0.03 + 0.012
-        this.fadeRate = Math.random() * 0.00012 + 0.00006
-        
-        // Movimiento flotante
-        this.driftX = (Math.random() - 0.5) * 1.0
-        this.driftY = -Math.random() * 0.5 - 0.2
-        
-        // Rotación y vaivén horizontal
-        this.rotation = Math.random() * Math.PI * 2
-        this.rotationSpeed = (Math.random() - 0.5) * 0.0015
-        this.oscillationFreq = Math.random() * 0.006 + 0.002
-        this.oscillationAmp = Math.random() * 1.4 + 0.4
-        
-        const colors = [
-          '0, 212, 255',   // Cyber cian
-          '255, 0, 85',    // FH6 Pink
-          '146, 0, 255',   // FH6 Purple
-          '98, 92, 86',    // Gris goma quemada
-          '45, 45, 55'     // Bruma oscura
-        ]
-        this.color = colors[Math.floor(Math.random() * colors.length)]
-      }
-      update() {
-        this.width += this.growthRateW
-        this.height += this.growthRateH
-        this.rotation += this.rotationSpeed
-        
-        this.x += this.driftX + Math.sin(this.y * this.oscillationFreq) * this.oscillationAmp
-        this.y += this.driftY
-        
-        this.opacity -= this.fadeRate
-        if (this.opacity <= 0 || this.y < -this.height || this.x < -this.width || this.x > canvas.width + this.width) {
-          this.reset()
-        }
-      }
-      draw() {
-        if (this.opacity <= 0) return
-        ctx.save()
-        
-        // Fusión aditiva neón
-        ctx.globalCompositeOperation = 'screen'
-        
-        ctx.translate(this.x, this.y)
-        ctx.rotate(this.rotation)
-        ctx.scale(1, this.height / this.width)
-        
-        const g = ctx.createRadialGradient(0, 0, 0, 0, 0, this.width / 2)
-        g.addColorStop(0, `rgba(${this.color}, ${this.opacity})`)
-        g.addColorStop(0.4, `rgba(${this.color}, ${this.opacity * 0.5})`)
-        g.addColorStop(0.8, `rgba(${this.color}, ${this.opacity * 0.15})`)
-        g.addColorStop(1, 'rgba(0,0,0,0)')
-        
-        ctx.fillStyle = g
-        ctx.beginPath()
-        ctx.arc(0, 0, this.width / 2, 0, Math.PI * 2)
-        ctx.fill()
-        ctx.restore()
-      }
-    }
-
-    for (let i = 0; i < maxParticles; i++) dustParticles.push(new DustParticle())
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      dustParticles.forEach(p => {
-        p.update()
-        p.draw()
-      })
-      animationId = requestAnimationFrame(animate)
-    }
-    animate()
-
-    return () => {
-      cancelAnimationFrame(animationId)
-      window.removeEventListener('resize', resize)
-    }
-  }, [])
-
-  return <canvas ref={canvasRef} id="drift-smoke-canvas" />
-}
 
 export default App
