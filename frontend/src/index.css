@@ -115,21 +115,32 @@ body {
   background: rgba(255, 107, 0, 0.15);
   border-top: 1px solid var(--forza-orange);
   border-bottom: 1px solid var(--forza-orange);
-  padding: 0.6rem 2rem;
+  padding: 0.6rem 0;
   font-family: var(--font-hud);
   font-size: 0.95rem;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
   overflow: hidden;
   white-space: nowrap;
   box-shadow: 0 0 15px rgba(255, 107, 0, 0.15);
   position: relative;
   z-index: 10;
+}
+
+.marquee-track {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.marquee-content {
+  display: inline-block;
+  animation: marquee-scroll 30s linear infinite;
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .telemetry-alert strong {

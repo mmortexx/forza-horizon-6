@@ -701,8 +701,12 @@ function App() {
 
             {/* MARQUEE DE TELEMETRÍA DE COMPETICIÓN */}
             <div className="telemetry-alert">
-              <strong>{t('alert.title')}</strong>
-              <span>{t('alert.text')}</span>
+              <div className="marquee-track">
+                <span className="marquee-content">
+                  <strong>{t('alert.title')}</strong>&nbsp;&nbsp;{t('alert.text')}&nbsp;&nbsp;&nbsp;⚡&nbsp;&nbsp;&nbsp;
+                  <strong>{t('alert.title')}</strong>&nbsp;&nbsp;{t('alert.text')}&nbsp;&nbsp;&nbsp;⚡&nbsp;&nbsp;&nbsp;
+                </span>
+              </div>
             </div>
 
             {/* MENÚ DE INICIO DE LA APLICACIÓN JDM (CARDS DE REGLAJES) */}
