@@ -702,10 +702,18 @@ function App() {
             {/* MARQUEE DE TELEMETRÍA DE COMPETICIÓN */}
             <div className="telemetry-alert">
               <div className="marquee-track">
-                <span className="marquee-content">
+                <div className="marquee-content">
                   <strong>{t('alert.title')}</strong>&nbsp;&nbsp;{t('alert.text')}&nbsp;&nbsp;&nbsp;⚡&nbsp;&nbsp;&nbsp;
                   <strong>{t('alert.title')}</strong>&nbsp;&nbsp;{t('alert.text')}&nbsp;&nbsp;&nbsp;⚡&nbsp;&nbsp;&nbsp;
-                </span>
+                  <strong>{t('alert.title')}</strong>&nbsp;&nbsp;{t('alert.text')}&nbsp;&nbsp;&nbsp;⚡&nbsp;&nbsp;&nbsp;
+                  <strong>{t('alert.title')}</strong>&nbsp;&nbsp;{t('alert.text')}&nbsp;&nbsp;&nbsp;⚡&nbsp;&nbsp;&nbsp;
+                </div>
+                <div className="marquee-content" aria-hidden="true">
+                  <strong>{t('alert.title')}</strong>&nbsp;&nbsp;{t('alert.text')}&nbsp;&nbsp;&nbsp;⚡&nbsp;&nbsp;&nbsp;
+                  <strong>{t('alert.title')}</strong>&nbsp;&nbsp;{t('alert.text')}&nbsp;&nbsp;&nbsp;⚡&nbsp;&nbsp;&nbsp;
+                  <strong>{t('alert.title')}</strong>&nbsp;&nbsp;{t('alert.text')}&nbsp;&nbsp;&nbsp;⚡&nbsp;&nbsp;&nbsp;
+                  <strong>{t('alert.title')}</strong>&nbsp;&nbsp;{t('alert.text')}&nbsp;&nbsp;&nbsp;⚡&nbsp;&nbsp;&nbsp;
+                </div>
               </div>
             </div>
 
