@@ -183,7 +183,105 @@ function App() {
         ctx.restore()
       }
     }
-    
+
+    // Líneas de velocidad de la portada
+    class SpeedLine {
+      constructor() { this.reset() }
+      reset() {
+        this.x = Math.random() * canvasWidth
+        this.y = Math.random() * canvasHeight
+        this.length = 35 + Math.random() * 80
+        this.speed = 6 + Math.random() * 12
+        this.opacity = 0.04 + Math.random() * 0.08
+      }
+      update(scrollVel) {
+        this.x -= this.speed + (scrollVel * 1.2)
+        if (this.x < -this.length) {
+          this.x = canvasWidth + Math.random() * 80
+          this.y = Math.random() * canvasHeight
+        }
+      }
+      draw() {
+        ctx.strokeStyle = `rgba(0, 212, 255, ${this.opacity})`
+        ctx.lineWidth = 1 + Math.random() * 1.5
+        ctx.beginPath()
+        ctx.moveTo(this.x, this.y)
+        ctx.lineTo(this.x + this.length, this.y)
+        ctx.stroke()
+      }
+    }
+
+    // Clase Chispas de Fricción (Asfalto JDM)
+    class Spark {
+      constructor() { this.reset() }
+      reset() {
+        this.x = Math.random() * canvasWidth
+        this.y = canvasHeight * 0.82 + Math.random() * (canvasHeight * 0.18)
+        this.size = Math.random() * 2.2 + 1.0
+        this.vx = (Math.random() - 0.5) * 4.8
+        this.vy = -Math.random() * 3.8 - 2.2
+        this.opacity = Math.random() * 0.85 + 0.15
+        this.fade = Math.random() * 0.012 + 0.006
+        this.gravity = 0.025
+        const colors = ['255, 107, 0', '255, 0, 85', '255, 210, 0', '0, 212, 255']
+        this.color = colors[Math.floor(Math.random() * colors.length)]
+      }
+      update() {
+        this.vy += this.gravity
+        this.x += this.vx
+        this.y += this.vy
+        this.opacity -= this.fade
+        if (this.opacity <= 0 || this.y < 0 || this.x < 0 || this.x > canvasWidth) {
+          this.reset()
+        }
+      }
+      draw() {
+        if (this.opacity <= 0) return
+        ctx.save()
+        ctx.globalCompositeOperation = 'screen'
+        ctx.fillStyle = `rgba(${this.color}, ${this.opacity})`
+        ctx.shadowBlur = Math.random() * 6 + 3
+        ctx.shadowColor = `rgb(${this.color})`
+        ctx.beginPath()
+        const angle = Math.atan2(this.vy, this.vx)
+        ctx.translate(this.x, this.y)
+        ctx.rotate(angle)
+        ctx.fillRect(-this.size * 1.5, -this.size / 2, this.size * 3, this.size)
+        ctx.restore()
+      }
+    }
+
+    // Clase Nubes Nocturnas en movimiento lento
+    class Cloud {
+      constructor() { this.reset() }
+      reset() {
+        this.x = -200 - Math.random() * 300
+        this.y = Math.random() * (canvasHeight * 0.25)
+        this.width = 250 + Math.random() * 350
+        this.height = 70 + Math.random() * 100
+        this.speed = 0.05 + Math.random() * 0.12
+        this.opacity = 0.015 + Math.random() * 0.02
+      }
+      update() {
+        this.x += this.speed
+        if (this.x > canvasWidth + 200) {
+          this.reset()
+        }
+      }
+      draw() {
+        ctx.save()
+        const grad = ctx.createRadialGradient(this.x, this.y, 10, this.x, this.y, this.width * 0.6)
+        grad.addColorStop(0, `rgba(255, 255, 255, ${this.opacity})`)
+        grad.addColorStop(0.5, `rgba(180, 210, 255, ${this.opacity * 0.5})`)
+        grad.addColorStop(1, 'rgba(0, 0, 0, 0)')
+        ctx.fillStyle = grad
+        ctx.beginPath()
+        ctx.ellipse(this.x, this.y, this.width, this.height, 0, 0, Math.PI * 2)
+        ctx.fill()
+        ctx.restore()
+      }
+    }
+
     // Clase Ramas de Sakura oscilantes (Viento en primer plano con soporte para volteado en espejo)
     class WindBranch {
       constructor(getX, y, scale, angleBase, flip = false) {
