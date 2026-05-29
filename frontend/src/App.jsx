@@ -118,10 +118,10 @@ function App() {
     }
     window.addEventListener('mousemove', handleCanvasMouseMove, { passive: true })
 
-    // Proyección 2D del fondo del Monte Fuji (dimensión nativa: 3439x1439)
+    // Proyección 2D del fondo de Tokio Nocturno (dimensión nativa: 3439x1411)
     const getCanvasCoords = (imgX, imgY, mx, my) => {
       const iw = 3439
-      const ih = 1439
+      const ih = 1411
       const aspectRatioImg = iw / ih
       const aspectRatioCanvas = canvasWidth / canvasHeight
       
@@ -183,264 +183,82 @@ function App() {
         ctx.restore()
       }
     }
-
-    // Clase Pájaro (Vuelo en bandada orgánica con aleteo sutil y planeo)
-    class Bird {
-      constructor(leader = null) {
-        this.leader = leader
-        this.reset()
-      }
-      reset() {
-        if (this.leader === null) {
-          // Líder de bandada: define el curso por la zona superior
-          this.x = -150 - Math.random() * 200
-          this.y = 40 + Math.random() * (canvasHeight * 0.25)
-          this.vx = 1.1 + Math.random() * 0.7
-          this.vy = -0.06 + Math.random() * 0.12
-        } else {
-          // Seguidor: se posiciona en formación detrás del líder con ligeros offsets
-          this.offsetX = -35 - Math.random() * 45
-          this.offsetY = (Math.random() - 0.5) * 60
-          this.x = this.leader.x + this.offsetX
-          this.y = this.leader.y + this.offsetY
-          this.vx = this.leader.vx
-          this.vy = this.leader.vy
-        }
-        this.wingPhase = Math.random() * Math.PI * 2
-        this.wingSpeed = 0.08 + Math.random() * 0.06
-        this.scale = 0.35 + Math.random() * 0.4 // Escala pequeña para dar sensación de profundidad respecto al Monte Fuji
-        this.opacity = 0.45 + Math.random() * 0.35
-      }
-      update() {
-        if (this.leader) {
-          // Movimiento de seguimiento amortiguado con respecto al líder
-          const targetX = this.leader.x + this.offsetX
-          const targetY = this.leader.y + this.offsetY
-          this.x += (targetX - this.x) * 0.07
-          this.y += (targetY - this.y) * 0.07
-          this.vx = this.leader.vx
-          this.vy = this.leader.vy
-        } else {
-          this.x += this.vx
-          this.y += this.vy
-        }
-        this.wingPhase += this.wingSpeed
-
-        // Control de reseteo cuando la bandada se aleja por el borde derecho
-        if (this.leader === null) {
-          if (this.x > canvasWidth + 150) {
-            this.reset()
-          }
-        } else {
-          if (this.leader.x < 0 && this.x > canvasWidth) {
-            this.reset()
-          }
-        }
-      }
-      draw() {
-        // Proyección con paralaje para alineación exacta en el cielo del Monte Fuji
-        const fracX = this.x / (canvasWidth || 1)
-        const fracY = this.y / (canvasHeight || 1)
-        const pos = getCanvasCoords(fracX * 3439, fracY * 700, mouseX, mouseY)
-
-        ctx.save()
-        ctx.translate(pos.x, pos.y)
-        ctx.scale(this.scale, this.scale)
-        ctx.strokeStyle = `rgba(32, 35, 52, ${this.opacity})`
-        ctx.lineWidth = 1.3
-        ctx.lineCap = 'round'
-        ctx.lineJoin = 'round'
-        
-        ctx.beginPath()
-        const wingY = Math.sin(this.wingPhase) * 5.0
-        // Dibujo de silueta estilizada de ala a ala
-        ctx.moveTo(-10, wingY)
-        ctx.quadraticCurveTo(-5, wingY - 3, 0, 1)
-        ctx.quadraticCurveTo(5, wingY - 3, 10, wingY)
-        
-        // Cuerpo y cola
-        ctx.moveTo(-1, 1)
-        ctx.lineTo(0, 3.5)
-        ctx.lineTo(1, 1)
-        
-        ctx.stroke()
-        ctx.restore()
-      }
-    }
-
-
-
-    // Líneas de velocidad de la portada
-    class SpeedLine {
-      constructor() { this.reset() }
-      reset() {
-        this.x = Math.random() * canvasWidth
-        this.y = Math.random() * canvasHeight
-        this.length = 30 + Math.random() * 65
-        this.speed = 5 + Math.random() * 9
-        this.opacity = 0.03 + Math.random() * 0.06
-      }
-      update(scrollVel) {
-        this.x -= this.speed + (scrollVel * 1.0)
-        if (this.x < -this.length) {
-          this.x = canvasWidth + Math.random() * 80
-          this.y = Math.random() * canvasHeight
-        }
-      }
-      draw() {
-        ctx.strokeStyle = `rgba(0, 212, 255, ${this.opacity})`
-        ctx.lineWidth = 1.0 + Math.random() * 1.0
-        ctx.beginPath()
-        ctx.moveTo(this.x, this.y)
-        ctx.lineTo(this.x + this.length, this.y)
-        ctx.stroke()
-      }
-    }
-
-    // Clase Chispas de Fricción (Asfalto JDM)
-    class Spark {
-      constructor() { this.reset() }
-      reset() {
-        this.x = Math.random() * canvasWidth
-        this.y = canvasHeight * 0.85 + Math.random() * (canvasHeight * 0.15)
-        this.size = Math.random() * 2.0 + 0.8
-        this.vx = (Math.random() - 0.5) * 4.0
-        this.vy = -Math.random() * 3.0 - 1.8
-        this.opacity = Math.random() * 0.8 + 0.2
-        this.fade = Math.random() * 0.015 + 0.007
-        this.gravity = 0.02
-        const colors = ['255, 107, 0', '255, 0, 85', '255, 210, 0']
-        this.color = colors[Math.floor(Math.random() * colors.length)]
-      }
-      update() {
-        this.vy += this.gravity
-        this.x += this.vx
-        this.y += this.vy
-        this.opacity -= this.fade
-        if (this.opacity <= 0 || this.y < 0 || this.x < 0 || this.x > canvasWidth) {
-          this.reset()
-        }
-      }
-      draw() {
-        if (this.opacity <= 0) return
-        ctx.save()
-        ctx.globalCompositeOperation = 'screen'
-        ctx.fillStyle = `rgba(${this.color}, ${this.opacity})`
-        ctx.shadowBlur = Math.random() * 5 + 2
-        ctx.shadowColor = `rgb(${this.color})`
-        ctx.beginPath()
-        const angle = Math.atan2(this.vy, this.vx)
-        ctx.translate(this.x, this.y)
-        ctx.rotate(angle)
-        ctx.fillRect(-this.size * 1.5, -this.size / 2, this.size * 3, this.size)
-        ctx.restore()
-      }
-    }
-
-    // Clase Nubes Nocturnas en movimiento lento
-    class Cloud {
-      constructor() { this.reset() }
-      reset() {
-        this.x = -250 - Math.random() * 300
-        this.y = Math.random() * (canvasHeight * 0.20)
-        this.width = 200 + Math.random() * 300
-        this.height = 60 + Math.random() * 80
-        this.speed = 0.04 + Math.random() * 0.08
-        this.opacity = 0.012 + Math.random() * 0.015
-      }
-      update() {
-        this.x += this.speed
-        if (this.x > canvasWidth + 250) {
-          this.reset()
-        }
-      }
-      draw() {
-        ctx.save()
-        const grad = ctx.createRadialGradient(this.x, this.y, 10, this.x, this.y, this.width * 0.5)
-        grad.addColorStop(0, `rgba(255, 255, 255, ${this.opacity})`)
-        grad.addColorStop(0.5, `rgba(180, 210, 255, ${this.opacity * 0.5})`)
-        grad.addColorStop(1, 'rgba(0, 0, 0, 0)')
-        ctx.fillStyle = grad
-        ctx.beginPath()
-        ctx.ellipse(this.x, this.y, this.width, this.height, 0, 0, Math.PI * 2)
-        ctx.fill()
-        ctx.restore()
-      }
-    }
-
-    // Clase Ramas de Sakura oscilantes (Viento en primer plano de la izquierda)
+    
+    // Clase Ramas de Sakura oscilantes (Viento en primer plano con soporte para volteado en espejo)
     class WindBranch {
-      constructor(getX, y, scale, angleBase) {
+      constructor(getX, y, scale, angleBase, flip = false) {
         this.getX = getX
         this.y = y
         this.scale = scale
         this.angleBase = angleBase
         this.angleOffset = 0
+        this.flip = flip
       }
       update(time) {
-        this.angleOffset = Math.sin(time * 0.0008) * 0.035
+        this.angleOffset = Math.sin(time * 0.001) * 0.04
       }
       draw() {
         const actualX = typeof this.getX === 'function' ? this.getX() : this.getX
         ctx.save()
         ctx.translate(actualX, this.y)
+        if (this.flip) ctx.scale(-1, 1)
         ctx.rotate(this.angleBase + this.angleOffset)
         ctx.scale(this.scale, this.scale)
         
-        ctx.fillStyle = 'rgba(12, 10, 18, 0.95)'
-        ctx.shadowBlur = 6
-        ctx.shadowColor = 'rgba(255, 180, 200, 0.12)'
+        ctx.fillStyle = 'rgba(5, 5, 10, 0.95)'
+        ctx.shadowBlur = 8
+        ctx.shadowColor = 'rgba(255, 0, 85, 0.15)'
         
         // Ramas
         ctx.beginPath()
         ctx.moveTo(0, 0)
-        ctx.bezierCurveTo(35, -8, 70, -4, 110, -15)
-        ctx.bezierCurveTo(80, 4, 45, 4, 0, 0)
+        ctx.bezierCurveTo(40, -10, 80, -5, 120, -20)
+        ctx.bezierCurveTo(90, 5, 50, 5, 0, 0)
         ctx.fill()
         
         // Pétalos de la rama
-        ctx.fillStyle = 'rgba(15, 12, 22, 0.98)'
-        for (let i = 15; i < 110; i += 10) {
+        ctx.fillStyle = 'rgba(10, 8, 15, 0.98)'
+        for (let i = 20; i < 120; i += 12) {
           ctx.beginPath()
-          ctx.ellipse(i, -8 - (i * 0.04), 7 + (i * 0.03), 14 + (i * 0.05), (30 + i * 0.2) * Math.PI / 180, 0, Math.PI * 2)
+          ctx.ellipse(i, -10 - (i * 0.05), 8 + (i * 0.04), 16 + (i * 0.06), (35 + i * 0.2) * Math.PI / 180, 0, Math.PI * 2)
           ctx.fill()
           
-          ctx.fillStyle = 'rgba(255, 180, 200, 0.3)'
+          ctx.fillStyle = 'rgba(255, 100, 150, 0.25)'
           ctx.beginPath()
-          ctx.ellipse(i + 1, -12 - (i * 0.04), 2.5, 5, 45 * Math.PI / 180, 0, Math.PI * 2)
+          ctx.ellipse(i + 2, -15 - (i * 0.05), 3, 6, 45 * Math.PI / 180, 0, Math.PI * 2)
           ctx.fill()
-          ctx.fillStyle = 'rgba(15, 12, 22, 0.98)'
+          ctx.fillStyle = 'rgba(10, 8, 15, 0.98)'
         }
         ctx.restore()
       }
     }
 
     // Inicializar elementos decorativos
-    const sCount = window.innerWidth < 768 ? 15 : 35
-    const lCount = window.innerWidth < 768 ? 8 : 22
-    const sparkCount = window.innerWidth < 768 ? 15 : 35
+    const sCount = window.innerWidth < 768 ? 15 : 40
+    const lCount = window.innerWidth < 768 ? 10 : 30
+    const sparkCount = window.innerWidth < 768 ? 18 : 45
     const sakuras = Array.from({ length: sCount }, () => new Sakura())
     const speedLines = Array.from({ length: lCount }, () => new SpeedLine())
     const sparks = Array.from({ length: sparkCount }, () => new Spark())
-    const clouds = Array.from({ length: 3 }, () => new Cloud())
+    const clouds = Array.from({ length: 4 }, () => new Cloud())
     
-    // Inicializar bandadas de pájaros
-    const birds = []
-    // Bandada A (Líder + 3 seguidores)
-    const leaderA = new Bird(null)
-    birds.push(leaderA)
-    for (let i = 0; i < 3; i++) {
-      birds.push(new Bird(leaderA))
-    }
-    // Bandada B (Líder + 2 seguidores)
-    const leaderB = new Bird(null)
-    birds.push(leaderB)
-    for (let i = 0; i < 2; i++) {
-      birds.push(new Bird(leaderB))
+    // Inicializar 45 luces de la ciudad parpadeantes en el skyline
+    const cityLights = []
+    for (let i = 0; i < 45; i++) {
+      cityLights.push({
+        imgX: 400 + Math.random() * 2600,
+        imgY: 480 + Math.random() * 150,
+        size: Math.random() * 1.5 + 0.8,
+        glow: Math.random() * 4 + 2,
+        pulseSpeed: 1 + Math.random() * 3,
+        pulseOffset: Math.random() * Math.PI * 2,
+        color: Math.random() > 0.45 ? '255, 255, 255' : (Math.random() > 0.5 ? '255, 220, 100' : '0, 212, 255')
+      })
     }
     
     const branches = [
-      new WindBranch(() => 0, 0, 1.2, 0.15)
+      new WindBranch(() => 0, 0, 1.25, 0.18),
+      new WindBranch(() => canvasWidth, 0, 1.05, 0.18, true)
     ]
 
     // Función premium para dibujar destellos de faros en cruz y refracciones de lente (lens flares)
@@ -534,26 +352,46 @@ function App() {
         cloud.update()
         cloud.draw()
       })
-
-      // ── 2. Pájaros volando en bandadas sobre el Monte Fuji ──
-      birds.forEach(bird => {
-        bird.update()
-        bird.draw()
+      // ── 2. Luces de la Ciudad Parpadeantes (Skyline de Tokio) ──
+      cityLights.forEach(light => {
+        const pos = getCanvasCoords(light.imgX, light.imgY, mouseX, mouseY)
+        const pulse = 0.3 + 0.7 * ((Math.sin(t * 0.001 * light.pulseSpeed + light.pulseOffset) + 1) / 2)
+        ctx.save()
+        ctx.globalCompositeOperation = 'screen'
+        ctx.shadowBlur = light.glow * pulse * 2
+        ctx.shadowColor = `rgba(${light.color}, ${pulse})`
+        ctx.fillStyle = `rgba(${light.color}, ${pulse * 0.85})`
+        ctx.beginPath()
+        ctx.arc(pos.x, pos.y, light.size * pulse, 0, Math.PI * 2)
+        ctx.fill()
+        ctx.restore()
       })
 
-      // ── 4. Destellos LED Premium de los Coches ──
-      // Coche Rojo (Delante Centro): faros en imgX: 1335 e imgX: 1530
+      // ── 3. Baliza Roja de la Torre de Tokio ──
+      const towerPos = getCanvasCoords(1720, 370, mouseX, mouseY)
+      const beaconPulse = 0.4 + 0.6 * ((Math.sin(t * 0.003) + 1) / 2)
+      ctx.save()
+      ctx.globalCompositeOperation = 'screen'
+      ctx.shadowBlur = 25 * beaconPulse
+      ctx.shadowColor = `rgba(255, 40, 20, ${beaconPulse})`
+      ctx.fillStyle = `rgba(255, 60, 30, ${beaconPulse * 0.9})`
+      ctx.beginPath()
+      ctx.arc(towerPos.x, towerPos.y, 3 * beaconPulse, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.restore()
+
+      // ── 4. Destellos LED de los Faros del Golf R (Coche principal centro-izquierda) ──
       const pulseRed = 0.7 + 0.3 * ((Math.sin(t * 0.002) + 1) / 2)
-      const headlightRedL = getCanvasCoords(1335, 760, mouseX, mouseY)
-      const headlightRedR = getCanvasCoords(1530, 760, mouseX, mouseY)
+      const headlightRedL = getCanvasCoords(1340, 860, mouseX, mouseY)
+      const headlightRedR = getCanvasCoords(1430, 860, mouseX, mouseY)
       
       drawLensFlare(headlightRedL.x, headlightRedL.y, 25, pulseRed)
       drawLensFlare(headlightRedR.x, headlightRedR.y, 25, pulseRed)
 
-      // Todoterreno Azul (Derecha): faros en imgX: 2360, imgY: 660
+      // ── 5. Destello de Xenón del Sedán (Coche derecha) ──
       const pulseBlue = 0.6 + 0.4 * ((Math.sin(t * 0.0018 + 1.2) + 1) / 2)
-      const headlightBlue = getCanvasCoords(2360, 660, mouseX, mouseY)
-      drawLensFlare(headlightBlue.x, headlightBlue.y, 18, pulseBlue)
+      const headlightBlue = getCanvasCoords(2350, 820, mouseX, mouseY)
+      drawLensFlare(headlightBlue.x, headlightBlue.y, 20, pulseBlue)
 
       // ── 5. Líneas de velocidad ──
       speedLines.forEach(line => {
